@@ -513,3 +513,74 @@ footer {
     background: #0284c7;
 
 }
+
+/* ===== Mobile Responsive ===== */
+
+@media (max-width: 768px) {
+
+    nav {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-image img {
+        width: 250px;
+    }
+
+    .service-container,
+    .portfolio-gallery {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* Mobile Menu */
+
+.menu-toggle {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+
+@media (max-width:768px) {
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+}
