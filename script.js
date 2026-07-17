@@ -22,38 +22,40 @@ const words = [
     "Graphic Designer"
 ];
 
-let wordIndex = 0;
-let charIndex = 0;
+let i = 0;
+let j = 0;
+let currentWord = "";
 let isDeleting = false;
-
-const typing = document.querySelector(".typing-text");
 
 function typeEffect() {
 
-    const currentWord = words[wordIndex];
+    currentWord = words[i];
 
-    if (!isDeleting) {
-        typing.textContent = currentWord.substring(0, charIndex++);
-        if (charIndex > currentWord.length) {
-            isDeleting = true;
-            setTimeout(typeEffect, 1500);
-            return;
-        }
+    if (isDeleting) {
+        document.querySelector(".typing-text").textContent =
+            currentWord.substring(0, j--);
     } else {
-        typing.textContent = currentWord.substring(0, charIndex--);
-        if (charIndex < 0) {
-            isDeleting = false;
-            wordIndex = (wordIndex + 1) % words.length;
-            charIndex = 0;
-        }
+        document.querySelector(".typing-text").textContent =
+            currentWord.substring(0, j++);
     }
 
-    setTimeout(typeEffect, isDeleting ? 50 : 100);
+    if (!isDeleting && j === currentWord.length) {
+        isDeleting = true;
+        setTimeout(typeEffect, 1000);
+    }
+    else if (isDeleting && j === 0) {
+        isDeleting = false;
+        i = (i + 1) % words.length;
+        setTimeout(typeEffect, 500);
+    }
+    else {
+        setTimeout(typeEffect, 100);
+    }
 }
 
-typeEffect();
 
 console.log("SamSreeFuture Loaded Successfully");
+
 const typing = document.querySelector(".typing-text");
 
 if (typing) {
