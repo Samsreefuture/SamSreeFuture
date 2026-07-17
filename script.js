@@ -32,12 +32,13 @@ function typeEffect() {
     currentWord = words[i];
 
     if (isDeleting) {
-        document.querySelector(".typing-text").textContent =
-            currentWord.substring(0, j--);
+        j--;
     } else {
-        document.querySelector(".typing-text").textContent =
-            currentWord.substring(0, j++);
+        j++;
     }
+
+    document.querySelector(".typing-text").textContent =
+        currentWord.substring(0, j);
 
     if (!isDeleting && j === currentWord.length) {
         isDeleting = true;
@@ -49,7 +50,7 @@ function typeEffect() {
         setTimeout(typeEffect, 500);
     }
     else {
-        setTimeout(typeEffect, 100);
+        setTimeout(typeEffect, isDeleting ? 50 : 100);
     }
 }
 
