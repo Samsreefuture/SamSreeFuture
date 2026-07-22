@@ -36,6 +36,7 @@
 </head>
 
 
+
 <body>
     <a href="https://wa.me/918125024046" class="whatsapp" target="_blank">
         <img src="images/whatsapp.png" alt="WhatsApp">
@@ -44,21 +45,18 @@
     <header>
 
         <nav>
-            <h2>SamSreeFuture</h2>
+    <h2>SamSreeFuture</h2>
 
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+    <div class="menu-toggle">☰</div>
 
-            <div class="menu-toggle">
-                ☰
-            </div>
-
-        </nav>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
 
     </header>
 
@@ -75,7 +73,11 @@
                 Building Modern Websites, AI Solutions & Creative Designs
             </h4>
 
-            <h3 class="typing-text"></h3>
+            <h3 class="typing-text">
+    <span id="line1"></span><br>
+    <span id="line2"></span><br>
+    <span id="line3"></span>
+</h3>
 
             <p>
                 I help businesses grow through modern websites, AI automation, graphic design, branding and digital
@@ -149,17 +151,17 @@
 
     <section id="portfolio" data-aos="zoom-in">
 
-        <h2>My Portfolio</h2>
+        <h2>My Projects</h2>
 
         <div class="portfolio-gallery">
 
             <div class="project">
-                <a href="business.jpg" class="portfolio-item">
+                <a href="images/business.jpg" class="portfolio-item">
                     <img src="images/business.jpg" alt="Business Website">
                 </a>
-                <h3>Business Website</h3>
-                <p>Professional Responsive Website Design</p>
-                <a href="#" class="btn">View Project</a>
+                <h3>Lakshmi Tulasi Tiffins & Caterers</h3>
+<p>Food Business Website, Menu Design & Online Branding</p>
+                <a href="#" onclick="alert('Project Coming Soon!')" class="btn">View Project</a>
             </div>
 
             <div class="project">
@@ -192,23 +194,40 @@
             </div>
 
             <div class="project">
-                <img src="images/corporate.jpg" alt="Corporate Branding">
+                <img class="corporate-img" src="images/corporate.png">
                 <h3>Corporate Branding</h3>
                 <p>Professional Business Identity</p>
                 <a href="#" class="btn">View Project</a>
-            </div>
-            <div class="project">
-                <img src="images/card.jpg" alt="Business Card">
+                <div class="project">
+    <div class="project">
+    <img class="corporate-img" src="images/corporate.png" alt="Corporate Branding">
 
-                <h3>Business Card</h3>
+    <h3>Corporate Branding</h3>
 
-                <p>Professional Visiting Card Design</p>
+    <p>Professional Business Identity</p>
 
-                <a href="#" class="btn">View Project</a>
-            </div>
+    <a href="#" class="btn">View Project</a>
+</div>
 
+<div class="project">
+    <img src="images/ai-video.jpg" alt="AI Video Creation">
 
-        </div>
+    <h3>AI Video Creation</h3>
+
+    <p>AI Generated Kids Videos & Creative Content</p>
+
+    <a href="#" class="btn">View Project</a>
+</div>
+
+<div class="project">
+    <img src="images/card.jpg" alt="Business Card">
+
+    <h3>Business Card</h3>
+
+    <p>Professional Visiting Card Design</p>
+
+    <a href="#" class="btn">View Project</a>
+</div>
 
     </section>
     <section id="skills" data-aos="fade-right">
@@ -242,29 +261,30 @@
 
     </section> <!-- My Skills section ends -->
 
-    <section class="stats" data-aos="fade-left">
+    
+        <section class="stats" data-aos="fade-left">
 
-        <div class="stat">
-            <h1>50+</h1>
-            <p>Projects</p>
-        </div>
+    <div class="stat">
+        <h1  class="counter" data-target="50">0</h1>
+        <p>Projects</p>
+    </div>
 
-        <div class="stat">
-            <h1>20+</h1>
-            <p>Happy Clients</p>
-        </div>
+    <div class="stat">
+        <h1 class="counter" data-target="20">0</h1>
+        <p>Happy Clients</p>
+    </div>
 
-        <div class="stat">
-            <h1>3+</h1>
-            <p>Years Learning</p>
-        </div>
+    <div class="stat">
+        <h1 class="counter" data-target="3">0</h1>
+        <p>Years Learning</p>
+    </div>
 
-        <div class="stat">
-            <h1>100%</h1>
-            <p>Passion</p>
-        </div>
+    <div class="stat">
+        <h1 class="counter" data-target="100">0</h1>
+        <p>Passion %</p>
+    </div>
 
-    </section>
+</section>
 
     <section id="contact" class="contact" data-aos="fade-up">
 
