@@ -101,20 +101,53 @@ if (menuToggle && navMenu) {
 
 // ===== Counter Animation =====
 
-const menuToggle = document.querySelector(".menu-toggle");
-const navMenu = document.querySelector("nav ul");
+const counters = document.querySelectorAll(".counter");
 
-if (menuToggle) {
-    menuToggle.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+            const counter = entry.target;
+
+            const target = +counter.getAttribute("data-target");
+
+            let count = 0;
+
+            const update = () => {
+
+                const increment = Math.ceil(target / 50);
+
+                if (count < target) {
+
+                    count += increment;
+
+                    if (count > target) count = target;
+
+                    counter.innerText = count;
+
+                    setTimeout(update, 30);
+
+                }
+
+            };
+
+            update();
+
+            observer.unobserve(counter);
+
+        }
+
     });
-}// Mobile Menu
 
-const menuToggle = document.querySelector(".menu-toggle");
-const navMenu = document.querySelector("nav ul");
+});
 
-if (menuToggle) {
-    menuToggle.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
-    });
-}
+counters.forEach(counter => {
+    observer.observe(counter);
+});
+
+
+// ===== Console =====
+
+console.log("SamSreeFuture Loaded Successfully");
