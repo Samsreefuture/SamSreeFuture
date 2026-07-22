@@ -584,3 +584,41 @@ footer {
     }
 
 }
+/* ===== Mobile Menu ===== */
+
+.menu-toggle{
+    display:none;
+    font-size:30px;
+    color:#fff;
+    cursor:pointer;
+}
+
+@media (max-width:768px){
+
+    .menu-toggle{
+        display:block;
+    }
+
+    nav{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        flex-wrap:wrap;
+    }
+
+    nav ul{
+        display:none;
+        width:100%;
+        flex-direction:column;
+        margin-top:20px;
+        text-align:center;
+    }
+
+    nav ul.active{
+        display:flex;
+    }
+
+    nav ul li{
+        margin:15px 0;
+    }
+}
