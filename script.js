@@ -1,81 +1,171 @@
 /* =====================================================
    SamSreeFuture | Mahesh Portfolio
-   Main JavaScript
+   Main JavaScript + Professional Lead Tracking
 ===================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
+       GOOGLE ANALYTICS HELPER
+    ===================================================== */
+
+    function trackEvent(eventName, parameters = {}) {
+
+        if (typeof gtag === "function") {
+
+            gtag("event", eventName, parameters);
+
+            console.log(
+                "GA4 Event:",
+                eventName,
+                parameters
+            );
+
+        } else {
+
+            console.log(
+                "GA4 not available:",
+                eventName,
+                parameters
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
        MOBILE MENU
     ===================================================== */
 
-    const menuToggle = document.getElementById("menu-toggle");
-    const navMenu = document.getElementById("main-nav");
+    const menuToggle =
+        document.getElementById("menu-toggle");
+
+    const navMenu =
+        document.getElementById("main-nav");
 
     if (menuToggle && navMenu) {
 
-        menuToggle.addEventListener("click", function (event) {
-            event.stopPropagation();
+        menuToggle.addEventListener(
+            "click",
+            function (event) {
 
-            navMenu.classList.toggle("active");
+                event.stopPropagation();
 
-            if (navMenu.classList.contains("active")) {
-                menuToggle.textContent = "✕";
-                menuToggle.setAttribute("aria-expanded", "true");
-            } else {
-                menuToggle.textContent = "☰";
-                menuToggle.setAttribute("aria-expanded", "false");
+                navMenu.classList.toggle("active");
+
+                if (
+                    navMenu.classList.contains("active")
+                ) {
+
+                    menuToggle.textContent = "✕";
+
+                    menuToggle.setAttribute(
+                        "aria-expanded",
+                        "true"
+                    );
+
+                    trackEvent(
+                        "mobile_menu_open",
+                        {
+                            event_category: "Navigation"
+                        }
+                    );
+
+                } else {
+
+                    menuToggle.textContent = "☰";
+
+                    menuToggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
+
             }
-        });
+        );
+
 
         /* Close menu after clicking a link */
 
-        navMenu.querySelectorAll("a").forEach(function (link) {
+        navMenu
+            .querySelectorAll("a")
+            .forEach(function (link) {
 
-            link.addEventListener("click", function () {
+                link.addEventListener(
+                    "click",
+                    function () {
 
-                navMenu.classList.remove("active");
+                        navMenu.classList.remove(
+                            "active"
+                        );
 
-                menuToggle.textContent = "☰";
-                menuToggle.setAttribute("aria-expanded", "false");
+                        menuToggle.textContent = "☰";
+
+                        menuToggle.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                    }
+                );
 
             });
 
-        });
 
         /* Close menu when clicking outside */
 
-        document.addEventListener("click", function (event) {
+        document.addEventListener(
+            "click",
+            function (event) {
 
-            if (
-                navMenu.classList.contains("active") &&
-                !navMenu.contains(event.target) &&
-                !menuToggle.contains(event.target)
-            ) {
+                if (
+                    navMenu.classList.contains("active") &&
+                    !navMenu.contains(event.target) &&
+                    !menuToggle.contains(event.target)
+                ) {
 
-                navMenu.classList.remove("active");
+                    navMenu.classList.remove(
+                        "active"
+                    );
 
-                menuToggle.textContent = "☰";
-                menuToggle.setAttribute("aria-expanded", "false");
+                    menuToggle.textContent = "☰";
+
+                    menuToggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
 
             }
+        );
 
-        });
 
         /* Close menu with Escape */
 
-        document.addEventListener("keydown", function (event) {
+        document.addEventListener(
+            "keydown",
+            function (event) {
 
-            if (event.key === "Escape") {
+                if (event.key === "Escape") {
 
-                navMenu.classList.remove("active");
+                    navMenu.classList.remove(
+                        "active"
+                    );
 
-                menuToggle.textContent = "☰";
-                menuToggle.setAttribute("aria-expanded", "false");
+                    menuToggle.textContent = "☰";
+
+                    menuToggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                }
 
             }
-
-        });
+        );
 
     }
 
@@ -84,42 +174,59 @@ document.addEventListener("DOMContentLoaded", function () {
        SMOOTH SCROLL
     ===================================================== */
 
-    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    document
+        .querySelectorAll('a[href^="#"]')
+        .forEach(function (link) {
 
-        link.addEventListener("click", function (event) {
+            link.addEventListener(
+                "click",
+                function (event) {
 
-            const targetId = this.getAttribute("href");
+                    const targetId =
+                        this.getAttribute("href");
 
-            if (!targetId || targetId === "#") {
-                return;
-            }
+                    if (
+                        !targetId ||
+                        targetId === "#"
+                    ) {
 
-            const target = document.querySelector(targetId);
+                        return;
 
-            if (target) {
+                    }
 
-                event.preventDefault();
+                    const target =
+                        document.querySelector(targetId);
 
-                const header = document.querySelector(".site-header");
+                    if (target) {
 
-                const headerHeight =
-                    header ? header.offsetHeight : 0;
+                        event.preventDefault();
 
-                const targetPosition =
-                    target.getBoundingClientRect().top +
-                    window.pageYOffset -
-                    headerHeight;
+                        const header =
+                            document.querySelector(
+                                ".site-header"
+                            );
 
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: "smooth"
-                });
+                        const headerHeight =
+                            header
+                                ? header.offsetHeight
+                                : 0;
 
-            }
+                        const targetPosition =
+                            target.getBoundingClientRect().top +
+                            window.pageYOffset -
+                            headerHeight;
+
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: "smooth"
+                        });
+
+                    }
+
+                }
+            );
 
         });
-
-    });
 
 
     /* =====================================================
@@ -169,6 +276,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     );
 
                     return;
+
                 }
 
             } else {
@@ -184,6 +292,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (charIndex <= 0) {
 
                     charIndex = 0;
+
                     deleting = false;
 
                     wordIndex++;
@@ -192,7 +301,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         wordIndex >=
                         words.length
                     ) {
+
                         wordIndex = 0;
+
                     }
 
                 }
@@ -229,11 +340,15 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
         if (isNaN(target)) {
+
             return;
+
         }
 
         const duration = 1500;
-        const startTime = performance.now();
+
+        const startTime =
+            performance.now();
 
         function updateCounter(currentTime) {
 
@@ -258,7 +373,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     easeOut * target
                 );
 
-            counter.textContent = current;
+            counter.textContent =
+                current;
 
             if (progress < 1) {
 
@@ -268,7 +384,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             } else {
 
-                counter.textContent = target;
+                counter.textContent =
+                    target;
 
             }
 
@@ -294,21 +411,25 @@ document.addEventListener("DOMContentLoaded", function () {
             new IntersectionObserver(
                 function (entries, observer) {
 
-                    entries.forEach(function (entry) {
+                    entries.forEach(
+                        function (entry) {
 
-                        if (entry.isIntersecting) {
+                            if (
+                                entry.isIntersecting
+                            ) {
 
-                            animateCounter(
-                                entry.target
-                            );
+                                animateCounter(
+                                    entry.target
+                                );
 
-                            observer.unobserve(
-                                entry.target
-                            );
+                                observer.unobserve(
+                                    entry.target
+                                );
+
+                            }
 
                         }
-
-                    });
+                    );
 
                 },
                 {
@@ -316,30 +437,36 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             );
 
-        counters.forEach(function (counter) {
+        counters.forEach(
+            function (counter) {
 
-            counterObserver.observe(counter);
+                counterObserver.observe(
+                    counter
+                );
 
-        });
+            }
+        );
 
     } else {
 
-        counters.forEach(function (counter) {
+        counters.forEach(
+            function (counter) {
 
-            const target =
-                parseInt(
-                    counter.getAttribute(
-                        "data-target"
-                    ),
-                    10
-                );
+                const target =
+                    parseInt(
+                        counter.getAttribute(
+                            "data-target"
+                        ),
+                        10
+                    );
 
-            counter.textContent =
-                isNaN(target)
-                    ? 0
-                    : target;
+                counter.textContent =
+                    isNaN(target)
+                        ? 0
+                        : target;
 
-        });
+            }
+        );
 
     }
 
@@ -353,11 +480,14 @@ document.addEventListener("DOMContentLoaded", function () {
             ".portfolio-card img"
         );
 
-    portfolioImages.forEach(function (image) {
+    portfolioImages.forEach(
+        function (image) {
 
-        image.style.cursor = "pointer";
+            image.style.cursor =
+                "pointer";
 
-    });
+        }
+    );
 
 
     /* =====================================================
@@ -380,12 +510,21 @@ document.addEventListener("DOMContentLoaded", function () {
                         "button[type='submit']"
                     );
 
+                trackEvent(
+                    "contact_form_submit",
+                    {
+                        event_category: "Lead",
+                        event_label: "Contact Form"
+                    }
+                );
+
                 if (button) {
 
                     button.textContent =
                         "Sending...";
 
-                    button.disabled = true;
+                    button.disabled =
+                        true;
 
                 }
 
@@ -407,16 +546,22 @@ document.addEventListener("DOMContentLoaded", function () {
     function handleHeaderScroll() {
 
         if (!header) {
+
             return;
+
         }
 
         if (window.scrollY > 50) {
 
-            header.classList.add("scrolled");
+            header.classList.add(
+                "scrolled"
+            );
 
         } else {
 
-            header.classList.remove("scrolled");
+            header.classList.remove(
+                "scrolled"
+            );
 
         }
 
@@ -449,40 +594,52 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let currentSection = "";
 
-        sections.forEach(function (section) {
+        sections.forEach(
+            function (section) {
 
-            const sectionTop =
-                section.offsetTop - 180;
+                const sectionTop =
+                    section.offsetTop - 180;
 
-            if (
-                window.scrollY >=
-                sectionTop
-            ) {
+                if (
+                    window.scrollY >=
+                    sectionTop
+                ) {
 
-                currentSection =
-                    section.getAttribute("id");
+                    currentSection =
+                        section.getAttribute(
+                            "id"
+                        );
 
-            }
-
-        });
-
-        navLinks.forEach(function (link) {
-
-            link.classList.remove("active");
-
-            const href =
-                link.getAttribute("href");
-
-            if (
-                href ===
-                "#" + currentSection
-            ) {
-
-                link.classList.add("active");
+                }
 
             }
+        );
 
-        });
+        navLinks.forEach(
+            function (link) {
+
+                link.classList.remove(
+                    "active"
+                );
+
+                const href =
+                    link.getAttribute(
+                        "href"
+                    );
+
+                if (
+                    href ===
+                    "#" + currentSection
+                ) {
+
+                    link.classList.add(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
 
     }
 
@@ -558,6 +715,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     behavior: "smooth"
                 });
 
+                trackEvent(
+                    "back_to_top_click",
+                    {
+                        event_category: "Navigation"
+                    }
+                );
+
             }
         );
 
@@ -583,6 +747,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     "Opening WhatsApp..."
                 );
 
+                trackEvent(
+                    "whatsapp_click",
+                    {
+                        event_category: "Lead",
+                        event_label: "Floating WhatsApp Button"
+                    }
+                );
+
             }
         );
 
@@ -598,41 +770,375 @@ document.addEventListener("DOMContentLoaded", function () {
             ".buy-btn, .product-buy-btn, .custom-product-btn"
         );
 
-    buyButtons.forEach(function (button) {
+    buyButtons.forEach(
+        function (button) {
 
-        button.addEventListener(
-            "click",
-            function () {
+            button.addEventListener(
+                "click",
+                function () {
 
-                const productCard =
-                    button.closest(
-                        ".product-card, .store-card"
-                    );
-
-                if (productCard) {
-
-                    const productNameElement =
-                        productCard.querySelector(
-                            "h3"
+                    const productCard =
+                        button.closest(
+                            ".product-card, .store-card"
                         );
 
-                    if (
-                        productNameElement
-                    ) {
+                    let productName =
+                        "Unknown Product";
 
-                        console.log(
-                            "Product selected:",
-                            productNameElement.textContent.trim()
-                        );
+                    if (productCard) {
+
+                        const productNameElement =
+                            productCard.querySelector(
+                                "h3"
+                            );
+
+                        if (
+                            productNameElement
+                        ) {
+
+                            productName =
+                                productNameElement
+                                    .textContent
+                                    .trim();
+
+                        }
 
                     }
 
+                    console.log(
+                        "Product selected:",
+                        productName
+                    );
+
+                    trackEvent(
+                        "store_product_click",
+                        {
+                            event_category: "Digital Store",
+                            event_label: productName,
+                            product_name: productName
+                        }
+                    );
+
                 }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       GET A QUOTE BUTTON TRACKING
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            'a[href="#get-quote"], .quote-btn, .get-quote-btn'
+        )
+        .forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        trackEvent(
+                            "quote_button_click",
+                            {
+                                event_category: "Lead",
+                                event_label: "Get a Quote"
+                            }
+                        );
+
+                    }
+                );
 
             }
         );
 
-    });
+
+    /* =====================================================
+       QUOTE FORM TRACKING
+       NOTE:
+       Existing generate_lead event in index.html
+       is preserved and will continue working.
+    ===================================================== */
+
+    const quoteForm =
+        document.getElementById(
+            "quote-form"
+        );
+
+    if (quoteForm) {
+
+        quoteForm.addEventListener(
+            "submit",
+            function () {
+
+                const serviceElement =
+                    document.getElementById(
+                        "quote-service"
+                    );
+
+                const service =
+                    serviceElement
+                        ? serviceElement.value
+                        : "Unknown Service";
+
+                trackEvent(
+                    "quote_form_submit",
+                    {
+                        event_category: "Lead",
+                        event_label: service,
+                        service: service
+                    }
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       WHATSAPP LINK TRACKING
+       Tracks every WhatsApp link on website.
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            'a[href*="wa.me"], a[href*="whatsapp.com"]'
+        )
+        .forEach(
+            function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+
+                        let label =
+                            link.textContent
+                                .trim();
+
+                        if (!label) {
+
+                            label =
+                                "WhatsApp Link";
+
+                        }
+
+                        trackEvent(
+                            "whatsapp_link_click",
+                            {
+                                event_category: "Lead",
+                                event_label: label
+                            }
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       CTA BUTTON TRACKING
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            ".btn, .cta-btn, .primary-btn"
+        )
+        .forEach(
+            function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        const label =
+                            button.textContent
+                                .trim();
+
+                        if (!label) {
+
+                            return;
+
+                        }
+
+                        trackEvent(
+                            "cta_click",
+                            {
+                                event_category: "CTA",
+                                event_label: label
+                            }
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       DIGITAL STORE VIEW TRACKING
+    ===================================================== */
+
+    const storeSection =
+        document.getElementById(
+            "digital-store"
+        );
+
+    if (
+        storeSection &&
+        "IntersectionObserver" in window
+    ) {
+
+        const storeObserver =
+            new IntersectionObserver(
+                function (entries, observer) {
+
+                    entries.forEach(
+                        function (entry) {
+
+                            if (
+                                entry.isIntersecting
+                            ) {
+
+                                trackEvent(
+                                    "store_view",
+                                    {
+                                        event_category:
+                                            "Digital Store",
+                                        event_label:
+                                            "Digital Store Viewed"
+                                    }
+                                );
+
+                                observer.unobserve(
+                                    entry.target
+                                );
+
+                            }
+
+                        }
+                    );
+
+                },
+                {
+                    threshold: 0.3
+                }
+            );
+
+        storeObserver.observe(
+            storeSection
+        );
+
+    }
+
+
+    /* =====================================================
+       PORTFOLIO CLICK TRACKING
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            ".portfolio-card a"
+        )
+        .forEach(
+            function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+
+                        const card =
+                            link.closest(
+                                ".portfolio-card"
+                            );
+
+                        let projectName =
+                            "Portfolio Project";
+
+                        if (card) {
+
+                            const title =
+                                card.querySelector(
+                                    "h3"
+                                );
+
+                            if (title) {
+
+                                projectName =
+                                    title.textContent
+                                        .trim();
+
+                            }
+
+                        }
+
+                        trackEvent(
+                            "portfolio_click",
+                            {
+                                event_category:
+                                    "Portfolio",
+                                event_label:
+                                    projectName,
+                                project_name:
+                                    projectName
+                            }
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       SERVICE CARD TRACKING
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            ".service-card"
+        )
+        .forEach(
+            function (card) {
+
+                card.addEventListener(
+                    "click",
+                    function () {
+
+                        const title =
+                            card.querySelector(
+                                "h3"
+                            );
+
+                        const serviceName =
+                            title
+                                ? title.textContent.trim()
+                                : "Service";
+
+                        trackEvent(
+                            "service_view",
+                            {
+                                event_category:
+                                    "Services",
+                                event_label:
+                                    serviceName,
+                                service_name:
+                                    serviceName
+                            }
+                        );
+
+                    }
+                );
+
+            }
+        );
 
 
     /* =====================================================
@@ -644,47 +1150,57 @@ document.addEventListener("DOMContentLoaded", function () {
             "img"
         );
 
-    images.forEach(function (image) {
+    images.forEach(
+        function (image) {
 
-        if (
-            !image.hasAttribute("loading")
-        ) {
+            if (
+                !image.hasAttribute(
+                    "loading"
+                )
+            ) {
 
-            image.setAttribute(
-                "loading",
-                "lazy"
-            );
+                image.setAttribute(
+                    "loading",
+                    "lazy"
+                );
+
+            }
 
         }
-
-    });
+    );
 
 
     /* =====================================================
        EXTERNAL LINKS
     ===================================================== */
 
-    document.querySelectorAll(
-        'a[href^="http"]'
-    ).forEach(function (link) {
+    document
+        .querySelectorAll(
+            'a[href^="http"]'
+        )
+        .forEach(
+            function (link) {
 
-        if (
-            !link.hasAttribute("target")
-        ) {
+                if (
+                    !link.hasAttribute(
+                        "target"
+                    )
+                ) {
 
-            link.setAttribute(
-                "target",
-                "_blank"
-            );
+                    link.setAttribute(
+                        "target",
+                        "_blank"
+                    );
 
-            link.setAttribute(
-                "rel",
-                "noopener noreferrer"
-            );
+                    link.setAttribute(
+                        "rel",
+                        "noopener noreferrer"
+                    );
 
-        }
+                }
 
-    });
+            }
+        );
 
 
     /* =====================================================
@@ -766,11 +1282,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* =====================================================
+       PAGE LOAD ANALYTICS
+    ===================================================== */
+
+    trackEvent(
+        "portfolio_page_loaded",
+        {
+            event_category: "Engagement",
+            event_label: "SamSreeFuture Portfolio"
+        }
+    );
+
+
+    /* =====================================================
        CONSOLE
     ===================================================== */
 
     console.log(
         "SamSreeFuture | Mahesh Portfolio Loaded Successfully 🚀"
+    );
+
+    console.log(
+        "Professional Lead Tracking System Active 📊"
     );
 
 });
