@@ -5,51 +5,73 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    /* =================================================
+    /* =====================================================
        MOBILE MENU
-    ================================================= */
+    ===================================================== */
 
-    const menuToggle = document.querySelector(".menu-toggle");
-    const navMenu = document.querySelector("nav ul");
+    const menuToggle = document.getElementById("menu-toggle");
+    const navMenu = document.getElementById("main-nav");
 
     if (menuToggle && navMenu) {
 
         menuToggle.addEventListener("click", function (event) {
-
             event.stopPropagation();
 
             navMenu.classList.toggle("active");
 
             if (navMenu.classList.contains("active")) {
                 menuToggle.textContent = "✕";
+                menuToggle.setAttribute("aria-expanded", "true");
             } else {
                 menuToggle.textContent = "☰";
+                menuToggle.setAttribute("aria-expanded", "false");
             }
-
         });
 
+        /* Close menu after clicking a link */
 
-        document.querySelectorAll("nav ul a").forEach(function (link) {
+        navMenu.querySelectorAll("a").forEach(function (link) {
 
             link.addEventListener("click", function () {
 
                 navMenu.classList.remove("active");
+
                 menuToggle.textContent = "☰";
+                menuToggle.setAttribute("aria-expanded", "false");
 
             });
 
         });
 
+        /* Close menu when clicking outside */
 
         document.addEventListener("click", function (event) {
 
             if (
+                navMenu.classList.contains("active") &&
                 !navMenu.contains(event.target) &&
                 !menuToggle.contains(event.target)
             ) {
 
                 navMenu.classList.remove("active");
+
                 menuToggle.textContent = "☰";
+                menuToggle.setAttribute("aria-expanded", "false");
+
+            }
+
+        });
+
+        /* Close menu with Escape */
+
+        document.addEventListener("keydown", function (event) {
+
+            if (event.key === "Escape") {
+
+                navMenu.classList.remove("active");
+
+                menuToggle.textContent = "☰";
+                menuToggle.setAttribute("aria-expanded", "false");
 
             }
 
@@ -58,13 +80,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =================================================
+    /* =====================================================
        SMOOTH SCROLL
-    ================================================= */
+    ===================================================== */
 
     document.querySelectorAll('a[href^="#"]').forEach(function (link) {
 
-        link.addEventListener("click", function (e) {
+        link.addEventListener("click", function (event) {
 
             const targetId = this.getAttribute("href");
 
@@ -76,11 +98,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (target) {
 
-                e.preventDefault();
+                event.preventDefault();
 
-                target.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
+                const header = document.querySelector(".site-header");
+
+                const headerHeight =
+                    header ? header.offsetHeight : 0;
+
+                const targetPosition =
+                    target.getBoundingClientRect().top +
+                    window.pageYOffset -
+                    headerHeight;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: "smooth"
                 });
 
             }
@@ -90,18 +122,14 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    /* =================================================
+    /* =====================================================
        TYPING ANIMATION
-       Web Developer
-       AI Solutions
-       Graphic Designer
-    ================================================= */
+    ===================================================== */
 
-    const line1 = document.getElementById("line1");
-    const line2 = document.getElementById("line2");
-    const line3 = document.getElementById("line3");
+    const typingElement =
+        document.getElementById("typing");
 
-    if (line1 && line2 && line3) {
+    if (typingElement) {
 
         const words = [
             "Web Developer",
@@ -113,81 +141,57 @@ document.addEventListener("DOMContentLoaded", function () {
         let charIndex = 0;
         let deleting = false;
 
-        function typingAnimation() {
+        function typeEffect() {
 
-            const currentWord = words[wordIndex];
+            const currentWord =
+                words[wordIndex];
 
             if (!deleting) {
 
-                if (wordIndex === 0) {
-                    line1.textContent =
-                        currentWord.substring(0, charIndex + 1);
-                }
-
-                if (wordIndex === 1) {
-                    line2.textContent =
-                        currentWord.substring(0, charIndex + 1);
-                }
-
-                if (wordIndex === 2) {
-                    line3.textContent =
-                        currentWord.substring(0, charIndex + 1);
-                }
+                typingElement.textContent =
+                    currentWord.substring(
+                        0,
+                        charIndex + 1
+                    );
 
                 charIndex++;
 
-                if (charIndex === currentWord.length) {
+                if (
+                    charIndex >=
+                    currentWord.length
+                ) {
 
-                    setTimeout(function () {
+                    deleting = true;
 
-                        deleting = true;
-
-                        typingAnimation();
-
-                    }, 1500);
+                    setTimeout(
+                        typeEffect,
+                        1500
+                    );
 
                     return;
-
                 }
 
             } else {
 
-                if (wordIndex === 0) {
-                    line1.textContent =
-                        currentWord.substring(0, charIndex - 1);
-                }
-
-                if (wordIndex === 1) {
-                    line2.textContent =
-                        currentWord.substring(0, charIndex - 1);
-                }
-
-                if (wordIndex === 2) {
-                    line3.textContent =
-                        currentWord.substring(0, charIndex - 1);
-                }
+                typingElement.textContent =
+                    currentWord.substring(
+                        0,
+                        charIndex - 1
+                    );
 
                 charIndex--;
 
-                if (charIndex === 0) {
+                if (charIndex <= 0) {
 
+                    charIndex = 0;
                     deleting = false;
-
-                    if (wordIndex === 0) {
-                        line1.textContent = "";
-                    }
-
-                    if (wordIndex === 1) {
-                        line2.textContent = "";
-                    }
-
-                    if (wordIndex === 2) {
-                        line3.textContent = "";
-                    }
 
                     wordIndex++;
 
-                    if (wordIndex >= words.length) {
+                    if (
+                        wordIndex >=
+                        words.length
+                    ) {
                         wordIndex = 0;
                     }
 
@@ -196,49 +200,40 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             setTimeout(
-                typingAnimation,
+                typeEffect,
                 deleting ? 45 : 75
             );
 
         }
 
+        typingElement.textContent = "";
 
-        /* Clear all lines first */
-
-        line1.textContent = "";
-        line2.textContent = "";
-        line3.textContent = "";
-
-
-        /* Start */
-
-        typingAnimation();
+        typeEffect();
 
     }
 
 
-    /* =================================================
+    /* =====================================================
        COUNTER ANIMATION
-    ================================================= */
+    ===================================================== */
 
-    const counters = document.querySelectorAll(".counter");
+    const counters =
+        document.querySelectorAll(".counter");
 
     function animateCounter(counter) {
 
-        const target = parseInt(
-            counter.getAttribute("data-target"),
-            10
-        );
+        const target =
+            parseInt(
+                counter.getAttribute("data-target"),
+                10
+            );
 
         if (isNaN(target)) {
             return;
         }
 
-        let current = 0;
-
         const duration = 1500;
         const startTime = performance.now();
-
 
         function updateCounter(currentTime) {
 
@@ -246,16 +241,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 currentTime - startTime;
 
             const progress =
-                Math.min(elapsed / duration, 1);
+                Math.min(
+                    elapsed / duration,
+                    1
+                );
 
             const easeOut =
-                1 - Math.pow(1 - progress, 3);
+                1 -
+                Math.pow(
+                    1 - progress,
+                    3
+                );
 
-            current =
-                Math.floor(easeOut * target);
+            const current =
+                Math.floor(
+                    easeOut * target
+                );
 
             counter.textContent = current;
-
 
             if (progress < 1) {
 
@@ -271,15 +274,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
-
-        requestAnimationFrame(updateCounter);
+        requestAnimationFrame(
+            updateCounter
+        );
 
     }
 
 
-    /* =================================================
+    /* =====================================================
        COUNTER OBSERVER
-    ================================================= */
+    ===================================================== */
 
     if (
         counters.length > 0 &&
@@ -312,7 +316,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             );
 
-
         counters.forEach(function (counter) {
 
             counterObserver.observe(counter);
@@ -323,46 +326,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
         counters.forEach(function (counter) {
 
-            const target = parseInt(
-                counter.getAttribute("data-target"),
-                10
-            );
+            const target =
+                parseInt(
+                    counter.getAttribute(
+                        "data-target"
+                    ),
+                    10
+                );
 
             counter.textContent =
-                isNaN(target) ? 0 : target;
+                isNaN(target)
+                    ? 0
+                    : target;
 
         });
 
     }
 
 
-    /* =================================================
+    /* =====================================================
        PORTFOLIO IMAGE CURSOR
-    ================================================= */
+    ===================================================== */
 
-    const projectImages =
-        document.querySelectorAll(".project img");
-
-    projectImages.forEach(function (image) {
-
-        image.addEventListener(
-            "mouseenter",
-            function () {
-
-                image.style.cursor = "pointer";
-
-            }
+    const portfolioImages =
+        document.querySelectorAll(
+            ".portfolio-card img"
         );
+
+    portfolioImages.forEach(function (image) {
+
+        image.style.cursor = "pointer";
 
     });
 
 
-    /* =================================================
+    /* =====================================================
        CONTACT FORM
-    ================================================= */
+    ===================================================== */
 
     const contactForm =
-        document.querySelector(".contact form");
+        document.getElementById(
+            "contact-form"
+        );
 
     if (contactForm) {
 
@@ -371,7 +376,9 @@ document.addEventListener("DOMContentLoaded", function () {
             function () {
 
                 const button =
-                    contactForm.querySelector("button");
+                    contactForm.querySelector(
+                        "button[type='submit']"
+                    );
 
                 if (button) {
 
@@ -388,45 +395,90 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* =================================================
-       CLOSE MOBILE MENU ON RESIZE
-    ================================================= */
+    /* =====================================================
+       HEADER SCROLL EFFECT
+    ===================================================== */
 
-    window.addEventListener("resize", function () {
+    const header =
+        document.querySelector(
+            ".site-header"
+        );
 
-        if (
-            window.innerWidth > 768 &&
-            navMenu &&
-            menuToggle
-        ) {
+    function handleHeaderScroll() {
 
-            navMenu.classList.remove("active");
+        if (!header) {
+            return;
+        }
 
-            menuToggle.textContent = "☰";
+        if (window.scrollY > 50) {
+
+            header.classList.add("scrolled");
+
+        } else {
+
+            header.classList.remove("scrolled");
 
         }
 
-    });
+    }
+
+    window.addEventListener(
+        "scroll",
+        handleHeaderScroll,
+        { passive: true }
+    );
+
+    handleHeaderScroll();
 
 
-    /* =================================================
-       BACK TO TOP BUTTON
-    ================================================= */
+    /* =====================================================
+       ACTIVE NAVIGATION LINK
+    ===================================================== */
 
-    const backToTop =
-        document.getElementById("backToTop");
+    const navLinks =
+        document.querySelectorAll(
+            "#main-nav a"
+        );
 
-    if (backToTop) {
+    const sections =
+        document.querySelectorAll(
+            "main section[id]"
+        );
 
-        window.addEventListener("scroll", function () {
+    function updateActiveNav() {
 
-            if (window.scrollY > 400) {
+        let currentSection = "";
 
-                backToTop.classList.add("show");
+        sections.forEach(function (section) {
 
-            } else {
+            const sectionTop =
+                section.offsetTop - 180;
 
-                backToTop.classList.remove("show");
+            if (
+                window.scrollY >=
+                sectionTop
+            ) {
+
+                currentSection =
+                    section.getAttribute("id");
+
+            }
+
+        });
+
+        navLinks.forEach(function (link) {
+
+            link.classList.remove("active");
+
+            const href =
+                link.getAttribute("href");
+
+            if (
+                href ===
+                "#" + currentSection
+            ) {
+
+                link.classList.add("active");
 
             }
 
@@ -434,10 +486,288 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+    window.addEventListener(
+        "scroll",
+        updateActiveNav,
+        { passive: true }
+    );
 
-    /* =================================================
-       CONSOLE MESSAGE
-    ================================================= */
+    updateActiveNav();
+
+
+    /* =====================================================
+       AOS ANIMATION
+    ===================================================== */
+
+    if (
+        typeof AOS !== "undefined"
+    ) {
+
+        AOS.init({
+            duration: 800,
+            easing: "ease-out",
+            once: true,
+            offset: 80,
+            disable: "mobile"
+        });
+
+    }
+
+
+    /* =====================================================
+       BACK TO TOP
+    ===================================================== */
+
+    const backToTop =
+        document.getElementById(
+            "back-to-top"
+        );
+
+    if (backToTop) {
+
+        window.addEventListener(
+            "scroll",
+            function () {
+
+                if (
+                    window.scrollY > 400
+                ) {
+
+                    backToTop.classList.add(
+                        "show"
+                    );
+
+                } else {
+
+                    backToTop.classList.remove(
+                        "show"
+                    );
+
+                }
+
+            },
+            { passive: true }
+        );
+
+        backToTop.addEventListener(
+            "click",
+            function () {
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       WHATSAPP BUTTON
+    ===================================================== */
+
+    const whatsappButton =
+        document.querySelector(
+            ".whatsapp-float"
+        );
+
+    if (whatsappButton) {
+
+        whatsappButton.addEventListener(
+            "click",
+            function () {
+
+                console.log(
+                    "Opening WhatsApp..."
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       DIGITAL STORE BUY BUTTONS
+    ===================================================== */
+
+    const buyButtons =
+        document.querySelectorAll(
+            ".buy-btn, .product-buy-btn, .custom-product-btn"
+        );
+
+    buyButtons.forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                const productCard =
+                    button.closest(
+                        ".product-card, .store-card"
+                    );
+
+                if (productCard) {
+
+                    const productNameElement =
+                        productCard.querySelector(
+                            "h3"
+                        );
+
+                    if (
+                        productNameElement
+                    ) {
+
+                        console.log(
+                            "Product selected:",
+                            productNameElement.textContent.trim()
+                        );
+
+                    }
+
+                }
+
+            }
+        );
+
+    });
+
+
+    /* =====================================================
+       LAZY LOAD IMAGES
+    ===================================================== */
+
+    const images =
+        document.querySelectorAll(
+            "img"
+        );
+
+    images.forEach(function (image) {
+
+        if (
+            !image.hasAttribute("loading")
+        ) {
+
+            image.setAttribute(
+                "loading",
+                "lazy"
+            );
+
+        }
+
+    });
+
+
+    /* =====================================================
+       EXTERNAL LINKS
+    ===================================================== */
+
+    document.querySelectorAll(
+        'a[href^="http"]'
+    ).forEach(function (link) {
+
+        if (
+            !link.hasAttribute("target")
+        ) {
+
+            link.setAttribute(
+                "target",
+                "_blank"
+            );
+
+            link.setAttribute(
+                "rel",
+                "noopener noreferrer"
+            );
+
+        }
+
+    });
+
+
+    /* =====================================================
+       CURRENT YEAR
+    ===================================================== */
+
+    const currentYear =
+        document.getElementById(
+            "current-year"
+        );
+
+    if (currentYear) {
+
+        currentYear.textContent =
+            new Date().getFullYear();
+
+    }
+
+
+    /* =====================================================
+       RESIZE
+    ===================================================== */
+
+    window.addEventListener(
+        "resize",
+        function () {
+
+            if (
+                window.innerWidth > 768 &&
+                navMenu &&
+                menuToggle
+            ) {
+
+                navMenu.classList.remove(
+                    "active"
+                );
+
+                menuToggle.textContent =
+                    "☰";
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       REDUCED MOTION
+    ===================================================== */
+
+    const prefersReducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        );
+
+    if (
+        prefersReducedMotion.matches &&
+        typingElement
+    ) {
+
+        typingElement.textContent =
+            "Web Developer";
+
+    }
+
+
+    /* =====================================================
+       PAGE LOADED
+    ===================================================== */
+
+    document.body.classList.add(
+        "page-loaded"
+    );
+
+
+    /* =====================================================
+       CONSOLE
+    ===================================================== */
 
     console.log(
         "SamSreeFuture | Mahesh Portfolio Loaded Successfully 🚀"

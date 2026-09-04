@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ABCD Kids Tracing Workbook | SamSreeFuture</title>
+
+    <meta name="description"
+        content="Printable ABCD Kids Tracing Workbook by SamSreeFuture. Learn A to Z through tracing, coloring and writing practice.">
+
+    <link rel="icon" type="image/png" href="./images/favicon.png">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #eeeeee;
+            color: #222;
+        }
+
+        .toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #111827;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .toolbar button {
+            border: 0;
+            padding: 12px 20px;
+            margin: 4px;
+            border-radius: 8px;
+            background: #ffffff;
+            color: #111827;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .toolbar button:hover {
+            background: #e5e7eb;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            background: white;
+            padding: 15mm;
+            position: relative;
+            page-break-after: always;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+        }
+
+        .cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 267mm;
+        }
+
+        .brand {
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        .cover h1 {
+            font-size: 70px;
+            margin: 10px 0;
+        }
+
+        .cover h2 {
+            font-size: 30px;
+            margin: 10px 0 25px;
+        }
+
+        .cover p {
+            font-size: 18px;
+        }
+
+        .letter-page {
+            text-align: center;
+        }
+
+        .page-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .big-letter {
+            font-size: 130px;
+            font-weight: 900;
+            line-height: 1;
+            margin: 10px 0;
+        }
+
+        .trace-box {
+            border: 3px dashed #999;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .trace {
+            font-size: 90px;
+            font-weight: 900;
+            color: white;
+            -webkit-text-stroke: 2px #777;
+            letter-spacing: 15px;
+            margin: 10px;
+        }
+
+        .word {
+            font-size: 42px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .emoji {
+            font-size: 70px;
+            margin: 10px;
+        }
+
+        .practice {
+            margin-top: 20px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        .practice-title {
+            font-weight: bold;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .lines {
+            height: 130px;
+            background:
+                repeating-linear-gradient(to bottom,
+                    transparent 0,
+                    transparent 31px,
+                    #aaa 32px,
+                    transparent 33px);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 8mm;
+            left: 15mm;
+            right: 15mm;
+            text-align: center;
+            font-size: 11px;
+            color: #777;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+
+            .toolbar {
+                display: none;
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+
+        @media(max-width:800px) {
+            .page {
+                width: 100%;
+                min-height: auto;
+                margin: 0;
+                padding: 25px;
+            }
+
+            .cover {
+                min-height: 90vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="toolbar">
+        <button onclick="window.print()">🖨 Print / Save PDF</button>
+        <button onclick="window.location.href='index.html'">← Back to Website</button>
+    </div>
+
+    <div id="workbook"></div>
+
+    <script>
+
+        const letters = [
+            ["A", "a", "Apple", "🍎"],
+            ["B", "b", "Ball", "⚽"],
+            ["C", "c", "Cat", "🐱"],
+            ["D", "d", "Dog", "🐶"],
+            ["E", "e", "Elephant", "🐘"],
+            ["F", "f", "Fish", "🐟"],
+            ["G", "g", "Grapes", "🍇"],
+            ["H", "h", "House", "🏠"],
+            ["I", "i", "Ice Cream", "🍦"],
+            ["J", "j", "Jug", "🏺"],
+            ["K", "k", "Kite", "🪁"],
+            ["L", "l", "Lion", "🦁"],
+            ["M", "m", "Monkey", "🐒"],
+            ["N", "n", "Nest", "🪺"],
+            ["O", "o", "Owl", "🦉"],
+            ["P", "p", "Parrot", "🦜"],
+            ["Q", "q", "Queen", "👑"],
+            ["R", "r", "Rabbit", "🐰"],
+            ["S", "s", "Sun", "☀️"],
+            ["T", "t", "Tree", "🌳"],
+            ["U", "u", "Umbrella", "☂️"],
+            ["V", "v", "Van", "🚐"],
+            ["W", "w", "Watch", "⌚"],
+            ["X", "x", "Xylophone", "🎵"],
+            ["Y", "y", "Yacht", "🛥️"],
+            ["Z", "z", "Zebra", "🦓"]
+        ];
+
+        let html = `
+
+<section class="page">
+    <div class="cover">
+
+        <div class="brand">
+            SAMSREEFUTURE KIDS SERIES
+        </div>
+
+        <h1>ABCD</h1>
+
+        <h2>Kids Tracing Workbook</h2>
+
+        <div style="font-size:90px;">🔤 ✏️ 🎨</div>
+
+        <p>
+            Learn • Trace • Write • Practice
+        </p>
+
+        <p>
+            <strong>A–Z Alphabet Practice Book</strong>
+        </p>
+
+        <p style="margin-top:50px;">
+            Designed by Mahesh<br>
+            SamSreeFuture
+        </p>
+
+    </div>
+
+    <div class="footer">
+        SamSreeFuture Kids Series | Designed by Mahesh
+    </div>
+</section>
+
+`;
+
+        letters.forEach(item => {
+
+            const [upper, lower, word, emoji] = item;
+
+            html += `
+
+<section class="page letter-page">
+
+    <div class="page-title">
+        ABCD KIDS TRACING WORKBOOK
+    </div>
+
+    <div class="big-letter">
+        ${upper} ${lower}
+    </div>
+
+    <div class="trace-box">
+
+        <div class="practice-title">
+            TRACE THE LETTER
+        </div>
+
+        <div class="trace">
+            ${upper} ${upper} ${upper}
+        </div>
+
+        <div class="trace">
+            ${lower} ${lower} ${lower}
+        </div>
+
+    </div>
+
+    <div class="emoji">
+        ${emoji}
+    </div>
+
+    <div class="word">
+        ${upper} is for ${word}
+    </div>
+
+    <div class="practice">
+
+        <div class="practice-title">
+            ✏️ WRITE ${upper} AND ${lower}
+        </div>
+
+        <div class="lines"></div>
+
+    </div>
+
+    <div class="practice">
+
+        <div class="practice-title">
+            🎨 DRAW & COLOR
+        </div>
+
+        <div style="height:80px;"></div>
+
+    </div>
+
+    <div class="footer">
+        SamSreeFuture Kids Series | A–Z Learning Workbook
+    </div>
+
+</section>
+
+`;
+
+        });
+
+        document.getElementById("workbook").innerHTML = html;
+
+    </script>
+
+</body>
+
+</html>

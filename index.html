@@ -1,99 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<!-- =================================================
+     SEO — SAMSREEFUTURE
+================================================= -->
 
-    <meta charset="UTF-8">
+<title>SamSreeFuture | Web Developer, AI Solutions & Graphic Designer in Hyderabad</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description"
+    content="SamSreeFuture by Mahesh — Professional Website Development, AI Solutions, Graphic Design, Branding and Digital Services in Hyderabad, Telangana.">
 
-    <title>SamSreeFuture | Mahesh Portfolio</title>
+<meta name="keywords"
+    content="SamSreeFuture, Mahesh Web Developer Hyderabad, Web Developer Hyderabad, Website Development Hyderabad, AI Solutions Hyderabad, Graphic Designer Hyderabad, Poster Design Hyderabad, Logo Design, Business Website, AI Automation, Digital Products">
 
-    <meta name="description"
-        content="SamSreeFuture - Mahesh Portfolio. Professional Website Development, AI Solutions, Graphic Design, Branding and Digital Services.">
+<meta name="author" content="Mahesh - SamSreeFuture">
 
-    <meta name="keywords"
-        content="Web Developer, AI Solutions, Website Design, Graphic Designer, Freelancing, SamSreeFuture">
+<meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow">
 
-    <meta name="author" content="Mahesh - SamSreeFuture">
+<link rel="canonical" href="https://samsreefuture.netlify.app/">
 
+<!-- =================================================
+     OPEN GRAPH — FACEBOOK / WHATSAPP / LINKEDIN
+================================================= -->
 
-    <!-- SOCIAL SHARE -->
+<meta property="og:title" content="SamSreeFuture | Web Developer, AI Solutions & Graphic Designer">
 
-    <meta property="og:title" content="SamSreeFuture | Mahesh Portfolio">
+<meta property="og:description"
+    content="Professional Website Development, AI Solutions, Graphic Design, Branding and Digital Services by Mahesh in Hyderabad.">
 
-    <meta property="og:description"
-        content="Professional Website Development, AI Solutions, Graphic Design and Digital Services by Mahesh.">
+<meta property="og:image" content="https://samsreefuture.netlify.app/images/mahesh.png">
 
-    <meta property="og:image" content="https://samsreefuture.github.io/SamSreeFuture/images/mahesh.png">
+<meta property="og:url" content="https://samsreefuture.netlify.app/">
 
-    <meta property="og:url" content="https://samsreefuture.github.io/SamSreeFuture/">
+<meta property="og:type" content="website">
 
-    <meta property="og:type" content="website">
+<meta property="og:site_name" content="SamSreeFuture">
 
+<meta property="og:locale" content="en_IN">
 
-    <!-- FAVICON -->
+<!-- =================================================
+     TWITTER / X
+================================================= -->
 
-    <link rel="icon" type="image/png" href="./images/favicon.png">
+<meta name="twitter:card" content="summary_large_image">
 
+<meta name="twitter:title" content="SamSreeFuture | Web Developer & AI Solutions">
 
-    <!-- GOOGLE FONT -->
+<meta name="twitter:description"
+    content="Website Development, AI Solutions, Graphic Design, Branding and Digital Services by Mahesh.">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+<meta name="twitter:image" content="https://samsreefuture.netlify.app/images/mahesh.png">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- =================================================
+     LOCAL SEO
+================================================= -->
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+<meta name="geo.region" content="IN-TG">
+<meta name="geo.placename" content="Hyderabad, Telangana, India">
 
+<!-- FAVICON -->
 
-    <!-- AOS -->
+<link rel="icon" type="image/png" href="./images/favicon.png">
+<!-- GOOGLE FONT -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
+<!-- AOS -->
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
 
-
-    <!-- MAIN CSS -->
-
-    <link rel="stylesheet" href="./style.css">
-
+<!-- MAIN CSS -->
+<link rel="stylesheet" href="./style.css">
 </head>
 
-
 <body>
-
 
     <!-- =================================================
          WHATSAPP
     ================================================= -->
-
-    <a href="https://wa.me/918125024046" class="whatsapp" target="_blank" rel="noopener noreferrer"
+    <a href="https://wa.me/918125024046" class="whatsapp whatsapp-float" target="_blank" rel="noopener noreferrer"
         aria-label="Chat with Mahesh on WhatsApp">
 
         <img src="./images/whatsapp.png" alt="WhatsApp">
-
     </a>
-
 
 
     <!-- =================================================
          NAVBAR
     ================================================= -->
-
-    <header>
+    <header class="site-header">
 
         <nav>
 
-            <h2>SamSreeFuture</h2>
+            <div class="brand">
+
+                <img src="./images/favicon.png" alt="SamSreeFuture Logo">
+
+                <h2>SamSreeFuture</h2>
+
+            </div>
 
 
-            <div class="menu-toggle" aria-label="Open Menu" role="button" tabindex="0">
+            <div class="menu-toggle" id="menu-toggle" aria-label="Open Menu" role="button" tabindex="0">
 
                 ☰
 
             </div>
 
 
-            <ul>
+            <ul id="main-nav">
 
                 <li>
                     <a href="#home">Home</a>
@@ -108,7 +124,15 @@
                 </li>
 
                 <li>
+                    <a href="#pricing">Pricing</a>
+                </li>
+
+                <li>
                     <a href="#portfolio">Portfolio</a>
+                </li>
+
+                <li>
+                    <a href="#digital-store">Digital Store</a>
                 </li>
 
                 <li>
@@ -130,101 +154,142 @@
     </header>
 
 
-
     <!-- =================================================
          HERO
     ================================================= -->
+    <section class="hero hero-section" id="home">
 
-    <section class="hero" id="home">
+        <div class="hero-image hero-image-wrapper" data-aos="fade-right">
 
+            <div class="hero-image-card">
 
-        <div class="hero-image" data-aos="fade-right">
+                <img src="./images/mahesh.png"
+                    alt="Mahesh - Web Developer, AI Solutions and Graphic Designer in Hyderabad">
 
-            <img src="./images/mahesh.png" alt="Mahesh - SamSreeFuture" loading="eager">
+            </div>
 
         </div>
 
 
         <div class="hero-content" data-aos="fade-left">
 
+            <span class="hero-tag">
+                Welcome to SamSreeFuture
+            </span>
 
             <h1>
-
                 Hello, I'm
                 <span>Mahesh</span>
-
             </h1>
 
-
             <h4 class="hero-subtitle">
-
                 Building Modern Websites, AI Solutions & Creative Designs
-
             </h4>
 
 
             <!-- TYPING -->
-
             <h3 class="typing-text">
 
-                <span id="line1"></span>
-
-                <br>
-
-                <span id="line2"></span>
-
-                <br>
-
-                <span id="line3"></span>
+                <span id="typing"></span>
 
             </h3>
 
 
             <p>
-
                 I help businesses grow through modern websites,
                 AI automation, graphic design, branding and
-                digital solutions. Let's build something
-                amazing together.
-
+                digital solutions.
+                Let's build something amazing together.
             </p>
 
 
             <div class="hero-buttons">
 
                 <a href="#contact" class="btn">
-
                     Hire Me
-
                 </a>
 
-
                 <a href="#portfolio" class="btn2">
-
                     View My Work
+                </a>
 
+                <a href="#digital-store" class="btn2">
+                    Digital Store
                 </a>
 
             </div>
 
+
+            <div class="hero-contact">
+
+                <span>📍 Hyderabad, Telangana</span>
+
+                <span>📧 samsreefuture@gmail.com</span>
+
+            </div>
 
         </div>
 
     </section>
 
 
+    <!-- =================================================
+         STATS
+    ================================================= -->
+    <section class="stats stats-section" data-aos="fade-up">
+
+        <div class="stat stat-box">
+
+            <h1 class="counter" data-target="50">
+                0
+            </h1>
+
+            <p>Projects</p>
+
+        </div>
+
+
+        <div class="stat stat-box">
+
+            <h1 class="counter" data-target="40">
+                0
+            </h1>
+
+            <p>Happy Clients</p>
+
+        </div>
+
+
+        <div class="stat stat-box">
+
+            <h1 class="counter" data-target="3">
+                0
+            </h1>
+
+            <p>Years Learning</p>
+
+        </div>
+
+
+        <div class="stat stat-box">
+
+            <h1 class="counter" data-target="100">
+                0
+            </h1>
+
+            <p>Passion %</p>
+
+        </div>
+
+    </section>
+
 
     <!-- =================================================
          ABOUT
     ================================================= -->
+    <section id="about" class="about about-section" data-aos="fade-up">
 
-    <section id="about" data-aos="fade-up">
-
-
-        <h2>
-            About Me
-        </h2>
-
+        <h2>About Me</h2>
 
         <p>
 
@@ -240,27 +305,26 @@
 
         </p>
 
-
     </section>
-
 
 
     <!-- =================================================
          SERVICES
     ================================================= -->
+    <section id="services" class="services services-section" data-aos="fade-up">
 
-    <section id="services" class="services" data-aos="fade-up">
+        <h2>My Services</h2>
 
-
-        <h2>
-            My Services
-        </h2>
-
-
-        <div class="service-container">
+        <p class="section-intro">
+            Professional digital services for businesses,
+            creators and organizations.
+        </p>
 
 
-            <div class="card">
+        <div class="service-container services-grid">
+
+
+            <div class="card service-card">
 
                 <h3>
                     🌐 Website Development
@@ -274,7 +338,7 @@
             </div>
 
 
-            <div class="card">
+            <div class="card service-card">
 
                 <h3>
                     🤖 AI Solutions
@@ -288,7 +352,7 @@
             </div>
 
 
-            <div class="card">
+            <div class="card service-card">
 
                 <h3>
                     🎨 Graphic Design
@@ -302,7 +366,7 @@
             </div>
 
 
-            <div class="card">
+            <div class="card service-card">
 
                 <h3>
                     🎬 Video Editing
@@ -316,7 +380,7 @@
             </div>
 
 
-            <div class="card">
+            <div class="card service-card">
 
                 <h3>
                     📱 Digital Marketing
@@ -330,7 +394,7 @@
             </div>
 
 
-            <div class="card">
+            <div class="card service-card">
 
                 <h3>
                     💼 Freelancing Support
@@ -343,263 +407,842 @@
 
             </div>
 
-
         </div>
 
     </section>
 
+
+    <!-- =================================================
+         PRICING
+    ================================================= -->
+    <section id="pricing" class="pricing pricing-section" data-aos="fade-up">
+
+        <h2>My Pricing</h2>
+
+        <p class="section-intro">
+            Simple packages for different business needs.
+        </p>
+
+
+        <div class="pricing-grid">
+
+
+            <div class="pricing-card">
+
+                <h3>Starter Website</h3>
+
+                <h2>₹5,000</h2>
+
+                <p>
+                    Professional one-page business website.
+                </p>
+
+                <ul>
+
+                    <li>✔ Responsive Design</li>
+                    <li>✔ Mobile Friendly</li>
+                    <li>✔ Contact Section</li>
+                    <li>✔ WhatsApp Integration</li>
+
+                </ul>
+
+                <a href="https://wa.me/918125024046?text=Hello%20Mahesh,%20I%20am%20interested%20in%20the%20Starter%20Website%20package%20of%20%E2%82%B95,000."
+                    class="btn" target="_blank" rel="noopener noreferrer">
+
+                    Get Started
+
+                </a>
+
+            </div>
+
+
+            <div class="pricing-card featured-product">
+
+                <span class="product-badge">
+                    POPULAR
+                </span>
+
+                <h3>Business Website</h3>
+
+                <h2>₹8,000</h2>
+
+                <p>
+                    Complete professional website for your business.
+                </p>
+
+                <ul>
+
+                    <li>✔ Multiple Sections</li>
+                    <li>✔ Responsive Design</li>
+                    <li>✔ WhatsApp Integration</li>
+                    <li>✔ Contact Form</li>
+                    <li>✔ Basic SEO</li>
+
+                </ul>
+
+                <a href="https://wa.me/918125024046?text=Hello%20Mahesh,%20I%20am%20interested%20in%20the%20Business%20Website%20package%20of%20%E2%82%B98,000."
+                    class="btn" target="_blank" rel="noopener noreferrer">
+
+                    Get Started
+
+                </a>
+
+            </div>
+
+
+            <div class="pricing-card">
+
+                <h3>Premium Website</h3>
+
+                <h2>₹15,000+</h2>
+
+                <p>
+                    Advanced website with premium features.
+                </p>
+
+                <ul>
+
+                    <li>✔ Premium UI</li>
+                    <li>✔ Advanced Sections</li>
+                    <li>✔ Animations</li>
+                    <li>✔ AI Features</li>
+                    <li>✔ SEO Setup</li>
+
+                </ul>
+
+                <a href="https://wa.me/918125024046?text=Hello%20Mahesh,%20I%20am%20interested%20in%20the%20Premium%20Website%20package."
+                    class="btn" target="_blank" rel="noopener noreferrer">
+
+                    Contact Me
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
 
 
     <!-- =================================================
          PORTFOLIO
     ================================================= -->
+    <section id="portfolio" class="portfolio portfolio-section" data-aos="fade-up">
 
-    <section id="portfolio" data-aos="zoom-in">
+        <h2>My Projects</h2>
 
+        <p class="portfolio-intro">
 
-        <h2>
-            My Projects
-        </h2>
+            A collection of websites, creative designs,
+            branding projects and digital solutions
+            created by SamSreeFuture.
 
-
-        <div class="portfolio-gallery">
-
-
-            <div class="project">
-
-                <a href="./images/business.jpg" class="portfolio-item" target="_blank">
-
-                    <img src="./images/business.jpg" alt="Lakshmi Tulasi Tiffins and Caterers Website" loading="lazy">
-
-                </a>
+        </p>
 
 
-                <h3>
-                    Lakshmi Tulasi Tiffins & Caterers
-                </h3>
+        <div class="portfolio-gallery portfolio-grid">
 
 
-                <p>
-                    Food Business Website,
-                    Menu Design & Online Branding
-                </p>
+            <!-- PROJECT 1 -->
+            <div class="project portfolio-card">
 
+                <a href="images/business.jpg" class="portfolio-item" target="_blank" rel="noopener noreferrer">
 
-                <a href="#contact" class="btn">
-
-                    Enquire About Project
+                    <img src="images/business.jpg" alt="Lakshmi Tulasi Tiffins and Caterers Website" loading="lazy">
 
                 </a>
+
+
+                <div class="project-content portfolio-content">
+
+                    <span class="project-tag">
+                        Website
+                    </span>
+
+                    <h3>
+                        Lakshmi Tulasi Tiffins & Caterers
+                    </h3>
+
+                    <p>
+                        Professional food business website
+                        with menu, branding and online
+                        ordering information.
+                    </p>
+
+                    <a href="images/business.jpg" target="_blank" rel="noopener noreferrer" class="project-btn">
+
+                        View Project →
+
+                    </a>
+
+                </div>
 
             </div>
 
 
+            <!-- PROJECT 2 -->
+            <div class="project portfolio-card">
 
-            <div class="project">
+                <a href="images/poster1.jpg" class="portfolio-item" target="_blank" rel="noopener noreferrer">
 
-                <img src="./images/poster1.jpg" alt="Poster Design" loading="lazy">
-
-
-                <h3>
-                    Poster Design
-                </h3>
-
-
-                <p>
-                    Creative Posters &
-                    Social Media Designs
-                </p>
-
-
-                <a href="#contact" class="btn">
-
-                    Enquire About Project
+                    <img src="images/poster1.jpg" alt="Creative Poster Design" loading="lazy">
 
                 </a>
+
+
+                <div class="project-content portfolio-content">
+
+                    <span class="project-tag">
+                        Graphic Design
+                    </span>
+
+                    <h3>Poster Design</h3>
+
+                    <p>
+                        Creative promotional posters designed
+                        for businesses, events and social media.
+                    </p>
+
+                    <a href="images/poster1.jpg" target="_blank" rel="noopener noreferrer" class="project-btn">
+
+                        View Project →
+
+                    </a>
+
+                </div>
 
             </div>
 
 
+            <!-- PROJECT 3 -->
+            <div class="project portfolio-card">
 
-            <div class="project">
+                <a href="images/Church Daily Promises Designs.jpg" class="portfolio-item" target="_blank"
+                    rel="noopener noreferrer">
 
-                <img src="./images/church.jpg" alt="Church Poster Design" loading="lazy">
-
-
-                <h3>
-                    Church Posters
-                </h3>
-
-
-                <p>
-                    Christian Event &
-                    Church Designs
-                </p>
-
-
-                <a href="#contact" class="btn">
-
-                    Enquire About Project
+                    <img src="images/Church Daily Promises Designs.jpg" alt="Church Daily Promises Designs"
+                        loading="lazy">
 
                 </a>
+
+
+                <div class="project-content portfolio-content">
+
+                    <span class="project-tag">
+                        Church Designs
+                    </span>
+
+                    <h3>
+                        Church Daily Promises Designs
+                    </h3>
+
+                    <p>
+                        Daily Bible promise posters and
+                        creative designs created for church
+                        and social media.
+                    </p>
+
+                    <a href="images/Church Daily Promises Designs.jpg" target="_blank" rel="noopener noreferrer"
+                        class="project-btn">
+
+                        View Project →
+
+                    </a>
+
+                </div>
 
             </div>
 
 
+            <!-- PROJECT 4 -->
+            <div class="project portfolio-card">
 
-            <div class="project">
+                <a href="images/business2.jpg" class="portfolio-item" target="_blank" rel="noopener noreferrer">
 
-                <img src="./images/business2.jpg" alt="Business Card Design" loading="lazy">
-
-
-                <h3>
-                    Business Card
-                </h3>
-
-
-                <p>
-                    Modern Visiting Card Design
-                </p>
-
-
-                <a href="#contact" class="btn">
-
-                    Enquire About Project
+                    <img src="images/business2.jpg" alt="Business Card Design" loading="lazy">
 
                 </a>
+
+
+                <div class="project-content portfolio-content">
+
+                    <span class="project-tag">
+                        Branding
+                    </span>
+
+                    <h3>Business Card</h3>
+
+                    <p>
+                        Modern and professional visiting
+                        card design for business branding.
+                    </p>
+
+                    <a href="images/business2.jpg" target="_blank" rel="noopener noreferrer" class="project-btn">
+
+                        View Project →
+
+                    </a>
+
+                </div>
 
             </div>
 
 
+            <!-- PROJECT 5 -->
+            <div class="project portfolio-card">
 
-            <div class="project">
+                <a href="images/artwork.jpg" class="portfolio-item" target="_blank" rel="noopener noreferrer">
 
-                <img src="./images/artwork.jpg" alt="Christian Artwork" loading="lazy">
-
-
-                <h3>
-                    Christian Artwork
-                </h3>
-
-
-                <p>
-                    Creative Bible Verse Designs
-                </p>
-
-
-                <a href="#contact" class="btn">
-
-                    Enquire About Project
+                    <img src="images/artwork.jpg" alt="Artwork Design" loading="lazy">
 
                 </a>
+
+
+                <div class="project-content portfolio-content">
+
+                    <span class="project-tag">
+                        Artwork
+                    </span>
+
+                    <h3>Artwork</h3>
+
+                    <p>
+                        Creative and professional artwork
+                        designs created for digital and
+                        promotional use.
+                    </p>
+
+                    <a href="images/artwork.jpg" target="_blank" rel="noopener noreferrer" class="project-btn">
+
+                        View Project →
+
+                    </a>
+
+                </div>
 
             </div>
 
 
+            <!-- PROJECT 6 -->
+            <div class="project portfolio-card">
 
-            <div class="project">
+                <a href="images/corporate.png" class="portfolio-item" target="_blank" rel="noopener noreferrer">
 
-                <img src="./images/corporate.png" alt="Corporate Branding" loading="lazy">
-
-
-                <h3>
-                    Corporate Branding
-                </h3>
-
-
-                <p>
-                    Professional Business Identity
-                </p>
-
-
-                <a href="#contact" class="btn">
-
-                    Enquire About Project
+                    <img src="images/corporate.png" alt="Corporate Branding" loading="lazy">
 
                 </a>
+
+
+                <div class="project-content portfolio-content">
+
+                    <span class="project-tag">
+                        Branding
+                    </span>
+
+                    <h3>Corporate Branding</h3>
+
+                    <p>
+                        Professional business identity,
+                        branding materials and digital creatives.
+                    </p>
+
+                    <a href="images/corporate.png" target="_blank" rel="noopener noreferrer" class="project-btn">
+
+                        View Project →
+
+                    </a>
+
+                </div>
 
             </div>
 
 
+            <!-- PROJECT 7 -->
+            <div class="project portfolio-card">
 
-            <div class="project">
+                <a href="images/ai-video.jpg" class="portfolio-item" target="_blank" rel="noopener noreferrer">
 
-                <img src="./images/ai-video.jpg" alt="AI Video Creation" loading="lazy">
-
-
-                <h3>
-                    AI Video Creation
-                </h3>
-
-
-                <p>
-                    AI Generated Kids Videos &
-                    Creative Content
-                </p>
-
-
-                <a href="#contact" class="btn">
-
-                    Enquire About Project
+                    <img src="images/ai-video.jpg" alt="AI Video Creation" loading="lazy">
 
                 </a>
+
+
+                <div class="project-content portfolio-content">
+
+                    <span class="project-tag">
+                        AI Solutions
+                    </span>
+
+                    <h3>AI Video Creation</h3>
+
+                    <p>
+                        AI-generated kids videos, creative
+                        content and digital media solutions.
+                    </p>
+
+                    <a href="images/ai-video.jpg" target="_blank" rel="noopener noreferrer" class="project-btn">
+
+                        View Project →
+
+                    </a>
+
+                </div>
 
             </div>
 
 
+            <!-- PROJECT 8 -->
+            <div class="project portfolio-card">
 
-            <div class="project">
+                <a href="images/card.jpg" class="portfolio-item" target="_blank" rel="noopener noreferrer">
 
-                <img src="./images/card.jpg" alt="Professional Business Card" loading="lazy">
-
-
-                <h3>
-                    Business Card
-                </h3>
-
-
-                <p>
-                    Professional Visiting Card Design
-                </p>
-
-
-                <a href="#contact" class="btn">
-
-                    Enquire About Project
+                    <img src="images/card.jpg" alt="Professional Visiting Card" loading="lazy">
 
                 </a>
 
-            </div>
 
+                <div class="project-content portfolio-content">
+
+                    <span class="project-tag">
+                        Graphic Design
+                    </span>
+
+                    <h3>
+                        Professional Business Card
+                    </h3>
+
+                    <p>
+                        Clean and professional visiting card
+                        design created for business promotion.
+                    </p>
+
+                    <a href="images/card.jpg" target="_blank" rel="noopener noreferrer" class="project-btn">
+
+                        View Project →
+
+                    </a>
+
+                </div>
+
+            </div>
 
         </div>
 
     </section>
 
+
+    <!-- =================================================
+         DIGITAL STORE
+    ================================================= -->
+    <section id="digital-store" class="digital-store-section" data-aos="fade-up">
+
+        <h2>Premium Digital Products</h2>
+
+        <p class="section-intro">
+            Ready-to-use digital products created by SamSreeFuture.
+        </p>
+
+
+        <!-- PROCESS -->
+        <div class="store-process">
+
+            <div class="process-item">
+
+                <span>1</span>
+
+                <h3>Choose</h3>
+
+                <p>
+                    Select your digital product.
+                </p>
+
+            </div>
+
+
+            <div class="process-item">
+
+                <span>2</span>
+
+                <h3>Order</h3>
+
+                <p>
+                    Click Buy Now and contact me.
+                </p>
+
+            </div>
+
+
+            <div class="process-item">
+
+                <span>3</span>
+
+                <h3>Receive</h3>
+
+                <p>
+                    Get your digital product.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCTS -->
+        <div class="store-grid">
+
+
+            <!-- ABCD -->
+            <div class="store-card featured-product">
+
+                <span class="product-badge">
+                    FEATURED
+                </span>
+
+                <div class="product-icon">
+                    🔤
+                </div>
+
+                <span class="product-type">
+                    Kids Workbook
+                </span>
+
+                <h3>
+                    ABCD Kids Tracing Book
+                </h3>
+
+                <p>
+                    Premium A-Z tracing, colouring,
+                    writing and practice workbook.
+                </p>
+
+                <div class="product-bottom">
+
+                    <span class="product-price">
+                        ₹99
+                    </span>
+
+                    <div>
+
+                        <a href="abcd-workbook.html" class="product-buy-btn" target="_blank">
+
+                            View Workbook
+
+                        </a>
+
+                        <a href="https://wa.me/918125024046?text=Hello%20Mahesh,%20I%20want%20to%20buy%20the%20ABCD%20Kids%20Tracing%20Book%20for%20%E2%82%B999."
+                            class="product-buy-btn" target="_blank" rel="noopener noreferrer">
+
+                            Buy Now
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- NUMBERS -->
+            <div class="store-card">
+
+                <div class="product-icon">
+                    🔢
+                </div>
+
+                <span class="product-type">
+                    Kids Workbook
+                </span>
+
+                <h3>
+                    Numbers Writing Book
+                </h3>
+
+                <p>
+                    Number tracing and handwriting practice
+                    for young children.
+                </p>
+
+                <div class="product-bottom">
+
+                    <span class="product-price">
+                        ₹99
+                    </span>
+
+                    <a href="https://wa.me/918125024046?text=Hello%20Mahesh,%20I%20want%20to%20buy%20the%20Numbers%20Writing%20Book%20for%20%E2%82%B999."
+                        class="product-buy-btn" target="_blank" rel="noopener noreferrer">
+
+                        Buy Now
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- COLOURING -->
+            <div class="store-card">
+
+                <div class="product-icon">
+                    🎨
+                </div>
+
+                <span class="product-type">
+                    Kids Book
+                </span>
+
+                <h3>
+                    Kids Colouring Book
+                </h3>
+
+                <p>
+                    Fun printable colouring activities
+                    for children.
+                </p>
+
+                <div class="product-bottom">
+
+                    <span class="product-price">
+                        ₹149
+                    </span>
+
+                    <a href="https://wa.me/918125024046?text=Hello%20Mahesh,%20I%20want%20to%20buy%20the%20Kids%20Colouring%20Book%20for%20%E2%82%B9149."
+                        class="product-buy-btn" target="_blank" rel="noopener noreferrer">
+
+                        Buy Now
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- TELUGU -->
+            <div class="store-card">
+
+                <div class="product-icon">
+                    అ
+                </div>
+
+                <span class="product-type">
+                    Telugu Workbook
+                </span>
+
+                <h3>
+                    Telugu Writing Practice Book
+                </h3>
+
+                <p>
+                    Telugu letter writing and handwriting
+                    practice for kids.
+                </p>
+
+                <div class="product-bottom">
+
+                    <span class="product-price">
+                        ₹149
+                    </span>
+
+                    <a href="https://wa.me/918125024046?text=Hello%20Mahesh,%20I%20want%20to%20buy%20the%20Telugu%20Writing%20Practice%20Book%20for%20%E2%82%B9149."
+                        class="product-buy-btn" target="_blank" rel="noopener noreferrer">
+
+                        Buy Now
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECIPES -->
+            <div class="store-card">
+
+                <div class="product-icon">
+                    🍲
+                </div>
+
+                <span class="product-type">
+                    eBook
+                </span>
+
+                <h3>
+                    Easy Indian Recipes eBook
+                </h3>
+
+                <p>
+                    Simple and practical Indian recipes
+                    for everyday cooking.
+                </p>
+
+                <div class="product-bottom">
+
+                    <span class="product-price">
+                        ₹199
+                    </span>
+
+                    <a href="https://wa.me/918125024046?text=Hello%20Mahesh,%20I%20want%20to%20buy%20the%20Easy%20Indian%20Recipes%20eBook%20for%20%E2%82%B9199."
+                        class="product-buy-btn" target="_blank" rel="noopener noreferrer">
+
+                        Buy Now
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- CANVA -->
+            <div class="store-card">
+
+                <div class="product-icon">
+                    🖌️
+                </div>
+
+                <span class="product-type">
+                    Templates
+                </span>
+
+                <h3>
+                    Canva Poster Templates Pack
+                </h3>
+
+                <p>
+                    Ready-to-edit Canva templates
+                    for social media and promotions.
+                </p>
+
+                <div class="product-bottom">
+
+                    <span class="product-price">
+                        ₹199
+                    </span>
+
+                    <a href="https://wa.me/918125024046?text=Hello%20Mahesh,%20I%20want%20to%20buy%20the%20Canva%20Poster%20Templates%20Pack%20for%20%E2%82%B9199."
+                        class="product-buy-btn" target="_blank" rel="noopener noreferrer">
+
+                        Buy Now
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- BUSINESS -->
+            <div class="store-card">
+
+                <div class="product-icon">
+                    💼
+                </div>
+
+                <span class="product-type">
+                    Templates
+                </span>
+
+                <h3>
+                    Business Poster Templates Pack
+                </h3>
+
+                <p>
+                    Professional promotional templates
+                    for businesses.
+                </p>
+
+                <div class="product-bottom">
+
+                    <span class="product-price">
+                        ₹249
+                    </span>
+
+                    <a href="https://wa.me/918125024046?text=Hello%20Mahesh,%20I%20want%20to%20buy%20the%20Business%20Poster%20Templates%20Pack%20for%20%E2%82%B9249."
+                        class="product-buy-btn" target="_blank" rel="noopener noreferrer">
+
+                        Buy Now
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- CHURCH -->
+            <div class="store-card">
+
+                <div class="product-icon">
+                    ✝️
+                </div>
+
+                <span class="product-type">
+                    Templates
+                </span>
+
+                <h3>
+                    Church Poster Templates Pack
+                </h3>
+
+                <p>
+                    Beautiful editable church poster
+                    templates for announcements and verses.
+                </p>
+
+                <div class="product-bottom">
+
+                    <span class="product-price">
+                        ₹199
+                    </span>
+
+                    <a href="https://wa.me/918125024046?text=Hello%20Mahesh,%20I%20want%20to%20buy%20the%20Church%20Poster%20Templates%20Pack%20for%20%E2%82%B9199."
+                        class="product-buy-btn" target="_blank" rel="noopener noreferrer">
+
+                        Buy Now
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="store-note">
+
+            <p>
+                💡 Need a custom digital product?
+            </p>
+
+            <a href="https://wa.me/918125024046?text=Hello%20Mahesh,%20I%20need%20a%20custom%20digital%20product."
+                class="custom-product-btn" target="_blank" rel="noopener noreferrer">
+
+                Request Custom Product
+
+            </a>
+
+        </div>
+
+    </section>
 
 
     <!-- =================================================
          SKILLS
     ================================================= -->
+    <section id="skills" class="skills" data-aos="fade-right">
 
-    <section id="skills" data-aos="fade-right">
-
-
-        <h2>
-            My Skills
-        </h2>
+        <h2>My Skills</h2>
 
 
         <div class="skill">
 
-            <p>
-                HTML
-            </p>
+            <p>HTML</p>
 
             <div class="progress">
-
                 <span style="width:95%"></span>
-
             </div>
 
         </div>
@@ -607,14 +1250,10 @@
 
         <div class="skill">
 
-            <p>
-                CSS
-            </p>
+            <p>CSS</p>
 
             <div class="progress">
-
                 <span style="width:90%"></span>
-
             </div>
 
         </div>
@@ -622,14 +1261,10 @@
 
         <div class="skill">
 
-            <p>
-                JavaScript
-            </p>
+            <p>JavaScript</p>
 
             <div class="progress">
-
                 <span style="width:85%"></span>
-
             </div>
 
         </div>
@@ -637,14 +1272,10 @@
 
         <div class="skill">
 
-            <p>
-                AI Solutions
-            </p>
+            <p>AI Solutions</p>
 
             <div class="progress">
-
                 <span style="width:95%"></span>
-
             </div>
 
         </div>
@@ -652,33 +1283,23 @@
 
         <div class="skill">
 
-            <p>
-                Graphic Design
-            </p>
+            <p>Graphic Design</p>
 
             <div class="progress">
-
                 <span style="width:90%"></span>
-
             </div>
 
         </div>
-
 
     </section>
-
 
 
     <!-- =================================================
          WHY CHOOSE ME
     ================================================= -->
+    <section id="why-me" class="why-section" data-aos="fade-up">
 
-    <section id="why-me" data-aos="fade-up">
-
-
-        <h2>
-            Why Choose Me
-        </h2>
+        <h2>Why Choose Me</h2>
 
 
         <div class="service-container">
@@ -726,95 +1347,30 @@
             </div>
 
 
+            <div class="card">
+
+                <h3>
+                    💯 Customer Focus
+                </h3>
+
+                <p>
+                    I understand your requirements and
+                    focus on delivering useful results.
+                </p>
+
+            </div>
+
         </div>
 
     </section>
-
-
-
-    <!-- =================================================
-         STATS
-    ================================================= -->
-
-    <section class="stats" data-aos="fade-left">
-
-
-        <div class="stat">
-
-            <h1 class="counter" data-target="50">
-
-                0
-
-            </h1>
-
-            <p>
-                Projects
-            </p>
-
-        </div>
-
-
-        <div class="stat">
-
-            <h1 class="counter" data-target="40">
-
-                0
-
-            </h1>
-
-            <p>
-                Happy Clients
-            </p>
-
-        </div>
-
-
-        <div class="stat">
-
-            <h1 class="counter" data-target="3">
-
-                0
-
-            </h1>
-
-            <p>
-                Years Learning
-            </p>
-
-        </div>
-
-
-        <div class="stat">
-
-            <h1 class="counter" data-target="100">
-
-                0
-
-            </h1>
-
-            <p>
-                Passion %
-
-            </p>
-
-        </div>
-
-
-    </section>
-
 
 
     <!-- =================================================
          CONTACT
     ================================================= -->
+    <section id="contact" class="contact contact-section" data-aos="fade-up">
 
-    <section id="contact" class="contact" data-aos="fade-up">
-
-
-        <h2>
-            Contact Me
-        </h2>
-
+        <h2>Contact Me</h2>
 
         <p>
             Let's work together and build something amazing.
@@ -824,20 +1380,17 @@
         <div class="contact-info">
 
 
+            <!-- WHATSAPP -->
             <a href="https://wa.me/918125024046" target="_blank" rel="noopener noreferrer" class="contact-card">
 
-                <span>
-                    💬
-                </span>
+                <span>💬</span>
 
                 <div>
 
-                    <h3>
-                        WhatsApp
-                    </h3>
+                    <h3>WhatsApp</h3>
 
                     <p>
-                        Chat with me
+                        +91 81250 24046
                     </p>
 
                 </div>
@@ -845,17 +1398,14 @@
             </a>
 
 
+            <!-- EMAIL -->
             <a href="mailto:samsreefuture@gmail.com" class="contact-card">
 
-                <span>
-                    📧
-                </span>
+                <span>📧</span>
 
                 <div>
 
-                    <h3>
-                        Email
-                    </h3>
+                    <h3>Email</h3>
 
                     <p>
                         samsreefuture@gmail.com
@@ -866,17 +1416,14 @@
             </a>
 
 
+            <!-- LOCATION -->
             <div class="contact-card">
 
-                <span>
-                    📍
-                </span>
+                <span>📍</span>
 
                 <div>
 
-                    <h3>
-                        Location
-                    </h3>
+                    <h3>Location</h3>
 
                     <p>
                         Hyderabad, Telangana
@@ -886,16 +1433,13 @@
 
             </div>
 
-
         </div>
 
 
-
-        <form action="https://formsubmit.co/samsreefuture@gmail.com" method="POST">
-
+        <!-- CONTACT FORM -->
+        <form id="contact-form" action="https://formsubmit.co/samsreefuture@gmail.com" method="POST">
 
             <input type="hidden" name="_subject" value="New Project Enquiry - SamSreeFuture">
-
 
             <input type="hidden" name="_captcha" value="false">
 
@@ -939,6 +1483,10 @@
                     AI Solutions
                 </option>
 
+                <option>
+                    Digital Product
+                </option>
+
             </select>
 
 
@@ -949,17 +1497,14 @@
                 Send Message
             </button>
 
-
         </form>
 
     </section>
 
 
-
     <!-- =================================================
          BACK TO TOP
     ================================================= -->
-
     <a href="#home" class="back-to-top" id="backToTop" aria-label="Back to top">
 
         ↑
@@ -967,29 +1512,87 @@
     </a>
 
 
-
     <!-- =================================================
          FOOTER
     ================================================= -->
+    <footer class="site-footer">
 
-    <footer>
+        <div class="footer-content">
 
-        <h3>
-            SamSreeFuture
-        </h3>
 
-        <p>
-            Designed by Mahesh © 2026
-        </p>
+            <div class="footer-brand">
+
+                <h3>
+                    SamSreeFuture
+                </h3>
+
+                <p>
+                    Modern Websites • AI Solutions •
+                    Graphic Design • Digital Products
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="#home">Home</a>
+
+                <a href="#services">Services</a>
+
+                <a href="#portfolio">Portfolio</a>
+
+                <a href="#digital-store">Digital Store</a>
+
+                <a href="#contact">Contact</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                Designed by Mahesh ©
+                <span id="current-year">2026</span>
+                SamSreeFuture
+            </p>
+
+
+            <div class="footer-policy-links">
+
+                <a href="privacy.html">
+                    Privacy Policy
+                </a>
+
+                <a href="terms.html">
+                    Terms & Conditions
+                </a>
+
+                <a href="refund.html">
+                    Refund Policy
+                </a>
+
+                <a href="delivery.html">
+                    Delivery Policy
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+            </div>
+
+        </div>
 
     </footer>
 
 
-
-    <!-- AOS -->
-
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js">
-    </script>
+    <!-- =================================================
+         AOS
+    ================================================= -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
 
     <script>
@@ -1007,12 +1610,9 @@
     </script>
 
 
-    <!-- IMPORTANT: MAIN JAVASCRIPT -->
-
+    <!-- MAIN JAVASCRIPT -->
     <script src="./script.js"></script>
-
 
 </body>
 
 </html>
-```
