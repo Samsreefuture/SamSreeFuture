@@ -1,0 +1,5 @@
+```txt
+User-agent: *
+Allow: /
+
+Sitemap: https://samsreefuture.netlify.app/sitemap.xml

@@ -1,232 +1,83 @@
-/* =====================================================
-   SamSreeFuture | Mahesh Portfolio
-   Main JavaScript + Professional Lead Tracking
-===================================================== */
+/* =========================================================
+   SamSreeFuture - Main JavaScript
+   Complete Website + Automatic Telugu Breaking News
+   ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
-
-    /* =====================================================
-       GOOGLE ANALYTICS HELPER
-    ===================================================== */
-
-    function trackEvent(eventName, parameters = {}) {
-
-        if (typeof gtag === "function") {
-
-            gtag("event", eventName, parameters);
-
-            console.log(
-                "GA4 Event:",
-                eventName,
-                parameters
-            );
-
-        } else {
-
-            console.log(
-                "GA4 not available:",
-                eventName,
-                parameters
-            );
-
-        }
-
-    }
 
 
     /* =====================================================
        MOBILE MENU
     ===================================================== */
 
-    const menuToggle =
-        document.getElementById("menu-toggle");
+    const menuToggle = document.getElementById("menu-toggle");
+    const mainNav = document.getElementById("main-nav");
 
-    const navMenu =
-        document.getElementById("main-nav");
+    if (menuToggle && mainNav) {
 
-    if (menuToggle && navMenu) {
+        function toggleMenu() {
+
+            mainNav.classList.toggle("active");
+
+            const isOpen =
+                mainNav.classList.contains("active");
+
+            menuToggle.setAttribute(
+                "aria-label",
+                isOpen ? "Close Menu" : "Open Menu"
+            );
+
+            menuToggle.setAttribute(
+                "aria-expanded",
+                isOpen ? "true" : "false"
+            );
+        }
 
         menuToggle.addEventListener(
             "click",
+            toggleMenu
+        );
+
+        menuToggle.addEventListener(
+            "keydown",
             function (event) {
 
-                event.stopPropagation();
-
-                navMenu.classList.toggle("active");
-
                 if (
-                    navMenu.classList.contains("active")
+                    event.key === "Enter" ||
+                    event.key === " "
                 ) {
 
-                    menuToggle.textContent = "✕";
+                    event.preventDefault();
 
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        "true"
-                    );
-
-                    trackEvent(
-                        "mobile_menu_open",
-                        {
-                            event_category: "Navigation"
-                        }
-                    );
-
-                } else {
-
-                    menuToggle.textContent = "☰";
-
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
+                    toggleMenu();
                 }
-
             }
         );
 
-
-        /* Close menu after clicking a link */
-
-        navMenu
-            .querySelectorAll("a")
-            .forEach(function (link) {
+        mainNav.querySelectorAll("a").forEach(
+            function (link) {
 
                 link.addEventListener(
                     "click",
                     function () {
 
-                        navMenu.classList.remove(
-                            "active"
-                        );
-
-                        menuToggle.textContent = "☰";
+                        mainNav.classList.remove("active");
 
                         menuToggle.setAttribute(
                             "aria-expanded",
                             "false"
                         );
 
+                        menuToggle.setAttribute(
+                            "aria-label",
+                            "Open Menu"
+                        );
                     }
                 );
-
-            });
-
-
-        /* Close menu when clicking outside */
-
-        document.addEventListener(
-            "click",
-            function (event) {
-
-                if (
-                    navMenu.classList.contains("active") &&
-                    !navMenu.contains(event.target) &&
-                    !menuToggle.contains(event.target)
-                ) {
-
-                    navMenu.classList.remove(
-                        "active"
-                    );
-
-                    menuToggle.textContent = "☰";
-
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                }
-
             }
         );
-
-
-        /* Close menu with Escape */
-
-        document.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (event.key === "Escape") {
-
-                    navMenu.classList.remove(
-                        "active"
-                    );
-
-                    menuToggle.textContent = "☰";
-
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                }
-
-            }
-        );
-
     }
 
-
-    /* =====================================================
-       SMOOTH SCROLL
-    ===================================================== */
-
-    document
-        .querySelectorAll('a[href^="#"]')
-        .forEach(function (link) {
-
-            link.addEventListener(
-                "click",
-                function (event) {
-
-                    const targetId =
-                        this.getAttribute("href");
-
-                    if (
-                        !targetId ||
-                        targetId === "#"
-                    ) {
-
-                        return;
-
-                    }
-
-                    const target =
-                        document.querySelector(targetId);
-
-                    if (target) {
-
-                        event.preventDefault();
-
-                        const header =
-                            document.querySelector(
-                                ".site-header"
-                            );
-
-                        const headerHeight =
-                            header
-                                ? header.offsetHeight
-                                : 0;
-
-                        const targetPosition =
-                            target.getBoundingClientRect().top +
-                            window.pageYOffset -
-                            headerHeight;
-
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: "smooth"
-                        });
-
-                    }
-
-                }
-            );
-
-        });
 
 
     /* =====================================================
@@ -264,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 charIndex++;
 
                 if (
-                    charIndex >=
+                    charIndex ===
                     currentWord.length
                 ) {
 
@@ -272,12 +123,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     setTimeout(
                         typeEffect,
-                        1500
+                        1800
                     );
 
                     return;
-
                 }
+
+                setTimeout(
+                    typeEffect,
+                    100
+                );
 
             } else {
 
@@ -289,578 +144,749 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 charIndex--;
 
-                if (charIndex <= 0) {
-
-                    charIndex = 0;
+                if (charIndex === 0) {
 
                     deleting = false;
 
-                    wordIndex++;
+                    wordIndex =
+                        (wordIndex + 1) %
+                        words.length;
 
-                    if (
-                        wordIndex >=
-                        words.length
-                    ) {
+                    setTimeout(
+                        typeEffect,
+                        400
+                    );
 
-                        wordIndex = 0;
-
-                    }
-
+                    return;
                 }
 
+                setTimeout(
+                    typeEffect,
+                    55
+                );
             }
-
-            setTimeout(
-                typeEffect,
-                deleting ? 45 : 75
-            );
-
         }
-
-        typingElement.textContent = "";
 
         typeEffect();
-
     }
 
-
-    /* =====================================================
-       COUNTER ANIMATION
-    ===================================================== */
-
-    const counters =
-        document.querySelectorAll(".counter");
-
-    function animateCounter(counter) {
-
-        const target =
-            parseInt(
-                counter.getAttribute("data-target"),
-                10
-            );
-
-        if (isNaN(target)) {
-
-            return;
-
-        }
-
-        const duration = 1500;
-
-        const startTime =
-            performance.now();
-
-        function updateCounter(currentTime) {
-
-            const elapsed =
-                currentTime - startTime;
-
-            const progress =
-                Math.min(
-                    elapsed / duration,
-                    1
-                );
-
-            const easeOut =
-                1 -
-                Math.pow(
-                    1 - progress,
-                    3
-                );
-
-            const current =
-                Math.floor(
-                    easeOut * target
-                );
-
-            counter.textContent =
-                current;
-
-            if (progress < 1) {
-
-                requestAnimationFrame(
-                    updateCounter
-                );
-
-            } else {
-
-                counter.textContent =
-                    target;
-
-            }
-
-        }
-
-        requestAnimationFrame(
-            updateCounter
-        );
-
-    }
-
-
-    /* =====================================================
-       COUNTER OBSERVER
-    ===================================================== */
-
-    if (
-        counters.length > 0 &&
-        "IntersectionObserver" in window
-    ) {
-
-        const counterObserver =
-            new IntersectionObserver(
-                function (entries, observer) {
-
-                    entries.forEach(
-                        function (entry) {
-
-                            if (
-                                entry.isIntersecting
-                            ) {
-
-                                animateCounter(
-                                    entry.target
-                                );
-
-                                observer.unobserve(
-                                    entry.target
-                                );
-
-                            }
-
-                        }
-                    );
-
-                },
-                {
-                    threshold: 0.3
-                }
-            );
-
-        counters.forEach(
-            function (counter) {
-
-                counterObserver.observe(
-                    counter
-                );
-
-            }
-        );
-
-    } else {
-
-        counters.forEach(
-            function (counter) {
-
-                const target =
-                    parseInt(
-                        counter.getAttribute(
-                            "data-target"
-                        ),
-                        10
-                    );
-
-                counter.textContent =
-                    isNaN(target)
-                        ? 0
-                        : target;
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       PORTFOLIO IMAGE CURSOR
-    ===================================================== */
-
-    const portfolioImages =
-        document.querySelectorAll(
-            ".portfolio-card img"
-        );
-
-    portfolioImages.forEach(
-        function (image) {
-
-            image.style.cursor =
-                "pointer";
-
-        }
-    );
-
-
-    /* =====================================================
-       CONTACT FORM
-    ===================================================== */
-
-    const contactForm =
-        document.getElementById(
-            "contact-form"
-        );
-
-    if (contactForm) {
-
-        contactForm.addEventListener(
-            "submit",
-            function () {
-
-                const button =
-                    contactForm.querySelector(
-                        "button[type='submit']"
-                    );
-
-                trackEvent(
-                    "contact_form_submit",
-                    {
-                        event_category: "Lead",
-                        event_label: "Contact Form"
-                    }
-                );
-
-                if (button) {
-
-                    button.textContent =
-                        "Sending...";
-
-                    button.disabled =
-                        true;
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       HEADER SCROLL EFFECT
-    ===================================================== */
-
-    const header =
-        document.querySelector(
-            ".site-header"
-        );
-
-    function handleHeaderScroll() {
-
-        if (!header) {
-
-            return;
-
-        }
-
-        if (window.scrollY > 50) {
-
-            header.classList.add(
-                "scrolled"
-            );
-
-        } else {
-
-            header.classList.remove(
-                "scrolled"
-            );
-
-        }
-
-    }
-
-    window.addEventListener(
-        "scroll",
-        handleHeaderScroll,
-        { passive: true }
-    );
-
-    handleHeaderScroll();
-
-
-    /* =====================================================
-       ACTIVE NAVIGATION LINK
-    ===================================================== */
-
-    const navLinks =
-        document.querySelectorAll(
-            "#main-nav a"
-        );
-
-    const sections =
-        document.querySelectorAll(
-            "main section[id]"
-        );
-
-    function updateActiveNav() {
-
-        let currentSection = "";
-
-        sections.forEach(
-            function (section) {
-
-                const sectionTop =
-                    section.offsetTop - 180;
-
-                if (
-                    window.scrollY >=
-                    sectionTop
-                ) {
-
-                    currentSection =
-                        section.getAttribute(
-                            "id"
-                        );
-
-                }
-
-            }
-        );
-
-        navLinks.forEach(
-            function (link) {
-
-                link.classList.remove(
-                    "active"
-                );
-
-                const href =
-                    link.getAttribute(
-                        "href"
-                    );
-
-                if (
-                    href ===
-                    "#" + currentSection
-                ) {
-
-                    link.classList.add(
-                        "active"
-                    );
-
-                }
-
-            }
-        );
-
-    }
-
-    window.addEventListener(
-        "scroll",
-        updateActiveNav,
-        { passive: true }
-    );
-
-    updateActiveNav();
 
 
     /* =====================================================
        AOS ANIMATION
     ===================================================== */
 
-    if (
-        typeof AOS !== "undefined"
-    ) {
+    if (typeof AOS !== "undefined") {
 
         AOS.init({
             duration: 800,
-            easing: "ease-out",
             once: true,
             offset: 80,
-            disable: "mobile"
+            easing: "ease-out-cubic"
         });
-
     }
 
 
+
     /* =====================================================
-       BACK TO TOP
+       SMOOTH SCROLLING
     ===================================================== */
 
-    const backToTop =
-        document.getElementById(
-            "back-to-top"
-        );
+    document
+        .querySelectorAll('a[href^="#"]')
+        .forEach(function (link) {
 
-    if (backToTop) {
+            link.addEventListener(
+                "click",
+                function (event) {
+
+                    const targetId =
+                        this.getAttribute("href");
+
+                    if (
+                        !targetId ||
+                        targetId === "#"
+                    ) {
+                        return;
+                    }
+
+                    const target =
+                        document.querySelector(
+                            targetId
+                        );
+
+                    if (target) {
+
+                        event.preventDefault();
+
+                        const header =
+                            document.querySelector(
+                                ".site-header"
+                            );
+
+                        const headerHeight =
+                            header
+                                ? header.offsetHeight
+                                : 0;
+
+                        const targetPosition =
+                            target
+                                .getBoundingClientRect()
+                                .top +
+                            window.pageYOffset -
+                            headerHeight -
+                            10;
+
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: "smooth"
+                        });
+                    }
+                }
+            );
+        });
+
+
+
+    /* =====================================================
+       COUNTERS
+    ===================================================== */
+
+    const counters =
+        document.querySelectorAll(".counter");
+
+    if (counters.length) {
+
+        let countersStarted = false;
+
+        function startCounters() {
+
+            if (countersStarted) return;
+
+            const statsSection =
+                document.querySelector(
+                    ".stats-section"
+                );
+
+            if (!statsSection) return;
+
+            const sectionTop =
+                statsSection
+                    .getBoundingClientRect()
+                    .top;
+
+            const windowHeight =
+                window.innerHeight;
+
+            if (
+                sectionTop <
+                windowHeight - 100
+            ) {
+
+                countersStarted = true;
+
+                counters.forEach(
+                    function (counter) {
+
+                        const target =
+                            parseInt(
+                                counter.getAttribute(
+                                    "data-target"
+                                ),
+                                10
+                            ) || 0;
+
+                        let current = 0;
+
+                        const increment =
+                            Math.max(
+                                1,
+                                Math.ceil(
+                                    target / 60
+                                )
+                            );
+
+                        const timer =
+                            setInterval(
+                                function () {
+
+                                    current +=
+                                        increment;
+
+                                    if (
+                                        current >=
+                                        target
+                                    ) {
+
+                                        current =
+                                            target;
+
+                                        clearInterval(
+                                            timer
+                                        );
+                                    }
+
+                                    counter.textContent =
+                                        current;
+
+                                },
+                                25
+                            );
+                    }
+                );
+            }
+        }
 
         window.addEventListener(
             "scroll",
-            function () {
+            startCounters
+        );
+
+        startCounters();
+    }
+
+
+
+    /* =====================================================
+       SKILLS PROGRESS
+    ===================================================== */
+
+    const skillBars =
+        document.querySelectorAll(
+            ".progress span"
+        );
+
+    if (skillBars.length) {
+
+        skillBars.forEach(
+            function (bar) {
+
+                const originalWidth =
+                    bar.style.width;
+
+                bar.style.width = "0";
+
+                setTimeout(
+                    function () {
+
+                        bar.style.width =
+                            originalWidth;
+
+                    },
+                    400
+                );
+            }
+        );
+    }
+
+
+
+    /* =====================================================
+       PROMOTIONAL TOP SLIDER
+    ===================================================== */
+
+    const promoSlider =
+        document.getElementById(
+            "promoAdSlider"
+        );
+
+    if (promoSlider) {
+
+        const slides =
+            promoSlider.querySelectorAll(
+                ".promo-ad"
+            );
+
+        const previousButton =
+            document.getElementById(
+                "promoPrev"
+            );
+
+        const nextButton =
+            document.getElementById(
+                "promoNext"
+            );
+
+        const dotsContainer =
+            document.getElementById(
+                "promoDots"
+            );
+
+        let currentSlide = 0;
+        let autoPlay = null;
+
+
+        if (
+            dotsContainer &&
+            slides.length
+        ) {
+
+            dotsContainer.innerHTML = "";
+
+            slides.forEach(
+                function (_, index) {
+
+                    const dot =
+                        document.createElement(
+                            "button"
+                        );
+
+                    dot.type = "button";
+
+                    dot.className =
+                        index === 0
+                            ? "promo-dot active"
+                            : "promo-dot";
+
+                    dot.setAttribute(
+                        "aria-label",
+                        "Show promotion " +
+                        (index + 1)
+                    );
+
+                    dot.addEventListener(
+                        "click",
+                        function () {
+
+                            showSlide(index);
+
+                            restartAutoPlay();
+                        }
+                    );
+
+                    dotsContainer.appendChild(
+                        dot
+                    );
+                }
+            );
+        }
+
+
+        function showSlide(index) {
+
+            if (!slides.length) return;
+
+            if (
+                index >=
+                slides.length
+            ) {
+                index = 0;
+            }
+
+            if (index < 0) {
+                index =
+                    slides.length - 1;
+            }
+
+            currentSlide = index;
+
+            slides.forEach(
+                function (slide, i) {
+
+                    slide.classList.toggle(
+                        "active",
+                        i === currentSlide
+                    );
+                }
+            );
+
+            if (dotsContainer) {
+
+                const dots =
+                    dotsContainer.querySelectorAll(
+                        ".promo-dot"
+                    );
+
+                dots.forEach(
+                    function (dot, i) {
+
+                        dot.classList.toggle(
+                            "active",
+                            i === currentSlide
+                        );
+                    }
+                );
+            }
+        }
+
+
+        function nextSlide() {
+
+            showSlide(
+                currentSlide + 1
+            );
+        }
+
+
+        function previousSlide() {
+
+            showSlide(
+                currentSlide - 1
+            );
+        }
+
+
+        if (nextButton) {
+
+            nextButton.addEventListener(
+                "click",
+                function () {
+
+                    nextSlide();
+
+                    restartAutoPlay();
+                }
+            );
+        }
+
+
+        if (previousButton) {
+
+            previousButton.addEventListener(
+                "click",
+                function () {
+
+                    previousSlide();
+
+                    restartAutoPlay();
+                }
+            );
+        }
+
+
+        function startAutoPlay() {
+
+            if (
+                slides.length <= 1
+            ) {
+                return;
+            }
+
+            autoPlay =
+                setInterval(
+                    function () {
+
+                        nextSlide();
+
+                    },
+                    4500
+                );
+        }
+
+
+        function stopAutoPlay() {
+
+            if (autoPlay) {
+
+                clearInterval(
+                    autoPlay
+                );
+
+                autoPlay = null;
+            }
+        }
+
+
+        function restartAutoPlay() {
+
+            stopAutoPlay();
+
+            startAutoPlay();
+        }
+
+
+        promoSlider.addEventListener(
+            "mouseenter",
+            stopAutoPlay
+        );
+
+        promoSlider.addEventListener(
+            "mouseleave",
+            startAutoPlay
+        );
+
+
+        promoSlider.addEventListener(
+            "keydown",
+            function (event) {
 
                 if (
-                    window.scrollY > 400
+                    event.key ===
+                    "ArrowRight"
                 ) {
 
-                    backToTop.classList.add(
+                    nextSlide();
+
+                    restartAutoPlay();
+                }
+
+                if (
+                    event.key ===
+                    "ArrowLeft"
+                ) {
+
+                    previousSlide();
+
+                    restartAutoPlay();
+                }
+            }
+        );
+
+
+        slides.forEach(
+            function (slide, index) {
+
+                slide.addEventListener(
+                    "click",
+                    function (event) {
+
+                        const clickedElement =
+                            event.target.closest(
+                                "a"
+                            );
+
+                        if (
+                            !clickedElement
+                        ) {
+                            return;
+                        }
+
+                        const promoName =
+                            slide.dataset.name ||
+                            "Promotion " +
+                            (index + 1);
+
+                        if (
+                            typeof gtag ===
+                            "function"
+                        ) {
+
+                            gtag(
+                                "event",
+                                "promo_click",
+                                {
+                                    promo_name:
+                                        promoName,
+
+                                    promo_position:
+                                        index + 1
+                                }
+                            );
+                        }
+                    }
+                );
+            }
+        );
+
+
+        showSlide(0);
+
+        startAutoPlay();
+    }
+
+
+
+    /* =====================================================
+       STICKY PROMOTIONAL AD
+    ===================================================== */
+
+    const stickyPromo =
+        document.getElementById(
+            "stickyPromoAd"
+        );
+
+    const stickyClose =
+        document.getElementById(
+            "stickyPromoClose"
+        );
+
+    if (stickyPromo) {
+
+        let stickyClosed = false;
+
+        setTimeout(
+            function () {
+
+                if (!stickyClosed) {
+
+                    stickyPromo.classList.add(
                         "show"
                     );
-
-                } else {
-
-                    backToTop.classList.remove(
-                        "show"
-                    );
-
                 }
 
             },
-            { passive: true }
+            4000
         );
 
-        backToTop.addEventListener(
-            "click",
-            function () {
 
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
+        if (stickyClose) {
 
-                trackEvent(
-                    "back_to_top_click",
-                    {
-                        event_category: "Navigation"
-                    }
-                );
+            stickyClose.addEventListener(
+                "click",
+                function () {
 
-            }
-        );
+                    stickyClosed = true;
 
+                    stickyPromo.classList.remove(
+                        "show"
+                    );
+                }
+            );
+        }
     }
 
 
-    /* =====================================================
-       WHATSAPP BUTTON
-    ===================================================== */
-
-    const whatsappButton =
-        document.querySelector(
-            ".whatsapp-float"
-        );
-
-    if (whatsappButton) {
-
-        whatsappButton.addEventListener(
-            "click",
-            function () {
-
-                console.log(
-                    "Opening WhatsApp..."
-                );
-
-                trackEvent(
-                    "whatsapp_click",
-                    {
-                        event_category: "Lead",
-                        event_label: "Floating WhatsApp Button"
-                    }
-                );
-
-            }
-        );
-
-    }
-
 
     /* =====================================================
-       DIGITAL STORE BUY BUTTONS
+       DIGITAL STORE SEARCH + FILTER
     ===================================================== */
 
-    const buyButtons =
+    const storeSearch =
+        document.getElementById(
+            "store-search"
+        );
+
+    const storeCards =
         document.querySelectorAll(
-            ".buy-btn, .product-buy-btn, .custom-product-btn"
+            ".store-card"
         );
 
-    buyButtons.forEach(
+    const storeFilters =
+        document.querySelectorAll(
+            ".store-filter"
+        );
+
+    const storeNoResults =
+        document.getElementById(
+            "store-no-results"
+        );
+
+    let selectedCategory = "all";
+
+
+    function filterStore() {
+
+        const searchText =
+            storeSearch
+                ? storeSearch.value
+                    .toLowerCase()
+                    .trim()
+                : "";
+
+        let visibleCount = 0;
+
+
+        storeCards.forEach(
+            function (card) {
+
+                const category =
+                    (
+                        card.getAttribute(
+                            "data-category"
+                        ) || ""
+                    ).toLowerCase();
+
+                const name =
+                    (
+                        card.getAttribute(
+                            "data-name"
+                        ) ||
+                        card.textContent ||
+                        ""
+                    ).toLowerCase();
+
+
+                const categoryMatch =
+                    selectedCategory ===
+                    "all" ||
+                    category ===
+                    selectedCategory;
+
+
+                const searchMatch =
+                    !searchText ||
+                    name.includes(
+                        searchText
+                    );
+
+
+                if (
+                    categoryMatch &&
+                    searchMatch
+                ) {
+
+                    card.style.display =
+                        "";
+
+                    visibleCount++;
+
+                } else {
+
+                    card.style.display =
+                        "none";
+                }
+            }
+        );
+
+
+        if (storeNoResults) {
+
+            storeNoResults.style.display =
+                visibleCount === 0
+                    ? "block"
+                    : "none";
+        }
+    }
+
+
+    if (storeSearch) {
+
+        storeSearch.addEventListener(
+            "input",
+            filterStore
+        );
+    }
+
+
+    storeFilters.forEach(
         function (button) {
 
             button.addEventListener(
                 "click",
                 function () {
 
-                    const productCard =
-                        button.closest(
-                            ".product-card, .store-card"
-                        );
+                    selectedCategory =
+                        (
+                            this.getAttribute(
+                                "data-filter"
+                            ) || "all"
+                        ).toLowerCase();
 
-                    let productName =
-                        "Unknown Product";
 
-                    if (productCard) {
+                    storeFilters.forEach(
+                        function (btn) {
 
-                        const productNameElement =
-                            productCard.querySelector(
-                                "h3"
+                            btn.classList.remove(
+                                "active"
                             );
-
-                        if (
-                            productNameElement
-                        ) {
-
-                            productName =
-                                productNameElement
-                                    .textContent
-                                    .trim();
-
-                        }
-
-                    }
-
-                    console.log(
-                        "Product selected:",
-                        productName
-                    );
-
-                    trackEvent(
-                        "store_product_click",
-                        {
-                            event_category: "Digital Store",
-                            event_label: productName,
-                            product_name: productName
                         }
                     );
 
+
+                    this.classList.add(
+                        "active"
+                    );
+
+                    filterStore();
                 }
             );
-
         }
     );
 
 
-    /* =====================================================
-       GET A QUOTE BUTTON TRACKING
-    ===================================================== */
-
-    document
-        .querySelectorAll(
-            'a[href="#get-quote"], .quote-btn, .get-quote-btn'
-        )
-        .forEach(
-            function (button) {
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        trackEvent(
-                            "quote_button_click",
-                            {
-                                event_category: "Lead",
-                                event_label: "Get a Quote"
-                            }
-                        );
-
-                    }
-                );
-
-            }
-        );
-
 
     /* =====================================================
-       QUOTE FORM TRACKING
-       NOTE:
-       Existing generate_lead event in index.html
-       is preserved and will continue working.
+       QUOTE FORM → WHATSAPP
     ===================================================== */
 
     const quoteForm =
@@ -872,335 +898,168 @@ document.addEventListener("DOMContentLoaded", function () {
 
         quoteForm.addEventListener(
             "submit",
-            function () {
+            function (event) {
 
-                const serviceElement =
+                event.preventDefault();
+
+
+                const name =
                     document.getElementById(
-                        "quote-service"
-                    );
+                        "quote-name"
+                    )?.value.trim() || "";
+
+
+                const phone =
+                    document.getElementById(
+                        "quote-phone"
+                    )?.value.trim() || "";
+
 
                 const service =
-                    serviceElement
-                        ? serviceElement.value
-                        : "Unknown Service";
-
-                trackEvent(
-                    "quote_form_submit",
-                    {
-                        event_category: "Lead",
-                        event_label: service,
-                        service: service
-                    }
-                );
-
-            }
-        );
-
-    }
+                    document.getElementById(
+                        "quote-service"
+                    )?.value || "";
 
 
-    /* =====================================================
-       WHATSAPP LINK TRACKING
-       Tracks every WhatsApp link on website.
-    ===================================================== */
-
-    document
-        .querySelectorAll(
-            'a[href*="wa.me"], a[href*="whatsapp.com"]'
-        )
-        .forEach(
-            function (link) {
-
-                link.addEventListener(
-                    "click",
-                    function () {
-
-                        let label =
-                            link.textContent
-                                .trim();
-
-                        if (!label) {
-
-                            label =
-                                "WhatsApp Link";
-
-                        }
-
-                        trackEvent(
-                            "whatsapp_link_click",
-                            {
-                                event_category: "Lead",
-                                event_label: label
-                            }
-                        );
-
-                    }
-                );
-
-            }
-        );
+                const budget =
+                    document.getElementById(
+                        "quote-budget"
+                    )?.value || "";
 
 
-    /* =====================================================
-       CTA BUTTON TRACKING
-    ===================================================== */
-
-    document
-        .querySelectorAll(
-            ".btn, .cta-btn, .primary-btn"
-        )
-        .forEach(
-            function (button) {
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        const label =
-                            button.textContent
-                                .trim();
-
-                        if (!label) {
-
-                            return;
-
-                        }
-
-                        trackEvent(
-                            "cta_click",
-                            {
-                                event_category: "CTA",
-                                event_label: label
-                            }
-                        );
-
-                    }
-                );
-
-            }
-        );
+                const timeline =
+                    document.getElementById(
+                        "quote-timeline"
+                    )?.value || "";
 
 
-    /* =====================================================
-       DIGITAL STORE VIEW TRACKING
-    ===================================================== */
+                const message =
+                    document.getElementById(
+                        "quote-message"
+                    )?.value.trim() || "";
 
-    const storeSection =
-        document.getElementById(
-            "digital-store"
-        );
 
-    if (
-        storeSection &&
-        "IntersectionObserver" in window
-    ) {
-
-        const storeObserver =
-            new IntersectionObserver(
-                function (entries, observer) {
-
-                    entries.forEach(
-                        function (entry) {
-
-                            if (
-                                entry.isIntersecting
-                            ) {
-
-                                trackEvent(
-                                    "store_view",
-                                    {
-                                        event_category:
-                                            "Digital Store",
-                                        event_label:
-                                            "Digital Store Viewed"
-                                    }
-                                );
-
-                                observer.unobserve(
-                                    entry.target
-                                );
-
-                            }
-
-                        }
+                const successMessage =
+                    document.getElementById(
+                        "quote-success"
                     );
 
-                },
-                {
-                    threshold: 0.3
+
+                const whatsappMessage =
+                    `Hello Mahesh,
+
+I would like to get a quote from SamSreeFuture.
+
+Name: ${name}
+WhatsApp: ${phone}
+Service: ${service}
+Budget: ${budget}
+Timeline: ${timeline}
+
+Project Details:
+${message}`;
+
+
+                const whatsappURL =
+                    "https://wa.me/918125024046?text=" +
+                    encodeURIComponent(
+                        whatsappMessage
+                    );
+
+
+                if (successMessage) {
+
+                    successMessage.style.display =
+                        "block";
+
+                    successMessage.textContent =
+                        "Opening WhatsApp...";
                 }
-            );
 
-        storeObserver.observe(
-            storeSection
-        );
-
-    }
-
-
-    /* =====================================================
-       PORTFOLIO CLICK TRACKING
-    ===================================================== */
-
-    document
-        .querySelectorAll(
-            ".portfolio-card a"
-        )
-        .forEach(
-            function (link) {
-
-                link.addEventListener(
-                    "click",
-                    function () {
-
-                        const card =
-                            link.closest(
-                                ".portfolio-card"
-                            );
-
-                        let projectName =
-                            "Portfolio Project";
-
-                        if (card) {
-
-                            const title =
-                                card.querySelector(
-                                    "h3"
-                                );
-
-                            if (title) {
-
-                                projectName =
-                                    title.textContent
-                                        .trim();
-
-                            }
-
-                        }
-
-                        trackEvent(
-                            "portfolio_click",
-                            {
-                                event_category:
-                                    "Portfolio",
-                                event_label:
-                                    projectName,
-                                project_name:
-                                    projectName
-                            }
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-    /* =====================================================
-       SERVICE CARD TRACKING
-    ===================================================== */
-
-    document
-        .querySelectorAll(
-            ".service-card"
-        )
-        .forEach(
-            function (card) {
-
-                card.addEventListener(
-                    "click",
-                    function () {
-
-                        const title =
-                            card.querySelector(
-                                "h3"
-                            );
-
-                        const serviceName =
-                            title
-                                ? title.textContent.trim()
-                                : "Service";
-
-                        trackEvent(
-                            "service_view",
-                            {
-                                event_category:
-                                    "Services",
-                                event_label:
-                                    serviceName,
-                                service_name:
-                                    serviceName
-                            }
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-    /* =====================================================
-       LAZY LOAD IMAGES
-    ===================================================== */
-
-    const images =
-        document.querySelectorAll(
-            "img"
-        );
-
-    images.forEach(
-        function (image) {
-
-            if (
-                !image.hasAttribute(
-                    "loading"
-                )
-            ) {
-
-                image.setAttribute(
-                    "loading",
-                    "lazy"
-                );
-
-            }
-
-        }
-    );
-
-
-    /* =====================================================
-       EXTERNAL LINKS
-    ===================================================== */
-
-    document
-        .querySelectorAll(
-            'a[href^="http"]'
-        )
-        .forEach(
-            function (link) {
 
                 if (
-                    !link.hasAttribute(
-                        "target"
-                    )
+                    typeof gtag ===
+                    "function"
                 ) {
 
-                    link.setAttribute(
-                        "target",
-                        "_blank"
+                    gtag(
+                        "event",
+                        "quote_whatsapp",
+                        {
+                            service: service,
+                            budget: budget
+                        }
                     );
-
-                    link.setAttribute(
-                        "rel",
-                        "noopener noreferrer"
-                    );
-
                 }
 
+
+                setTimeout(
+                    function () {
+
+                        window.open(
+                            whatsappURL,
+                            "_blank"
+                        );
+
+                    },
+                    300
+                );
             }
         );
+    }
+
+
+
+    /* =====================================================
+       BACK TO TOP
+    ===================================================== */
+
+    const backToTop =
+        document.getElementById(
+            "backToTop"
+        );
+
+    if (backToTop) {
+
+        function updateBackToTop() {
+
+            if (
+                window.scrollY > 400
+            ) {
+
+                backToTop.classList.add(
+                    "show"
+                );
+
+            } else {
+
+                backToTop.classList.remove(
+                    "show"
+                );
+            }
+        }
+
+
+        window.addEventListener(
+            "scroll",
+            updateBackToTop
+        );
+
+        updateBackToTop();
+
+
+        backToTop.addEventListener(
+            "click",
+            function () {
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            }
+        );
+    }
+
 
 
     /* =====================================================
@@ -1216,94 +1075,429 @@ document.addEventListener("DOMContentLoaded", function () {
 
         currentYear.textContent =
             new Date().getFullYear();
-
     }
 
 
+
     /* =====================================================
-       RESIZE
+       ADVERTISEMENT CLICK TRACKING
     ===================================================== */
 
-    window.addEventListener(
-        "resize",
-        function () {
+    document
+        .querySelectorAll("[data-ad-name]")
+        .forEach(
+            function (adLink) {
 
-            if (
-                window.innerWidth > 768 &&
-                navMenu &&
-                menuToggle
-            ) {
+                adLink.addEventListener(
+                    "click",
+                    function () {
 
-                navMenu.classList.remove(
-                    "active"
+                        const adName =
+                            this.getAttribute(
+                                "data-ad-name"
+                            ) ||
+                            "Advertisement";
+
+                        const adPosition =
+                            this.getAttribute(
+                                "data-ad-position"
+                            ) || "";
+
+
+                        if (
+                            typeof gtag ===
+                            "function"
+                        ) {
+
+                            gtag(
+                                "event",
+                                "advertisement_click",
+                                {
+                                    ad_name:
+                                        adName,
+
+                                    ad_position:
+                                        adPosition
+                                }
+                            );
+                        }
+                    }
+                );
+            }
+        );
+
+
+    /* =====================================================
+       AUTOMATIC TELUGU BREAKING NEWS
+       NETLIFY FUNCTION + CLICKABLE LIVE NEWS
+    ===================================================== */
+
+    const newsTicker =
+        document.getElementById(
+            "newsTicker"
+        );
+
+
+    if (newsTicker) {
+
+        const newsTrack =
+            newsTicker.querySelector(
+                ".news-ticker-track"
+            );
+
+
+        const newsContent =
+            document.getElementById(
+                "newsContent"
+            );
+
+
+        const newsClone =
+            document.getElementById(
+                "newsClone"
+            );
+
+
+        if (
+            newsTrack &&
+            newsContent &&
+            newsClone
+        ) {
+
+
+            /* -----------------------------------------
+               FALLBACK
+            ----------------------------------------- */
+
+            const fallbackNews = [
+
+                {
+                    title:
+                        "తెలుగు తాజా వార్తలు త్వరలో అందుబాటులోకి వస్తాయి.",
+
+                    link: ""
+                }
+
+            ];
+
+
+            /* -----------------------------------------
+               CREATE NEWS ITEM
+            ----------------------------------------- */
+
+            function createNewsItem(news) {
+
+                if (news.link) {
+
+                    const link =
+                        document.createElement(
+                            "a"
+                        );
+
+
+                    link.className =
+                        "news-item";
+
+
+                    link.href =
+                        news.link;
+
+
+                    link.target =
+                        "_blank";
+
+
+                    link.rel =
+                        "noopener noreferrer";
+
+
+                    link.textContent =
+                        "📰 " +
+                        news.title;
+
+
+                    return link;
+
+                }
+
+
+                const span =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                span.className =
+                    "news-item";
+
+
+                span.textContent =
+                    "📰 " +
+                    news.title;
+
+
+                return span;
+            }
+
+
+            /* -----------------------------------------
+               DISPLAY NEWS
+            ----------------------------------------- */
+
+            function displayNews(newsList) {
+
+                newsContent.innerHTML =
+                    "";
+
+
+                newsList.forEach(
+                    function (news) {
+
+                        newsContent.appendChild(
+                            createNewsItem(
+                                news
+                            )
+                        );
+
+                    }
                 );
 
-                menuToggle.textContent =
-                    "☰";
 
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    "false"
+                /*
+                 * Duplicate headlines for
+                 * seamless continuous scrolling.
+                 */
+
+                newsClone.innerHTML =
+                    newsContent.innerHTML;
+
+
+                /*
+                 * Restart animation.
+                 */
+
+                newsTrack.style.animation =
+                    "none";
+
+
+                void newsTrack.offsetWidth;
+
+
+                newsTrack.style.animation =
+                    "";
+
+            }
+
+
+            /* -----------------------------------------
+               LOAD LIVE NEWS
+            ----------------------------------------- */
+
+            async function loadLiveNews() {
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "/.netlify/functions/news",
+                            {
+                                cache:
+                                    "no-store"
+                            }
+                        );
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "News function unavailable"
+                        );
+
+                    }
+
+
+                    const data =
+                        await response.json();
+
+
+                    if (
+                        !data.success ||
+                        !Array.isArray(
+                            data.items
+                        ) ||
+                        !data.items.length
+                    ) {
+
+                        throw new Error(
+                            "No news found"
+                        );
+
+                    }
+
+
+                    const latestNews =
+                        data.items
+                            .slice(0, 15)
+                            .filter(
+                                function (item) {
+
+                                    return (
+                                        item &&
+                                        item.title
+                                    );
+
+                                }
+                            )
+                            .map(
+                                function (item) {
+
+                                    return {
+
+                                        title:
+                                            item.title
+                                                .trim(),
+
+                                        link:
+                                            item.link ||
+                                            ""
+
+                                    };
+
+                                }
+                            );
+
+
+                    if (
+                        !latestNews.length
+                    ) {
+
+                        throw new Error(
+                            "No headlines found"
+                        );
+
+                    }
+
+
+                    displayNews(
+                        latestNews
+                    );
+
+
+                    console.log(
+                        "Telugu breaking news updated successfully."
+                    );
+
+
+                } catch (error) {
+
+                    console.warn(
+                        "Live Telugu news unavailable.",
+                        error
+                    );
+
+
+                    displayNews(
+                        fallbackNews
+                    );
+
+                }
+
+            }
+
+
+            /* -----------------------------------------
+               PAUSE
+            ----------------------------------------- */
+
+            function pauseNews() {
+
+                newsTrack.classList.add(
+                    "is-paused"
                 );
 
             }
 
+
+            /* -----------------------------------------
+               RESUME
+            ----------------------------------------- */
+
+            function resumeNews() {
+
+                newsTrack.classList.remove(
+                    "is-paused"
+                );
+
+            }
+
+
+            /* -----------------------------------------
+               MOUSE PAUSE
+            ----------------------------------------- */
+
+            newsTicker.addEventListener(
+                "mouseenter",
+                pauseNews
+            );
+
+
+            newsTicker.addEventListener(
+                "mouseleave",
+                resumeNews
+            );
+
+
+            /* -----------------------------------------
+               KEYBOARD / FOCUS PAUSE
+            ----------------------------------------- */
+
+            newsTicker.addEventListener(
+                "focusin",
+                pauseNews
+            );
+
+
+            newsTicker.addEventListener(
+                "focusout",
+                resumeNews
+            );
+
+
+            /* -----------------------------------------
+               FIRST LOAD
+            ----------------------------------------- */
+
+            loadLiveNews();
+
+
+            /* -----------------------------------------
+               AUTO REFRESH
+               Every 15 minutes
+            ----------------------------------------- */
+
+            setInterval(
+                loadLiveNews,
+                15 * 60 * 1000
+            );
+
         }
-    );
+
+    }
 
 
     /* =====================================================
        REDUCED MOTION
     ===================================================== */
 
-    const prefersReducedMotion =
+    if (
+        window.matchMedia &&
         window.matchMedia(
             "(prefers-reduced-motion: reduce)"
-        );
-
-    if (
-        prefersReducedMotion.matches &&
-        typingElement
+        ).matches
     ) {
 
-        typingElement.textContent =
-            "Web Developer";
-
+        document.documentElement.style.scrollBehavior =
+            "auto";
     }
-
-
-    /* =====================================================
-       PAGE LOADED
-    ===================================================== */
-
-    document.body.classList.add(
-        "page-loaded"
-    );
-
-
-    /* =====================================================
-       PAGE LOAD ANALYTICS
-    ===================================================== */
-
-    trackEvent(
-        "portfolio_page_loaded",
-        {
-            event_category: "Engagement",
-            event_label: "SamSreeFuture Portfolio"
-        }
-    );
-
-
-    /* =====================================================
-       CONSOLE
-    ===================================================== */
-
-    console.log(
-        "SamSreeFuture | Mahesh Portfolio Loaded Successfully 🚀"
-    );
-
-    console.log(
-        "Professional Lead Tracking System Active 📊"
-    );
 
 });

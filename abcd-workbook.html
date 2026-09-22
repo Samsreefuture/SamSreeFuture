@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ABCD Kids Tracing Workbook | SamSreeFuture</title>
+    <title>ABCD & Numbers 1-100 Kids Tracing Workbook | SamSreeFuture</title>
 
     <meta name="description"
-        content="Printable ABCD Kids Tracing Workbook by SamSreeFuture. Learn A to Z through tracing, coloring and writing practice.">
+        content="Printable ABCD and Numbers 1-100 Kids Tracing Workbook by SamSreeFuture. Learn, trace, count and write with colourful pictures and practice lines.">
 
     <link rel="icon" type="image/png" href="./images/favicon.png">
 
@@ -23,6 +23,10 @@
             background: #eeeeee;
             color: #222;
         }
+
+        /* =========================================
+           TOOLBAR
+        ========================================= */
 
         .toolbar {
             position: sticky;
@@ -48,6 +52,10 @@
             background: #e5e7eb;
         }
 
+        /* =========================================
+           COMMON PAGE
+        ========================================= */
+
         .page {
             width: 210mm;
             min-height: 297mm;
@@ -56,8 +64,14 @@
             padding: 15mm;
             position: relative;
             page-break-after: always;
+            break-after: page;
             box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+            overflow: hidden;
         }
+
+        /* =========================================
+           COVER
+        ========================================= */
 
         .cover {
             display: flex;
@@ -88,6 +102,10 @@
         .cover p {
             font-size: 18px;
         }
+
+        /* =========================================
+           ABCD PAGES
+        ========================================= */
 
         .letter-page {
             text-align: center;
@@ -156,41 +174,348 @@
                     transparent 33px);
         }
 
+        /* =========================================
+           NUMBER SECTION
+        ========================================= */
+
+        .number-page {
+            text-align: center;
+        }
+
+        .number-header {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 4px;
+            color: #333;
+        }
+
+        .number-subtitle {
+            font-size: 13px;
+            color: #777;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        /* =========================================
+           LARGE TRACEABLE NUMBER
+        ========================================= */
+
+        .number-trace-box {
+            border: 3px dashed #999;
+            border-radius: 18px;
+            padding: 8px 12px;
+            margin: 8px 0;
+        }
+
+        .trace-label {
+            font-size: 17px;
+            font-weight: bold;
+            color: #f05a28;
+            margin-bottom: 2px;
+        }
+
+        .big-number {
+            font-size: 115px;
+            line-height: 0.95;
+            font-weight: 900;
+
+            color: white;
+
+            -webkit-text-stroke: 3px #777;
+
+            /*
+              Dotted tracing effect
+            */
+            background-image:
+                radial-gradient(circle,
+                    #777 1.4px,
+                    transparent 1.7px);
+
+            background-size: 8px 8px;
+
+            background-clip: text;
+            -webkit-background-clip: text;
+
+            margin: 3px 0;
+        }
+
+        /* =========================================
+           NUMBER NAME
+        ========================================= */
+
+        .number-name {
+            display: inline-block;
+
+            font-size: 27px;
+            font-weight: 900;
+            text-transform: uppercase;
+
+            padding: 7px 22px;
+
+            border-radius: 30px;
+
+            background: #fff1a8;
+            color: #765700;
+
+            margin: 4px 0 8px;
+        }
+
+        /* =========================================
+           COUNTING AREA
+        ========================================= */
+
+        .count-heading {
+            font-size: 19px;
+            font-weight: 900;
+            color: #14966f;
+
+            margin-top: 7px;
+            margin-bottom: 2px;
+        }
+
+        .count-instruction {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        /*
+          Picture grid.
+          Exact number of pictures is generated
+          by JavaScript.
+        */
+
+        .picture-grid {
+            width: 100%;
+            max-width: 178mm;
+
+            margin: 5px auto;
+
+            display: grid;
+
+            justify-items: center;
+            align-items: center;
+
+            gap: 4px 5px;
+        }
+
+        .count-picture {
+            width: 27px;
+            height: 27px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 22px;
+
+            background: #ffffff;
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 1px 4px rgba(0, 0, 0, .14);
+
+            border: 1px solid #eeeeee;
+        }
+
+        /* =========================================
+           COUNT RESULT
+        ========================================= */
+
+        .count-result {
+            display: inline-block;
+
+            margin: 6px auto;
+
+            padding: 7px 20px;
+
+            border-radius: 20px;
+
+            background: #e3fff4;
+
+            border: 2px dashed #21a875;
+
+            font-size: 16px;
+
+            font-weight: 900;
+
+            color: #12835d;
+        }
+
+        /* =========================================
+           NUMBER WRITING PRACTICE
+        ========================================= */
+
+        .number-practice {
+            margin-top: 8px;
+
+            border: 2px solid #ddd;
+
+            border-radius: 13px;
+
+            padding: 7px 12px 9px;
+        }
+
+        .number-practice-title {
+            font-size: 17px;
+            font-weight: bold;
+
+            color: #8e44ad;
+
+            margin-bottom: 5px;
+        }
+
+        /*
+           Three practice lines
+        */
+
+        .writing-line {
+            position: relative;
+
+            height: 34px;
+
+            margin: 4px 0;
+
+            border-bottom: 2px solid #777;
+        }
+
+        /*
+           Middle dotted guide
+        */
+
+        .writing-line::before {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+
+            top: 16px;
+
+            border-top: 1px dashed #aaa;
+        }
+
+        /*
+           Light tracing number
+        */
+
+        .writing-number {
+            position: absolute;
+
+            left: 8px;
+
+            top: -4px;
+
+            font-size: 30px;
+
+            font-weight: bold;
+
+            color: #dedede;
+
+            letter-spacing: 8px;
+
+            z-index: 2;
+        }
+
+        /* =========================================
+           MINI COUNTING CHALLENGE
+        ========================================= */
+
+        .challenge {
+            margin-top: 6px;
+
+            font-size: 12px;
+
+            color: #555;
+
+            font-weight: bold;
+        }
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
         .footer {
             position: absolute;
+
             bottom: 8mm;
+
             left: 15mm;
             right: 15mm;
+
             text-align: center;
+
             font-size: 11px;
+
             color: #777;
         }
 
+        /* =========================================
+           PRINT
+        ========================================= */
+
         @media print {
+
             body {
                 background: white;
             }
 
             .toolbar {
-                display: none;
+                display: none !important;
             }
 
             .page {
                 margin: 0;
                 box-shadow: none;
+
+                width: 210mm;
+                min-height: 297mm;
+
+                page-break-after: always;
+                break-after: page;
+            }
+
+            .page:last-child {
+                page-break-after: auto;
+                break-after: auto;
             }
         }
 
+        /* =========================================
+           MOBILE
+        ========================================= */
+
         @media(max-width:800px) {
+
             .page {
                 width: 100%;
                 min-height: auto;
+
                 margin: 0;
+
                 padding: 25px;
+
+                box-shadow: none;
             }
 
             .cover {
                 min-height: 90vh;
+            }
+
+            .big-number {
+                font-size: 95px;
+            }
+
+            .count-picture {
+                width: 25px;
+                height: 25px;
+                font-size: 20px;
+            }
+
+            .picture-grid {
+                gap: 4px;
             }
         }
     </style>
@@ -198,16 +523,33 @@
 
 <body>
 
+    <!-- =========================================
+         TOOLBAR
+    ========================================= -->
+
     <div class="toolbar">
-        <button onclick="window.print()">🖨 Print / Save PDF</button>
-        <button onclick="window.location.href='index.html'">← Back to Website</button>
+
+        <button onclick="window.print()">
+            🖨 Print / Save PDF
+        </button>
+
+        <button onclick="window.location.href='index.html'">
+            ← Back to Website
+        </button>
+
     </div>
 
     <div id="workbook"></div>
 
+
     <script>
 
+        /* =====================================================
+           A-Z DATA
+        ===================================================== */
+
         const letters = [
+
             ["A", "a", "Apple", "🍎"],
             ["B", "b", "Ball", "⚽"],
             ["C", "c", "Cat", "🐱"],
@@ -234,44 +576,249 @@
             ["X", "x", "Xylophone", "🎵"],
             ["Y", "y", "Yacht", "🛥️"],
             ["Z", "z", "Zebra", "🦓"]
+
         ];
+
+
+        /* =====================================================
+           NUMBER NAMES 1-100
+        ===================================================== */
+
+        const numberNames = [
+
+            "",
+            "One",
+            "Two",
+            "Three",
+            "Four",
+            "Five",
+            "Six",
+            "Seven",
+            "Eight",
+            "Nine",
+            "Ten",
+
+            "Eleven",
+            "Twelve",
+            "Thirteen",
+            "Fourteen",
+            "Fifteen",
+            "Sixteen",
+            "Seventeen",
+            "Eighteen",
+            "Nineteen",
+            "Twenty",
+
+            "Twenty-One",
+            "Twenty-Two",
+            "Twenty-Three",
+            "Twenty-Four",
+            "Twenty-Five",
+            "Twenty-Six",
+            "Twenty-Seven",
+            "Twenty-Eight",
+            "Twenty-Nine",
+            "Thirty",
+
+            "Thirty-One",
+            "Thirty-Two",
+            "Thirty-Three",
+            "Thirty-Four",
+            "Thirty-Five",
+            "Thirty-Six",
+            "Thirty-Seven",
+            "Thirty-Eight",
+            "Thirty-Nine",
+            "Forty",
+
+            "Forty-One",
+            "Forty-Two",
+            "Forty-Three",
+            "Forty-Four",
+            "Forty-Five",
+            "Forty-Six",
+            "Forty-Seven",
+            "Forty-Eight",
+            "Forty-Nine",
+            "Fifty",
+
+            "Fifty-One",
+            "Fifty-Two",
+            "Fifty-Three",
+            "Fifty-Four",
+            "Fifty-Five",
+            "Fifty-Six",
+            "Fifty-Seven",
+            "Fifty-Eight",
+            "Fifty-Nine",
+            "Sixty",
+
+            "Sixty-One",
+            "Sixty-Two",
+            "Sixty-Three",
+            "Sixty-Four",
+            "Sixty-Five",
+            "Sixty-Six",
+            "Sixty-Seven",
+            "Sixty-Eight",
+            "Sixty-Nine",
+            "Seventy",
+
+            "Seventy-One",
+            "Seventy-Two",
+            "Seventy-Three",
+            "Seventy-Four",
+            "Seventy-Five",
+            "Seventy-Six",
+            "Seventy-Seven",
+            "Seventy-Eight",
+            "Seventy-Nine",
+            "Eighty",
+
+            "Eighty-One",
+            "Eighty-Two",
+            "Eighty-Three",
+            "Eighty-Four",
+            "Eighty-Five",
+            "Eighty-Six",
+            "Eighty-Seven",
+            "Eighty-Eight",
+            "Eighty-Nine",
+            "Ninety",
+
+            "Ninety-One",
+            "Ninety-Two",
+            "Ninety-Three",
+            "Ninety-Four",
+            "Ninety-Five",
+            "Ninety-Six",
+            "Ninety-Seven",
+            "Ninety-Eight",
+            "Ninety-Nine",
+            "One Hundred"
+
+        ];
+
+
+        /* =====================================================
+           COLOURFUL PICTURE COLLECTION
+
+           These are native colour emoji.
+           The script repeats them so that every number
+           gets EXACTLY the same count of pictures.
+        ===================================================== */
+
+        const pictures = [
+
+            "🍎",
+            "🍊",
+            "🍋",
+            "🍉",
+            "🍓",
+            "🍇",
+            "🍒",
+            "🍍",
+            "🥝",
+            "🥕",
+
+            "🌈",
+            "⭐",
+            "🌸",
+            "🌻",
+            "🌼",
+            "🦋",
+            "🐝",
+            "🐞",
+            "🐠",
+            "🐟",
+
+            "🐳",
+            "🐢",
+            "🐰",
+            "🐻",
+            "🐼",
+            "🦁",
+            "🐯",
+            "🐸",
+            "🐵",
+            "🐶",
+
+            "🐱",
+            "🐭",
+            "🐹",
+            "🐥",
+            "🦄",
+            "🍉",
+            "🍓",
+            "🍪",
+            "🧁",
+            "🎈"
+
+        ];
+
+
+        /* =====================================================
+           START HTML
+        ===================================================== */
 
         let html = `
 
-<section class="page">
-    <div class="cover">
+        <!-- ==========================================
+             COVER PAGE
+        =========================================== -->
 
-        <div class="brand">
-            SAMSREEFUTURE KIDS SERIES
-        </div>
+        <section class="page">
 
-        <h1>ABCD</h1>
+            <div class="cover">
 
-        <h2>Kids Tracing Workbook</h2>
+                <div class="brand">
+                    SAMSREEFUTURE KIDS SERIES
+                </div>
 
-        <div style="font-size:90px;">🔤 ✏️ 🎨</div>
+                <h1>
+                    ABCD
+                </h1>
 
-        <p>
-            Learn • Trace • Write • Practice
-        </p>
+                <h2>
+                    Kids Tracing Workbook
+                </h2>
 
-        <p>
-            <strong>A–Z Alphabet Practice Book</strong>
-        </p>
+                <div style="font-size:90px;">
+                    🔤 ✏️ 🎨
+                </div>
 
-        <p style="margin-top:50px;">
-            Designed by Mahesh<br>
-            SamSreeFuture
-        </p>
+                <p>
+                    Learn • Trace • Write • Practice
+                </p>
 
-    </div>
+                <p>
+                    <strong>
+                        A–Z Alphabet Practice Book
+                    </strong>
+                </p>
 
-    <div class="footer">
-        SamSreeFuture Kids Series | Designed by Mahesh
-    </div>
-</section>
+                <p style="margin-top:50px;">
 
-`;
+                    Designed by Mahesh<br>
+
+                    SamSreeFuture
+
+                </p>
+
+            </div>
+
+            <div class="footer">
+                SamSreeFuture Kids Series | Designed by Mahesh
+            </div>
+
+        </section>
+
+        `;
+
+
+        /* =====================================================
+           CREATE A-Z PAGES
+        ===================================================== */
 
         letters.forEach(item => {
 
@@ -279,69 +826,311 @@
 
             html += `
 
-<section class="page letter-page">
+            <section class="page letter-page">
 
-    <div class="page-title">
-        ABCD KIDS TRACING WORKBOOK
-    </div>
+                <div class="page-title">
+                    ABCD KIDS TRACING WORKBOOK
+                </div>
 
-    <div class="big-letter">
-        ${upper} ${lower}
-    </div>
+                <div class="big-letter">
+                    ${upper} ${lower}
+                </div>
 
-    <div class="trace-box">
+                <div class="trace-box">
 
-        <div class="practice-title">
-            TRACE THE LETTER
-        </div>
+                    <div class="practice-title">
+                        TRACE THE LETTER
+                    </div>
 
-        <div class="trace">
-            ${upper} ${upper} ${upper}
-        </div>
+                    <div class="trace">
+                        ${upper} ${upper} ${upper}
+                    </div>
 
-        <div class="trace">
-            ${lower} ${lower} ${lower}
-        </div>
+                    <div class="trace">
+                        ${lower} ${lower} ${lower}
+                    </div>
 
-    </div>
+                </div>
 
-    <div class="emoji">
-        ${emoji}
-    </div>
+                <div class="emoji">
+                    ${emoji}
+                </div>
 
-    <div class="word">
-        ${upper} is for ${word}
-    </div>
+                <div class="word">
+                    ${upper} is for ${word}
+                </div>
 
-    <div class="practice">
+                <div class="practice">
 
-        <div class="practice-title">
-            ✏️ WRITE ${upper} AND ${lower}
-        </div>
+                    <div class="practice-title">
+                        ✏️ WRITE ${upper} AND ${lower}
+                    </div>
 
-        <div class="lines"></div>
+                    <div class="lines"></div>
 
-    </div>
+                </div>
 
-    <div class="practice">
+                <div class="practice">
 
-        <div class="practice-title">
-            🎨 DRAW & COLOR
-        </div>
+                    <div class="practice-title">
+                        🎨 DRAW & COLOR
+                    </div>
 
-        <div style="height:80px;"></div>
+                    <div style="height:80px;"></div>
 
-    </div>
+                </div>
 
-    <div class="footer">
-        SamSreeFuture Kids Series | A–Z Learning Workbook
-    </div>
+                <div class="footer">
+                    SamSreeFuture Kids Series | A–Z Learning Workbook
+                </div>
 
-</section>
+            </section>
 
-`;
+            `;
 
         });
+
+
+        /* =====================================================
+           NUMBERS INTRO PAGE
+        ===================================================== */
+
+        html += `
+
+        <section class="page">
+
+            <div class="cover">
+
+                <div class="brand">
+                    SAMSREEFUTURE KIDS SERIES
+                </div>
+
+                <h1 style="font-size:60px;">
+                    1–100
+                </h1>
+
+                <h2>
+                    Numbers Tracing Workbook
+                </h2>
+
+                <div style="font-size:85px;">
+                    🔢 ✏️ 🌈
+                </div>
+
+                <p>
+                    Trace • Count • Write • Practice
+                </p>
+
+                <p>
+                    <strong>
+                        Numbers 1 to 100
+                    </strong>
+                </p>
+
+                <p style="margin-top:35px;">
+                    Count the colourful pictures<br>
+                    and practise writing every number.
+                </p>
+
+                <p style="margin-top:35px;">
+                    Designed by Mahesh<br>
+                    SamSreeFuture
+                </p>
+
+            </div>
+
+            <div class="footer">
+                SamSreeFuture Kids Series | Numbers 1–100
+            </div>
+
+        </section>
+
+        `;
+
+
+        /* =====================================================
+           CREATE NUMBER PAGES 1-100
+        ===================================================== */
+
+        for (let number = 1; number <= 100; number++) {
+
+
+            /* ----------------------------------------------
+               Decide grid columns.
+
+               Small numbers:
+               1-10 = 5 columns
+
+               11-30 = 6 columns
+
+               31-60 = 8 columns
+
+               61-100 = 10 columns
+            ---------------------------------------------- */
+
+            let columns = 5;
+
+            if (number >= 11 && number <= 30) {
+                columns = 6;
+            }
+
+            if (number >= 31 && number <= 60) {
+                columns = 8;
+            }
+
+            if (number >= 61) {
+                columns = 10;
+            }
+
+
+            /* ----------------------------------------------
+               Create EXACT number of pictures
+            ---------------------------------------------- */
+
+            let pictureHTML = "";
+
+            for (let i = 0; i < number; i++) {
+
+                const picture =
+                    pictures[i % pictures.length];
+
+                pictureHTML += `
+                    <div class="count-picture">
+                        ${picture}
+                    </div>
+                `;
+            }
+
+
+            /* ----------------------------------------------
+               Page HTML
+            ---------------------------------------------- */
+
+            html += `
+
+            <section class="page number-page">
+
+                <div class="number-header">
+                    NUMBERS 1–100 KIDS TRACING WORKBOOK
+                </div>
+
+                <div class="number-subtitle">
+                    Learn • Trace • Count • Write
+                </div>
+
+
+                <!-- TRACE NUMBER -->
+
+                <div class="number-trace-box">
+
+                    <div class="trace-label">
+                        ✏️ TRACE THE NUMBER
+                    </div>
+
+                    <div class="big-number">
+                        ${number}
+                    </div>
+
+                    <div class="number-name">
+                        ${numberNames[number]}
+                    </div>
+
+                </div>
+
+
+                <!-- COUNTING -->
+
+                <div class="count-heading">
+                    🎨 COUNT THE PICTURES
+                </div>
+
+                <div class="count-instruction">
+                    Count all the colourful pictures carefully.
+                </div>
+
+
+                <div
+                    class="picture-grid"
+                    style="grid-template-columns: repeat(${columns}, 1fr);"
+                >
+
+                    ${pictureHTML}
+
+                </div>
+
+
+                <!-- COUNT RESULT -->
+
+                <div class="count-result">
+                    ✓ I counted ${number} pictures!
+                </div>
+
+
+                <!-- WRITING PRACTICE -->
+
+                <div class="number-practice">
+
+                    <div class="number-practice-title">
+                        ✍️ WRITE ${number} BY YOURSELF
+                    </div>
+
+
+                    <!-- LINE 1 -->
+
+                    <div class="writing-line">
+
+                        <span class="writing-number">
+                            ${number}
+                        </span>
+
+                    </div>
+
+
+                    <!-- LINE 2 -->
+
+                    <div class="writing-line">
+
+                        <span class="writing-number">
+                            ${number}
+                        </span>
+
+                    </div>
+
+
+                    <!-- LINE 3 -->
+
+                    <div class="writing-line">
+
+                        <span class="writing-number">
+                            ${number}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="challenge">
+                    ⭐ Great job! Trace, count and write ${number}.
+                </div>
+
+
+                <div class="footer">
+                    SamSreeFuture Kids Series |
+                    Numbers 1–100 |
+                    Page ${number} of 100
+                </div>
+
+            </section>
+
+            `;
+
+        }
+
+
+        /* =====================================================
+           PUT EVERYTHING INTO WORKBOOK
+        ===================================================== */
 
         document.getElementById("workbook").innerHTML = html;
 
