@@ -1239,28 +1239,22 @@ ${message}`;
                 return span;
             }
 
-
             /* -----------------------------------------
                DISPLAY NEWS
+               FORCE SLOW SPEED + LIGHT RED STYLE
             ----------------------------------------- */
 
             function displayNews(newsList) {
 
-                newsContent.innerHTML =
-                    "";
+                newsContent.innerHTML = "";
 
+                newsList.forEach(function (news) {
 
-                newsList.forEach(
-                    function (news) {
+                    newsContent.appendChild(
+                        createNewsItem(news)
+                    );
 
-                        newsContent.appendChild(
-                            createNewsItem(
-                                news
-                            )
-                        );
-
-                    }
-                );
+                });
 
 
                 /*
@@ -1272,23 +1266,156 @@ ${message}`;
                     newsContent.innerHTML;
 
 
-                /*
-                 * Restart animation.
-                 */
+                /* =========================================
+                   FORCE LIGHT RED NEWS BACKGROUND
+                ========================================= */
 
-                newsTrack.style.animation =
-                    "none";
+                newsTicker.style.setProperty(
+                    "background",
+                    "#fff0f0",
+                    "important"
+                );
 
+                newsTicker.style.setProperty(
+                    "background-color",
+                    "#fff0f0",
+                    "important"
+                );
+
+                newsTicker.style.setProperty(
+                    "border-top",
+                    "1px solid #ffd0d0",
+                    "important"
+                );
+
+                newsTicker.style.setProperty(
+                    "border-bottom",
+                    "1px solid #ffd0d0",
+                    "important"
+                );
+
+
+                /* =========================================
+                   FORCE BREAKING NEWS LABEL COLOR
+                ========================================= */
+
+                const newsLabel =
+                    newsTicker.querySelector(
+                        ".news-ticker-label"
+                    );
+
+                if (newsLabel) {
+
+                    newsLabel.style.setProperty(
+                        "background",
+                        "#ffe0e0",
+                        "important"
+                    );
+
+                    newsLabel.style.setProperty(
+                        "background-color",
+                        "#ffe0e0",
+                        "important"
+                    );
+
+                    newsLabel.style.setProperty(
+                        "color",
+                        "#b71c1c",
+                        "important"
+                    );
+
+                    newsLabel.style.setProperty(
+                        "border-right",
+                        "1px solid #ffcaca",
+                        "important"
+                    );
+                }
+
+
+                /* =========================================
+                   FORCE NEWS TEXT COLOR
+                ========================================= */
+
+                newsTicker
+                    .querySelectorAll(".news-item")
+                    .forEach(function (item) {
+
+                        item.style.setProperty(
+                            "color",
+                            "#7f1d1d",
+                            "important"
+                        );
+
+                        item.style.setProperty(
+                            "text-decoration",
+                            "none",
+                            "important"
+                        );
+                    });
+
+
+                /* =========================================
+                   RESTART NEWS ANIMATION
+                ========================================= */
+
+                newsTrack.style.animation = "none";
 
                 void newsTrack.offsetWidth;
 
 
-                newsTrack.style.animation =
-                    "";
+                /* =========================================
+                   VERY SLOW NEWS SPEED
+                   120 SECONDS
+                ========================================= */
+
+                newsTrack.style.setProperty(
+                    "animation-duration",
+                    "120s",
+                    "important"
+                );
+
+                newsTrack.style.setProperty(
+                    "-webkit-animation-duration",
+                    "120s",
+                    "important"
+                );
+
+                newsTrack.style.setProperty(
+                    "animation-timing-function",
+                    "linear",
+                    "important"
+                );
+
+                newsTrack.style.setProperty(
+                    "-webkit-animation-timing-function",
+                    "linear",
+                    "important"
+                );
+
+                newsTrack.style.setProperty(
+                    "animation-iteration-count",
+                    "infinite",
+                    "important"
+                );
+
+                newsTrack.style.setProperty(
+                    "-webkit-animation-iteration-count",
+                    "infinite",
+                    "important"
+                );
+
+
+                /*
+                 * Restore animation after forcing
+                 * the new duration.
+                 */
+
+                newsTrack.style.animationName =
+                    getComputedStyle(
+                        newsTrack
+                    ).animationName;
 
             }
-
-
             /* -----------------------------------------
                LOAD LIVE NEWS
             ----------------------------------------- */

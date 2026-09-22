@@ -1546,3 +1546,104 @@ img[src*="mahesh.png"] {
       padding: 27px 18px
    }
 }
+
+/* =========================================================
+   BREAKING NEWS - LIGHT RED STYLE
+   ========================================================= */
+
+.news-ticker {
+   background: #fff0f0 !important;
+   border-top: 1px solid #ffd0d0 !important;
+   border-bottom: 1px solid #ffd0d0 !important;
+}
+
+.news-ticker-label {
+   background: #ffe0e0 !important;
+   color: #b71c1c !important;
+   border-right: 1px solid #ffcaca !important;
+}
+
+.news-item {
+   color: #7f1d1d !important;
+}
+
+/* =========================================================
+   SAMSREEFUTURE - BREAKING NEWS
+   LIGHT RED + VERY SLOW + SMOOTH SCROLL
+   ========================================================= */
+
+.news-ticker {
+   background: #fff0f0 !important;
+   background-color: #fff0f0 !important;
+   border-top: 1px solid #ffd0d0 !important;
+   border-bottom: 1px solid #ffd0d0 !important;
+}
+
+.news-ticker-label {
+   background: #ffe0e0 !important;
+   color: #b71c1c !important;
+   border-right: 1px solid #ffcaca !important;
+}
+
+.news-item {
+   color: #7f1d1d !important;
+   text-decoration: none !important;
+}
+
+.news-item:hover {
+   color: #c62828 !important;
+}
+
+
+/* =========================================================
+   NEWS MOVING TRACK
+   VERY SLOW + SMOOTH
+   ========================================================= */
+
+.news-ticker-track {
+   animation-duration: 120s !important;
+   -webkit-animation-duration: 120s !important;
+
+   animation-timing-function: linear !important;
+   -webkit-animation-timing-function: linear !important;
+
+   animation-iteration-count: infinite !important;
+   -webkit-animation-iteration-count: infinite !important;
+
+   will-change: transform;
+}
+
+
+/* =========================================================
+   NEWS PAUSE
+   ========================================================= */
+
+.news-ticker-track.is-paused {
+   animation-play-state: paused !important;
+   -webkit-animation-play-state: paused !important;
+}
+
+
+/* =========================================================
+   SMOOTH NEWS ITEMS
+   ========================================================= */
+
+.news-ticker-track .news-item {
+   white-space: nowrap;
+   display: inline-flex;
+   align-items: center;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+   .news-ticker-track {
+      animation-duration: 100s !important;
+      -webkit-animation-duration: 100s !important;
+   }
+
+}
