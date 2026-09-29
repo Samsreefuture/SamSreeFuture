@@ -1,4 +1,4 @@
-/* =========================================================
+﻿/* =========================================================
    SamSreeFuture - Dark Blue Theme
    COMPLETE STYLE.CSS
    ========================================================= */
@@ -1163,7 +1163,7 @@ img[src*="mahesh.png"] {
 }
 
 /* =========================================================
-   🔴 TELUGU BREAKING NEWS
+   ðŸ”´ TELUGU BREAKING NEWS
    RED BACKGROUND + FAST SCROLL
    ========================================================= */
 
@@ -1175,8 +1175,8 @@ img[src*="mahesh.png"] {
    display: flex;
    align-items: stretch;
 
-   background: #e00000 !important;
-   color: #fff !important;
+   background: #bfe8ff !important;
+   color: #123b52 !important;
 
    overflow: hidden !important;
    position: relative;
@@ -1230,7 +1230,7 @@ img[src*="mahesh.png"] {
    display: flex;
    align-items: center;
 
-   background: #e00000 !important;
+   background: #bfe8ff !important;
 }
 
 /* MOVING TRACK */
@@ -1297,7 +1297,7 @@ img[src*="mahesh.png"] {
 /* SEPARATOR */
 
 .breaking-ticker .news-item::after {
-   content: "🔴";
+   content: "ðŸ”´";
 
    display: inline-block;
 
@@ -1773,7 +1773,7 @@ img[src*="mahesh.png"] {
    display: flex !important;
    align-items: stretch !important;
    overflow: hidden !important;
-   background: #e00000 !important;
+   background: #bfe8ff !important;
    color: #ffffff !important;
    border: none !important;
    position: relative !important;
@@ -1803,7 +1803,7 @@ img[src*="mahesh.png"] {
    overflow: hidden !important;
    position: relative !important;
    display: block !important;
-   background: #e00000 !important;
+   background: #bfe8ff !important;
 }
 
 .telugu-breaking-track {
@@ -2031,4 +2031,331 @@ img[src*="mahesh.png"] {
       padding: 0 18px;
       font-size: 12px;
    }
+}
+
+/* =========================================================
+   SAMSREEFUTURE - TELUGU BREAKING NEWS
+   LIGHT BLUE STYLE PREVIEW
+   ========================================================= */
+
+.telugu-breaking-news {
+   width: 100%;
+   height: 48px;
+   min-height: 48px;
+   max-height: 48px;
+
+   display: flex;
+   align-items: stretch;
+
+   margin: 0;
+   padding: 0;
+
+   overflow: hidden;
+   position: relative;
+
+   background: #dff4ff !important;
+   border-top: 1px solid #9bdcff;
+   border-bottom: 1px solid #9bdcff;
+
+   box-shadow:
+      0 2px 8px rgba(0, 120, 190, 0.12);
+
+   z-index: 20;
+}
+
+
+/* =========================================================
+   BREAKING NEWS LABEL
+   ========================================================= */
+
+.telugu-breaking-label {
+   flex: 0 0 auto;
+
+   height: 48px;
+   min-height: 48px;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   padding: 0 20px;
+
+   background: #169bd5 !important;
+   color: #ffffff !important;
+
+   font-family:
+      "Poppins",
+      "Noto Sans Telugu",
+      "Nirmala UI",
+      sans-serif;
+
+   font-size: 13px;
+   font-weight: 800;
+
+   letter-spacing: 0.4px;
+   white-space: nowrap;
+
+   box-shadow:
+      4px 0 10px rgba(0, 120, 190, 0.15);
+
+   position: relative;
+   z-index: 3;
+}
+
+
+/* =========================================================
+   NEWS VIEWPORT
+   ========================================================= */
+
+.telugu-breaking-news .news-ticker-viewport {
+   flex: 1 1 auto;
+
+   width: auto;
+   min-width: 0;
+
+   height: 48px;
+
+   overflow: hidden;
+
+   position: relative;
+
+   display: flex;
+   align-items: center;
+}
+
+
+/* =========================================================
+   SCROLLING TRACK
+   JS CONTROLS MOVEMENT
+   ========================================================= */
+
+.telugu-breaking-news .telugu-breaking-track {
+   display: flex;
+   align-items: center;
+
+   width: max-content;
+   min-width: max-content;
+
+   height: 48px;
+
+   flex-shrink: 0;
+
+   animation: none !important;
+
+   transform: translate3d(0, 0, 0);
+
+   will-change: transform;
+}
+
+
+/* =========================================================
+   NEWS CONTENT
+   ========================================================= */
+
+.telugu-breaking-news .news-ticker-content {
+   display: flex;
+   align-items: center;
+
+   flex-shrink: 0;
+
+   height: 48px;
+   min-height: 48px;
+}
+
+
+/* =========================================================
+   NEWS FONT STYLE
+   ========================================================= */
+
+.telugu-breaking-news .news-item {
+
+   display: inline-flex;
+   align-items: center;
+
+   height: 48px;
+   min-height: 48px;
+
+   padding: 0 30px;
+
+   margin: 0;
+
+   box-sizing: border-box;
+
+   color: #123b52 !important;
+
+   font-family:
+      "Noto Sans Telugu",
+      "Nirmala UI",
+      "Gautami",
+      "Poppins",
+      sans-serif;
+
+   font-size: 14px;
+
+   font-weight: 600;
+
+   letter-spacing: 0.15px;
+
+   line-height: 1.4;
+
+   white-space: nowrap;
+
+   text-decoration: none;
+
+   transition:
+      color 0.25s ease,
+      background 0.25s ease;
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.telugu-breaking-news .news-item:hover {
+   color: #0077b6 !important;
+}
+
+
+/* =========================================================
+   NEWS SEPARATOR FEEL
+   ========================================================= */
+
+.telugu-breaking-news .news-item::after {
+   content: "  â€¢  ";
+
+   margin-left: 30px;
+
+   color: #169bd5;
+
+   font-size: 15px;
+   font-weight: 800;
+}
+
+
+/* =========================================================
+   DESKTOP PREMIUM EFFECT
+   ========================================================= */
+
+.telugu-breaking-news::after {
+   content: "";
+
+   position: absolute;
+
+   top: 0;
+   right: 0;
+
+   width: 70px;
+   height: 100%;
+
+   pointer-events: none;
+
+   background:
+      linear-gradient(to left,
+         rgba(223, 244, 255, 1),
+         rgba(223, 244, 255, 0));
+
+   z-index: 2;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+   .telugu-breaking-news {
+      height: 42px;
+      min-height: 42px;
+      max-height: 42px;
+   }
+
+   .telugu-breaking-label {
+      height: 42px;
+      min-height: 42px;
+
+      padding: 0 12px;
+
+      font-size: 11px;
+      letter-spacing: 0.2px;
+   }
+
+   .telugu-breaking-news .news-ticker-viewport {
+      height: 42px;
+   }
+
+   .telugu-breaking-news .telugu-breaking-track {
+      height: 42px;
+   }
+
+   .telugu-breaking-news .news-ticker-content {
+      height: 42px;
+      min-height: 42px;
+   }
+
+   .telugu-breaking-news .news-item {
+      height: 42px;
+      min-height: 42px;
+
+      padding: 0 20px;
+
+      font-size: 12px;
+
+      font-weight: 600;
+   }
+
+   .telugu-breaking-news .news-item::after {
+      margin-left: 20px;
+   }
+
+   .telugu-breaking-news::after {
+      width: 40px;
+   }
+}
+
+/* =========================================================
+   FINAL TELUGU BREAKING NEWS COLOR
+   SCROLLING NEWS AREA = LIGHT BLUE
+   ========================================================= */
+
+#newsTicker.telugu-breaking-news {
+   background: #bfe8ff !important;
+   background-color: #bfe8ff !important;
+}
+
+/* ONLY SCROLLING NEWS AREA */
+#newsTicker.telugu-breaking-news .news-ticker-viewport {
+   background: #bfe8ff !important;
+   background-color: #bfe8ff !important;
+}
+
+#newsTicker.telugu-breaking-news .telugu-breaking-track {
+   background: #bfe8ff !important;
+   background-color: #bfe8ff !important;
+}
+
+#newsTicker.telugu-breaking-news .news-ticker-content {
+   background: #bfe8ff !important;
+   background-color: #bfe8ff !important;
+}
+
+/* NEWS TEXT */
+#newsTicker.telugu-breaking-news .news-item {
+   background: transparent !important;
+   color: #123b52 !important;
+}
+
+/* Keep the red/light-blue BREAKING NEWS label separate */
+#newsTicker.telugu-breaking-news .telugu-breaking-label {
+   background: #169bd5 !important;
+   background-color: #169bd5 !important;
+   color: #ffffff !important;
+}
+
+/* Right fade should also be LIGHT BLUE */
+#newsTicker.telugu-breaking-news::after {
+   background: linear-gradient(to left,
+         rgba(191, 232, 255, 1),
+         rgba(191, 232, 255, 0)) !important;
 }
