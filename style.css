@@ -1898,3 +1898,137 @@ img[src*="mahesh.png"] {
       line-height: 44px !important;
    }
 }
+
+/* =====================================================
+   TELUGU BREAKING NEWS - FINAL SPEED + LAYOUT FIX
+   ===================================================== */
+
+.telugu-breaking-news {
+   width: 100%;
+   height: 44px;
+   min-height: 44px;
+   max-height: 44px;
+   overflow: hidden;
+   position: relative;
+   display: flex;
+   align-items: stretch;
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   background: #111827;
+   z-index: 10;
+}
+
+.telugu-breaking-label {
+   flex: 0 0 auto;
+   width: auto;
+   height: 44px;
+   min-height: 44px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 0 18px;
+   box-sizing: border-box;
+   background: #dc2626 !important;
+   color: #ffffff !important;
+   font-size: 13px;
+   font-weight: 700;
+   white-space: nowrap;
+}
+
+.telugu-breaking-news .news-ticker-viewport {
+   flex: 1 1 auto;
+   min-width: 0;
+   width: auto;
+   height: 44px;
+   overflow: hidden;
+   position: relative;
+   display: flex;
+   align-items: center;
+}
+
+.telugu-breaking-news .telugu-breaking-track {
+   display: flex;
+   align-items: center;
+   width: max-content;
+   min-width: max-content;
+   height: 44px;
+   flex-shrink: 0;
+
+   /* JS controls movement */
+   animation: none !important;
+
+   transform: translate3d(0, 0, 0);
+   will-change: transform;
+}
+
+.telugu-breaking-news .news-ticker-content {
+   display: flex;
+   align-items: center;
+   flex-shrink: 0;
+   height: 44px;
+   min-height: 44px;
+}
+
+.telugu-breaking-news .news-item {
+   display: inline-flex;
+   align-items: center;
+   height: 44px;
+   min-height: 44px;
+   padding: 0 24px;
+   margin: 0;
+   box-sizing: border-box;
+
+   color: #ffffff !important;
+   font-size: 13px;
+   font-weight: 500;
+   line-height: 1;
+   white-space: nowrap;
+}
+
+/* Slow down the JS ticker */
+.telugu-breaking-news .news-ticker-track {
+   transition: none !important;
+}
+
+/* Make sure the ticker itself cannot create a giant blank area */
+.telugu-breaking-news+* {
+   margin-top: 0 !important;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+   .telugu-breaking-news {
+      height: 40px;
+      min-height: 40px;
+      max-height: 40px;
+   }
+
+   .telugu-breaking-label {
+      height: 40px;
+      min-height: 40px;
+      padding: 0 10px;
+      font-size: 11px;
+   }
+
+   .telugu-breaking-news .news-ticker-viewport {
+      height: 40px;
+   }
+
+   .telugu-breaking-news .telugu-breaking-track {
+      height: 40px;
+   }
+
+   .telugu-breaking-news .news-ticker-content {
+      height: 40px;
+      min-height: 40px;
+   }
+
+   .telugu-breaking-news .news-item {
+      height: 40px;
+      min-height: 40px;
+      padding: 0 18px;
+      font-size: 12px;
+   }
+}

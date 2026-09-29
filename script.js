@@ -633,7 +633,7 @@ ${details}`;
         // FIXED: previously "alse" caused JavaScript error
         let newsReducedMotion = false;
 
-        let newsSpeed = 110;
+        let newsSpeed = 40;
 
 
         /* -----------------------------------------------------
@@ -901,15 +901,15 @@ ${details}`;
 
             if (width <= 480) {
 
-                newsSpeed = 95;
+                newsSpeed = 40;
 
             } else if (width <= 768) {
 
-                newsSpeed = 105;
+                newsSpeed = 40;
 
             } else {
 
-                newsSpeed = 115;
+                newsSpeed = 40;
             }
         }
 
@@ -975,7 +975,7 @@ ${details}`;
             const delta =
                 Math.min(
                     timestamp - newsLastTime,
-                    100
+                    50
                 );
 
             newsLastTime = timestamp;
@@ -989,7 +989,7 @@ ${details}`;
 
                 newsOffset +=
                     newsSpeed *
-                    (delta / 1000);
+                    (delta / 500);
 
 
                 if (
