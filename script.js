@@ -1,898 +1,454 @@
 /* =========================================================
-   SamSreeFuture - Main JavaScript
-   Complete Website + Automatic Telugu Breaking News
+   SamSreeFuture - Complete JavaScript
+   Stable Website Functions + Telugu Breaking News
    ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
 
-
     /* =====================================================
        MOBILE MENU
-    ===================================================== */
+       ===================================================== */
 
     const menuToggle = document.getElementById("menu-toggle");
     const mainNav = document.getElementById("main-nav");
 
     if (menuToggle && mainNav) {
 
-        function toggleMenu() {
-
+        menuToggle.addEventListener("click", function () {
             mainNav.classList.toggle("active");
+            menuToggle.classList.toggle("active");
+        });
 
-            const isOpen =
-                mainNav.classList.contains("active");
+        mainNav.querySelectorAll("a").forEach(function (link) {
 
-            menuToggle.setAttribute(
-                "aria-label",
-                isOpen ? "Close Menu" : "Open Menu"
-            );
+            link.addEventListener("click", function () {
 
-            menuToggle.setAttribute(
-                "aria-expanded",
-                isOpen ? "true" : "false"
-            );
-        }
+                mainNav.classList.remove("active");
+                menuToggle.classList.remove("active");
 
-        menuToggle.addEventListener(
-            "click",
-            toggleMenu
-        );
+            });
 
-        menuToggle.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (
-                    event.key === "Enter" ||
-                    event.key === " "
-                ) {
-
-                    event.preventDefault();
-
-                    toggleMenu();
-                }
-            }
-        );
-
-        mainNav.querySelectorAll("a").forEach(
-            function (link) {
-
-                link.addEventListener(
-                    "click",
-                    function () {
-
-                        mainNav.classList.remove("active");
-
-                        menuToggle.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-                        menuToggle.setAttribute(
-                            "aria-label",
-                            "Open Menu"
-                        );
-                    }
-                );
-            }
-        );
+        });
     }
-
 
 
     /* =====================================================
        TYPING ANIMATION
-    ===================================================== */
+       ===================================================== */
 
-    const typingElement =
-        document.getElementById("typing");
+    const typingElement = document.getElementById("typing");
 
     if (typingElement) {
 
-        const words = [
+        const roles = [
             "Web Developer",
-            "AI Solutions",
+            "AI Solutions Creator",
             "Graphic Designer"
         ];
 
-        let wordIndex = 0;
+        let roleIndex = 0;
         let charIndex = 0;
         let deleting = false;
 
-        function typeEffect() {
+        function typeText() {
 
-            const currentWord =
-                words[wordIndex];
+            const currentRole = roles[roleIndex];
 
             if (!deleting) {
 
                 typingElement.textContent =
-                    currentWord.substring(
-                        0,
-                        charIndex + 1
-                    );
+                    currentRole.substring(0, charIndex + 1);
 
                 charIndex++;
 
-                if (
-                    charIndex ===
-                    currentWord.length
-                ) {
+                if (charIndex >= currentRole.length) {
 
                     deleting = true;
 
-                    setTimeout(
-                        typeEffect,
-                        1800
-                    );
+                    setTimeout(typeText, 1600);
 
                     return;
                 }
-
-                setTimeout(
-                    typeEffect,
-                    100
-                );
 
             } else {
 
                 typingElement.textContent =
-                    currentWord.substring(
-                        0,
-                        charIndex - 1
-                    );
+                    currentRole.substring(0, charIndex - 1);
 
                 charIndex--;
 
-                if (charIndex === 0) {
+                if (charIndex <= 0) {
 
+                    charIndex = 0;
                     deleting = false;
 
-                    wordIndex =
-                        (wordIndex + 1) %
-                        words.length;
+                    roleIndex++;
 
-                    setTimeout(
-                        typeEffect,
-                        400
-                    );
-
-                    return;
+                    if (roleIndex >= roles.length) {
+                        roleIndex = 0;
+                    }
                 }
-
-                setTimeout(
-                    typeEffect,
-                    55
-                );
             }
+
+            setTimeout(
+                typeText,
+                deleting ? 55 : 95
+            );
         }
 
-        typeEffect();
+        typeText();
     }
-
 
 
     /* =====================================================
        AOS ANIMATION
-    ===================================================== */
+       ===================================================== */
 
     if (typeof AOS !== "undefined") {
 
         AOS.init({
             duration: 800,
             once: true,
-            offset: 80,
-            easing: "ease-out-cubic"
+            offset: 80
         });
     }
 
 
-
     /* =====================================================
-       SMOOTH SCROLLING
-    ===================================================== */
+       SMOOTH SCROLL
+       ===================================================== */
 
-    document
-        .querySelectorAll('a[href^="#"]')
-        .forEach(function (link) {
+    document.querySelectorAll('a[href^="#"]').forEach(function (link) {
 
-            link.addEventListener(
-                "click",
-                function (event) {
+        link.addEventListener("click", function (event) {
 
-                    const targetId =
-                        this.getAttribute("href");
+            const targetId =
+                this.getAttribute("href");
 
-                    if (
-                        !targetId ||
-                        targetId === "#"
-                    ) {
-                        return;
-                    }
+            if (!targetId || targetId === "#") {
+                return;
+            }
 
-                    const target =
-                        document.querySelector(
-                            targetId
-                        );
+            const target =
+                document.querySelector(targetId);
 
-                    if (target) {
+            if (target) {
 
-                        event.preventDefault();
+                event.preventDefault();
 
-                        const header =
-                            document.querySelector(
-                                ".site-header"
-                            );
-
-                        const headerHeight =
-                            header
-                                ? header.offsetHeight
-                                : 0;
-
-                        const targetPosition =
-                            target
-                                .getBoundingClientRect()
-                                .top +
-                            window.pageYOffset -
-                            headerHeight -
-                            10;
-
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: "smooth"
-                        });
-                    }
-                }
-            );
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
         });
-
+    });
 
 
     /* =====================================================
        COUNTERS
-    ===================================================== */
+       ===================================================== */
 
     const counters =
         document.querySelectorAll(".counter");
 
     if (counters.length) {
 
-        let countersStarted = false;
+        const counterObserver =
+            new IntersectionObserver(
+                function (entries, observer) {
 
-        function startCounters() {
+                    entries.forEach(function (entry) {
 
-            if (countersStarted) return;
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
 
-            const statsSection =
-                document.querySelector(
-                    ".stats-section"
-                );
-
-            if (!statsSection) return;
-
-            const sectionTop =
-                statsSection
-                    .getBoundingClientRect()
-                    .top;
-
-            const windowHeight =
-                window.innerHeight;
-
-            if (
-                sectionTop <
-                windowHeight - 100
-            ) {
-
-                countersStarted = true;
-
-                counters.forEach(
-                    function (counter) {
+                        const counter =
+                            entry.target;
 
                         const target =
                             parseInt(
-                                counter.getAttribute(
-                                    "data-target"
-                                ),
+                                counter.getAttribute("data-target") ||
+                                counter.textContent ||
+                                "0",
                                 10
-                            ) || 0;
+                            );
 
                         let current = 0;
 
                         const increment =
                             Math.max(
                                 1,
-                                Math.ceil(
-                                    target / 60
-                                )
+                                Math.ceil(target / 80)
                             );
 
-                        const timer =
-                            setInterval(
-                                function () {
+                        function updateCounter() {
 
-                                    current +=
-                                        increment;
+                            current += increment;
 
-                                    if (
-                                        current >=
-                                        target
-                                    ) {
+                            if (current >= target) {
+                                current = target;
+                            }
 
-                                        current =
-                                            target;
+                            counter.textContent =
+                                current;
 
-                                        clearInterval(
-                                            timer
-                                        );
-                                    }
+                            if (current < target) {
+                                requestAnimationFrame(
+                                    updateCounter
+                                );
+                            }
+                        }
 
-                                    counter.textContent =
-                                        current;
+                        updateCounter();
 
-                                },
-                                25
-                            );
-                    }
-                );
-            }
-        }
+                        observer.unobserve(counter);
 
-        window.addEventListener(
-            "scroll",
-            startCounters
-        );
+                    });
 
-        startCounters();
+                },
+                {
+                    threshold: 0.5
+                }
+            );
+
+        counters.forEach(function (counter) {
+            counterObserver.observe(counter);
+        });
     }
-
 
 
     /* =====================================================
        SKILLS PROGRESS
-    ===================================================== */
+       ===================================================== */
 
     const skillBars =
-        document.querySelectorAll(
-            ".progress span"
-        );
+        document.querySelectorAll(".skill-progress");
 
     if (skillBars.length) {
 
-        skillBars.forEach(
-            function (bar) {
+        const skillObserver =
+            new IntersectionObserver(
+                function (entries, observer) {
 
-                const originalWidth =
-                    bar.style.width;
+                    entries.forEach(function (entry) {
 
-                bar.style.width = "0";
-
-                setTimeout(
-                    function () {
-
-                        bar.style.width =
-                            originalWidth;
-
-                    },
-                    400
-                );
-            }
-        );
-    }
-
-
-
-    /* =====================================================
-       PROMOTIONAL TOP SLIDER
-    ===================================================== */
-
-    const promoSlider =
-        document.getElementById(
-            "promoAdSlider"
-        );
-
-    if (promoSlider) {
-
-        const slides =
-            promoSlider.querySelectorAll(
-                ".promo-ad"
-            );
-
-        const previousButton =
-            document.getElementById(
-                "promoPrev"
-            );
-
-        const nextButton =
-            document.getElementById(
-                "promoNext"
-            );
-
-        const dotsContainer =
-            document.getElementById(
-                "promoDots"
-            );
-
-        let currentSlide = 0;
-        let autoPlay = null;
-
-
-        if (
-            dotsContainer &&
-            slides.length
-        ) {
-
-            dotsContainer.innerHTML = "";
-
-            slides.forEach(
-                function (_, index) {
-
-                    const dot =
-                        document.createElement(
-                            "button"
-                        );
-
-                    dot.type = "button";
-
-                    dot.className =
-                        index === 0
-                            ? "promo-dot active"
-                            : "promo-dot";
-
-                    dot.setAttribute(
-                        "aria-label",
-                        "Show promotion " +
-                        (index + 1)
-                    );
-
-                    dot.addEventListener(
-                        "click",
-                        function () {
-
-                            showSlide(index);
-
-                            restartAutoPlay();
-                        }
-                    );
-
-                    dotsContainer.appendChild(
-                        dot
-                    );
-                }
-            );
-        }
-
-
-        function showSlide(index) {
-
-            if (!slides.length) return;
-
-            if (
-                index >=
-                slides.length
-            ) {
-                index = 0;
-            }
-
-            if (index < 0) {
-                index =
-                    slides.length - 1;
-            }
-
-            currentSlide = index;
-
-            slides.forEach(
-                function (slide, i) {
-
-                    slide.classList.toggle(
-                        "active",
-                        i === currentSlide
-                    );
-                }
-            );
-
-            if (dotsContainer) {
-
-                const dots =
-                    dotsContainer.querySelectorAll(
-                        ".promo-dot"
-                    );
-
-                dots.forEach(
-                    function (dot, i) {
-
-                        dot.classList.toggle(
-                            "active",
-                            i === currentSlide
-                        );
-                    }
-                );
-            }
-        }
-
-
-        function nextSlide() {
-
-            showSlide(
-                currentSlide + 1
-            );
-        }
-
-
-        function previousSlide() {
-
-            showSlide(
-                currentSlide - 1
-            );
-        }
-
-
-        if (nextButton) {
-
-            nextButton.addEventListener(
-                "click",
-                function () {
-
-                    nextSlide();
-
-                    restartAutoPlay();
-                }
-            );
-        }
-
-
-        if (previousButton) {
-
-            previousButton.addEventListener(
-                "click",
-                function () {
-
-                    previousSlide();
-
-                    restartAutoPlay();
-                }
-            );
-        }
-
-
-        function startAutoPlay() {
-
-            if (
-                slides.length <= 1
-            ) {
-                return;
-            }
-
-            autoPlay =
-                setInterval(
-                    function () {
-
-                        nextSlide();
-
-                    },
-                    4500
-                );
-        }
-
-
-        function stopAutoPlay() {
-
-            if (autoPlay) {
-
-                clearInterval(
-                    autoPlay
-                );
-
-                autoPlay = null;
-            }
-        }
-
-
-        function restartAutoPlay() {
-
-            stopAutoPlay();
-
-            startAutoPlay();
-        }
-
-
-        promoSlider.addEventListener(
-            "mouseenter",
-            stopAutoPlay
-        );
-
-        promoSlider.addEventListener(
-            "mouseleave",
-            startAutoPlay
-        );
-
-
-        promoSlider.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (
-                    event.key ===
-                    "ArrowRight"
-                ) {
-
-                    nextSlide();
-
-                    restartAutoPlay();
-                }
-
-                if (
-                    event.key ===
-                    "ArrowLeft"
-                ) {
-
-                    previousSlide();
-
-                    restartAutoPlay();
-                }
-            }
-        );
-
-
-        slides.forEach(
-            function (slide, index) {
-
-                slide.addEventListener(
-                    "click",
-                    function (event) {
-
-                        const clickedElement =
-                            event.target.closest(
-                                "a"
-                            );
-
-                        if (
-                            !clickedElement
-                        ) {
+                        if (!entry.isIntersecting) {
                             return;
                         }
 
-                        const promoName =
-                            slide.dataset.name ||
-                            "Promotion " +
-                            (index + 1);
+                        const bar =
+                            entry.target;
 
-                        if (
-                            typeof gtag ===
-                            "function"
-                        ) {
+                        const width =
+                            bar.getAttribute("data-width") ||
+                            bar.dataset.width;
 
-                            gtag(
-                                "event",
-                                "promo_click",
-                                {
-                                    promo_name:
-                                        promoName,
-
-                                    promo_position:
-                                        index + 1
-                                }
-                            );
+                        if (width) {
+                            bar.style.width = width;
                         }
-                    }
-                );
-            }
-        );
 
+                        observer.unobserve(bar);
 
-        showSlide(0);
+                    });
 
-        startAutoPlay();
+                },
+                {
+                    threshold: 0.3
+                }
+            );
+
+        skillBars.forEach(function (bar) {
+            skillObserver.observe(bar);
+        });
     }
 
 
+    /* =====================================================
+       PROMO SLIDER
+       ===================================================== */
+
+    const promoSlides =
+        document.querySelectorAll(".promo-slide");
+
+    if (promoSlides.length > 1) {
+
+        let promoIndex = 0;
+
+        promoSlides.forEach(function (slide, index) {
+
+            slide.classList.toggle(
+                "active",
+                index === 0
+            );
+
+        });
+
+        setInterval(function () {
+
+            promoSlides[promoIndex]
+                .classList.remove("active");
+
+            promoIndex++;
+
+            if (promoIndex >= promoSlides.length) {
+                promoIndex = 0;
+            }
+
+            promoSlides[promoIndex]
+                .classList.add("active");
+
+        }, 4500);
+    }
+
 
     /* =====================================================
-       STICKY PROMOTIONAL AD
-    ===================================================== */
+       STICKY PROMO
+       ===================================================== */
 
     const stickyPromo =
-        document.getElementById(
-            "stickyPromoAd"
-        );
+        document.getElementById("stickyPromo");
 
     const stickyClose =
-        document.getElementById(
-            "stickyPromoClose"
-        );
+        document.getElementById("stickyPromoClose");
 
     if (stickyPromo) {
 
-        let stickyClosed = false;
+        setTimeout(function () {
 
-        setTimeout(
-            function () {
+            stickyPromo.classList.add("show");
 
-                if (!stickyClosed) {
-
-                    stickyPromo.classList.add(
-                        "show"
-                    );
-                }
-
-            },
-            4000
-        );
-
-
-        if (stickyClose) {
-
-            stickyClose.addEventListener(
-                "click",
-                function () {
-
-                    stickyClosed = true;
-
-                    stickyPromo.classList.remove(
-                        "show"
-                    );
-                }
-            );
-        }
+        }, 2500);
     }
 
+    if (stickyClose && stickyPromo) {
+
+        stickyClose.addEventListener(
+            "click",
+            function () {
+
+                stickyPromo.classList.remove("show");
+
+                setTimeout(function () {
+
+                    stickyPromo.style.display =
+                        "none";
+
+                }, 400);
+
+            }
+        );
+    }
 
 
     /* =====================================================
-       DIGITAL STORE SEARCH + FILTER
-    ===================================================== */
+       DIGITAL STORE SEARCH
+       ===================================================== */
 
     const storeSearch =
-        document.getElementById(
-            "store-search"
-        );
+        document.getElementById("storeSearch");
 
-    const storeCards =
-        document.querySelectorAll(
-            ".store-card"
-        );
+    const storeItems =
+        document.querySelectorAll(".store-item");
 
-    const storeFilters =
-        document.querySelectorAll(
-            ".store-filter"
-        );
-
-    const storeNoResults =
-        document.getElementById(
-            "store-no-results"
-        );
-
-    let selectedCategory = "all";
-
-
-    function filterStore() {
-
-        const searchText =
-            storeSearch
-                ? storeSearch.value
-                    .toLowerCase()
-                    .trim()
-                : "";
-
-        let visibleCount = 0;
-
-
-        storeCards.forEach(
-            function (card) {
-
-                const category =
-                    (
-                        card.getAttribute(
-                            "data-category"
-                        ) || ""
-                    ).toLowerCase();
-
-                const name =
-                    (
-                        card.getAttribute(
-                            "data-name"
-                        ) ||
-                        card.textContent ||
-                        ""
-                    ).toLowerCase();
-
-
-                const categoryMatch =
-                    selectedCategory ===
-                    "all" ||
-                    category ===
-                    selectedCategory;
-
-
-                const searchMatch =
-                    !searchText ||
-                    name.includes(
-                        searchText
-                    );
-
-
-                if (
-                    categoryMatch &&
-                    searchMatch
-                ) {
-
-                    card.style.display =
-                        "";
-
-                    visibleCount++;
-
-                } else {
-
-                    card.style.display =
-                        "none";
-                }
-            }
-        );
-
-
-        if (storeNoResults) {
-
-            storeNoResults.style.display =
-                visibleCount === 0
-                    ? "block"
-                    : "none";
-        }
-    }
-
-
-    if (storeSearch) {
+    if (storeSearch && storeItems.length) {
 
         storeSearch.addEventListener(
             "input",
-            filterStore
+            function () {
+
+                const searchValue =
+                    this.value
+                        .trim()
+                        .toLowerCase();
+
+                storeItems.forEach(function (item) {
+
+                    const text =
+                        item.textContent
+                            .toLowerCase();
+
+                    item.style.display =
+                        text.includes(searchValue)
+                            ? ""
+                            : "none";
+
+                });
+            }
         );
     }
 
 
-    storeFilters.forEach(
-        function (button) {
+    /* =====================================================
+       DIGITAL STORE FILTER
+       ===================================================== */
+
+    const filterButtons =
+        document.querySelectorAll(".store-filter");
+
+    if (filterButtons.length && storeItems.length) {
+
+        filterButtons.forEach(function (button) {
 
             button.addEventListener(
                 "click",
                 function () {
 
-                    selectedCategory =
-                        (
-                            this.getAttribute(
-                                "data-filter"
-                            ) || "all"
-                        ).toLowerCase();
-
-
-                    storeFilters.forEach(
+                    filterButtons.forEach(
                         function (btn) {
 
                             btn.classList.remove(
                                 "active"
                             );
+
                         }
                     );
 
+                    this.classList.add("active");
 
-                    this.classList.add(
-                        "active"
+                    const filter =
+                        this.getAttribute(
+                            "data-filter"
+                        );
+
+                    storeItems.forEach(
+                        function (item) {
+
+                            const category =
+                                item.getAttribute(
+                                    "data-category"
+                                );
+
+                            if (
+                                filter === "all" ||
+                                !filter ||
+                                category === filter
+                            ) {
+
+                                item.style.display =
+                                    "";
+
+                            } else {
+
+                                item.style.display =
+                                    "none";
+                            }
+
+                        }
                     );
-
-                    filterStore();
                 }
             );
-        }
-    );
-
+        });
+    }
 
 
     /* =====================================================
-       QUOTE FORM → WHATSAPP
-    ===================================================== */
+       GET A QUOTE -> WHATSAPP
+       ===================================================== */
 
     const quoteForm =
-        document.getElementById(
-            "quote-form"
-        );
+        document.getElementById("quoteForm");
 
     if (quoteForm) {
 
@@ -902,151 +458,82 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 event.preventDefault();
 
-
                 const name =
-                    document.getElementById(
-                        "quote-name"
-                    )?.value.trim() || "";
+                    document.getElementById("name")
+                        ?.value.trim() || "";
 
-
-                const phone =
-                    document.getElementById(
-                        "quote-phone"
-                    )?.value.trim() || "";
-
+                const whatsapp =
+                    document.getElementById("whatsapp")
+                        ?.value.trim() || "";
 
                 const service =
-                    document.getElementById(
-                        "quote-service"
-                    )?.value || "";
-
+                    document.getElementById("service")
+                        ?.value.trim() || "";
 
                 const budget =
-                    document.getElementById(
-                        "quote-budget"
-                    )?.value || "";
-
+                    document.getElementById("budget")
+                        ?.value.trim() || "";
 
                 const timeline =
-                    document.getElementById(
-                        "quote-timeline"
-                    )?.value || "";
+                    document.getElementById("timeline")
+                        ?.value.trim() || "";
 
+                const details =
+                    document.getElementById("details")
+                        ?.value.trim() || "";
 
                 const message =
-                    document.getElementById(
-                        "quote-message"
-                    )?.value.trim() || "";
-
-
-                const successMessage =
-                    document.getElementById(
-                        "quote-success"
-                    );
-
-
-                const whatsappMessage =
                     `Hello Mahesh,
 
 I would like to get a quote from SamSreeFuture.
 
 Name: ${name}
-WhatsApp: ${phone}
+WhatsApp: ${whatsapp}
 Service: ${service}
 Budget: ${budget}
 Timeline: ${timeline}
 
 Project Details:
-${message}`;
-
+${details}`;
 
                 const whatsappURL =
                     "https://wa.me/918125024046?text=" +
-                    encodeURIComponent(
-                        whatsappMessage
-                    );
+                    encodeURIComponent(message);
 
-
-                if (successMessage) {
-
-                    successMessage.style.display =
-                        "block";
-
-                    successMessage.textContent =
-                        "Opening WhatsApp...";
-                }
-
-
-                if (
-                    typeof gtag ===
-                    "function"
-                ) {
-
-                    gtag(
-                        "event",
-                        "quote_whatsapp",
-                        {
-                            service: service,
-                            budget: budget
-                        }
-                    );
-                }
-
-
-                setTimeout(
-                    function () {
-
-                        window.open(
-                            whatsappURL,
-                            "_blank"
-                        );
-
-                    },
-                    300
+                window.open(
+                    whatsappURL,
+                    "_blank"
                 );
             }
         );
     }
 
 
-
     /* =====================================================
        BACK TO TOP
-    ===================================================== */
+       ===================================================== */
 
     const backToTop =
-        document.getElementById(
-            "backToTop"
-        );
+        document.getElementById("backToTop");
 
     if (backToTop) {
 
-        function updateBackToTop() {
-
-            if (
-                window.scrollY > 400
-            ) {
-
-                backToTop.classList.add(
-                    "show"
-                );
-
-            } else {
-
-                backToTop.classList.remove(
-                    "show"
-                );
-            }
-        }
-
-
         window.addEventListener(
             "scroll",
-            updateBackToTop
+            function () {
+
+                if (window.scrollY > 500) {
+
+                    backToTop.classList.add("show");
+
+                } else {
+
+                    backToTop.classList.remove(
+                        "show"
+                    );
+                }
+            }
         );
-
-        updateBackToTop();
-
 
         backToTop.addEventListener(
             "click",
@@ -1056,575 +543,831 @@ ${message}`;
                     top: 0,
                     behavior: "smooth"
                 });
+
             }
         );
     }
-
 
 
     /* =====================================================
        CURRENT YEAR
-    ===================================================== */
+       ===================================================== */
 
-    const currentYear =
-        document.getElementById(
-            "current-year"
+    const yearElements =
+        document.querySelectorAll(
+            "#currentYear, .current-year"
         );
 
-    if (currentYear) {
+    yearElements.forEach(function (element) {
 
-        currentYear.textContent =
+        element.textContent =
             new Date().getFullYear();
-    }
 
+    });
 
 
     /* =====================================================
-       ADVERTISEMENT CLICK TRACKING
-    ===================================================== */
+       AD CLICK TRACKING
+       ===================================================== */
 
     document
-        .querySelectorAll("[data-ad-name]")
-        .forEach(
-            function (adLink) {
+        .querySelectorAll("[data-ad]")
+        .forEach(function (ad) {
 
-                adLink.addEventListener(
-                    "click",
-                    function () {
+            ad.addEventListener(
+                "click",
+                function () {
 
-                        const adName =
-                            this.getAttribute(
-                                "data-ad-name"
-                            ) ||
-                            "Advertisement";
+                    const adName =
+                        this.getAttribute("data-ad") ||
+                        "unknown";
 
-                        const adPosition =
-                            this.getAttribute(
-                                "data-ad-position"
-                            ) || "";
+                    if (
+                        typeof gtag === "function"
+                    ) {
 
-
-                        if (
-                            typeof gtag ===
-                            "function"
-                        ) {
-
-                            gtag(
-                                "event",
-                                "advertisement_click",
-                                {
-                                    ad_name:
-                                        adName,
-
-                                    ad_position:
-                                        adPosition
-                                }
-                            );
-                        }
+                        gtag(
+                            "event",
+                            "ad_click",
+                            {
+                                ad_name: adName
+                            }
+                        );
                     }
-                );
-            }
-        );
+                }
+            );
+        });
 
 
-    /* =====================================================
-       AUTOMATIC TELUGU BREAKING NEWS
-       NETLIFY FUNCTION + CLICKABLE LIVE NEWS
-    ===================================================== */
+    /* =========================================================
+       TELUGU BREAKING NEWS
+       ========================================================= */
 
     const newsTicker =
-        document.getElementById(
-            "newsTicker"
+        document.getElementById("newsTicker");
+
+    const newsTrack =
+        document.querySelector(
+            ".telugu-breaking-track"
+        );
+
+    const newsContent =
+        document.getElementById("newsContent");
+
+    const newsClone =
+        document.getElementById("newsClone");
+
+
+    if (
+        newsTicker &&
+        newsTrack &&
+        newsContent &&
+        newsClone
+    ) {
+
+        let newsOffset = 0;
+        let newsLastTime = 0;
+        let newsContentWidth = 0;
+        let newsPaused = false;
+
+        // FIXED: previously "alse" caused JavaScript error
+        let newsReducedMotion = false;
+
+        let newsSpeed = 110;
+
+
+        /* -----------------------------------------------------
+           FORCE TICKER STYLE
+           ----------------------------------------------------- */
+
+        newsTicker.style.setProperty(
+            "background",
+            "#e00000",
+            "important"
+        );
+
+        newsTicker.style.setProperty(
+            "overflow",
+            "hidden",
+            "important"
+        );
+
+        newsTicker.style.setProperty(
+            "display",
+            "flex",
+            "important"
+        );
+
+        newsTicker.style.setProperty(
+            "align-items",
+            "center",
+            "important"
+        );
+
+        newsTicker.style.setProperty(
+            "width",
+            "100%",
+            "important"
+        );
+
+        newsTicker.style.setProperty(
+            "min-height",
+            "48px",
+            "important"
         );
 
 
-    if (newsTicker) {
+        /* -----------------------------------------------------
+           LABEL
+           ----------------------------------------------------- */
 
-        const newsTrack =
+        const newsLabel =
             newsTicker.querySelector(
-                ".news-ticker-track"
+                ".telugu-breaking-label"
             );
 
+        if (newsLabel) {
 
-        const newsContent =
-            document.getElementById(
-                "newsContent"
+            newsLabel.style.setProperty(
+                "background",
+                "#a80000",
+                "important"
             );
 
-
-        const newsClone =
-            document.getElementById(
-                "newsClone"
+            newsLabel.style.setProperty(
+                "color",
+                "#ffffff",
+                "important"
             );
 
+            newsLabel.style.setProperty(
+                "font-weight",
+                "800",
+                "important"
+            );
 
-        if (
-            newsTrack &&
-            newsContent &&
-            newsClone
-        ) {
+            newsLabel.style.setProperty(
+                "white-space",
+                "nowrap",
+                "important"
+            );
 
+            newsLabel.style.setProperty(
+                "flex-shrink",
+                "0",
+                "important"
+            );
 
-            /* -----------------------------------------
-               FALLBACK
-            ----------------------------------------- */
-
-            const fallbackNews = [
-
-                {
-                    title:
-                        "తెలుగు తాజా వార్తలు త్వరలో అందుబాటులోకి వస్తాయి.",
-
-                    link: ""
-                }
-
-            ];
-
-
-            /* -----------------------------------------
-               CREATE NEWS ITEM
-            ----------------------------------------- */
-
-            function createNewsItem(news) {
-
-                if (news.link) {
-
-                    const link =
-                        document.createElement(
-                            "a"
-                        );
+            newsLabel.style.setProperty(
+                "z-index",
+                "5",
+                "important"
+            );
+        }
 
 
-                    link.className =
-                        "news-item";
+        /* -----------------------------------------------------
+           TRACK
+           ----------------------------------------------------- */
+
+        newsTrack.style.setProperty(
+            "display",
+            "flex",
+            "important"
+        );
+
+        newsTrack.style.setProperty(
+            "flex",
+            "0 0 auto",
+            "important"
+        );
+
+        newsTrack.style.setProperty(
+            "width",
+            "max-content",
+            "important"
+        );
+
+        newsTrack.style.setProperty(
+            "min-width",
+            "max-content",
+            "important"
+        );
+
+        newsTrack.style.setProperty(
+            "gap",
+            "0",
+            "important"
+        );
+
+        // Disable CSS animation.
+        // JavaScript handles continuous scrolling.
+
+        newsTrack.style.setProperty(
+            "animation",
+            "none",
+            "important"
+        );
+
+        newsTrack.style.setProperty(
+            "transition",
+            "none",
+            "important"
+        );
 
 
-                    link.href =
-                        news.link;
+        /* -----------------------------------------------------
+           CONTENT + CLONE
+           ----------------------------------------------------- */
+
+        [newsContent, newsClone]
+            .forEach(function (element) {
+
+                element.style.setProperty(
+                    "display",
+                    "flex",
+                    "important"
+                );
+
+                element.style.setProperty(
+                    "align-items",
+                    "center",
+                    "important"
+                );
+
+                element.style.setProperty(
+                    "flex",
+                    "0 0 auto",
+                    "important"
+                );
+
+                element.style.setProperty(
+                    "width",
+                    "max-content",
+                    "important"
+                );
+
+                element.style.setProperty(
+                    "min-width",
+                    "max-content",
+                    "important"
+                );
+
+                element.style.setProperty(
+                    "white-space",
+                    "nowrap",
+                    "important"
+                );
+
+                element.style.setProperty(
+                    "animation",
+                    "none",
+                    "important"
+                );
+
+                element.style.setProperty(
+                    "transition",
+                    "none",
+                    "important"
+                );
+
+            });
 
 
-                    link.target =
-                        "_blank";
+        /* -----------------------------------------------------
+           NEWS ITEM STYLE
+           ----------------------------------------------------- */
 
+        function styleNewsItems() {
 
-                    link.rel =
-                        "noopener noreferrer";
+            newsTicker
+                .querySelectorAll(".news-item")
+                .forEach(function (item) {
 
-
-                    link.textContent =
-                        "📰 " +
-                        news.title;
-
-
-                    return link;
-
-                }
-
-
-                const span =
-                    document.createElement(
-                        "span"
+                    item.style.setProperty(
+                        "color",
+                        "#ffffff",
+                        "important"
                     );
 
+                    item.style.setProperty(
+                        "display",
+                        "inline-flex",
+                        "important"
+                    );
 
-                span.className =
-                    "news-item";
+                    item.style.setProperty(
+                        "align-items",
+                        "center",
+                        "important"
+                    );
 
+                    item.style.setProperty(
+                        "white-space",
+                        "nowrap",
+                        "important"
+                    );
 
-                span.textContent =
-                    "📰 " +
-                    news.title;
+                    item.style.setProperty(
+                        "flex-shrink",
+                        "0",
+                        "important"
+                    );
 
+                    item.style.setProperty(
+                        "margin-right",
+                        "45px",
+                        "important"
+                    );
 
-                return span;
-            }
-
-            /* -----------------------------------------
-               DISPLAY NEWS
-               FORCE SLOW SPEED + LIGHT RED STYLE
-            ----------------------------------------- */
-
-            function displayNews(newsList) {
-
-                newsContent.innerHTML = "";
-
-                newsList.forEach(function (news) {
-
-                    newsContent.appendChild(
-                        createNewsItem(news)
+                    item.style.setProperty(
+                        "text-decoration",
+                        "none",
+                        "important"
                     );
 
                 });
+        }
 
 
-                /*
-                 * Duplicate headlines for
-                 * seamless continuous scrolling.
-                 */
+        /* -----------------------------------------------------
+           RESPONSIVE SPEED
+           ----------------------------------------------------- */
+
+        function setNewsSpeed() {
+
+            const width =
+                window.innerWidth;
+
+            if (width <= 480) {
+
+                newsSpeed = 95;
+
+            } else if (width <= 768) {
+
+                newsSpeed = 105;
+
+            } else {
+
+                newsSpeed = 115;
+            }
+        }
+
+
+        /* -----------------------------------------------------
+           CALCULATE WIDTH
+           ----------------------------------------------------- */
+
+        function calculateNewsWidth() {
+
+            newsContentWidth =
+                newsContent.getBoundingClientRect().width;
+
+            if (
+                !newsContentWidth ||
+                newsContentWidth < 10
+            ) {
+
+                setTimeout(
+                    calculateNewsWidth,
+                    300
+                );
+
+                return;
+            }
+
+            if (
+                newsOffset >= newsContentWidth
+            ) {
+
+                newsOffset =
+                    newsOffset %
+                    newsContentWidth;
+            }
+        }
+
+
+        /* -----------------------------------------------------
+           ESCAPE HTML
+           ----------------------------------------------------- */
+
+        function escapeHTML(value) {
+
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+
+        /* -----------------------------------------------------
+           CONTINUOUS NEWS ANIMATION
+           ----------------------------------------------------- */
+
+        function newsAnimation(timestamp) {
+
+            if (!newsLastTime) {
+                newsLastTime = timestamp;
+            }
+
+            const delta =
+                Math.min(
+                    timestamp - newsLastTime,
+                    100
+                );
+
+            newsLastTime = timestamp;
+
+
+            if (
+                !newsPaused &&
+                !newsReducedMotion &&
+                newsContentWidth > 10
+            ) {
+
+                newsOffset +=
+                    newsSpeed *
+                    (delta / 1000);
+
+
+                if (
+                    newsOffset >=
+                    newsContentWidth
+                ) {
+
+                    newsOffset =
+                        newsOffset -
+                        newsContentWidth;
+                }
+
+
+                newsTrack.style.setProperty(
+                    "transform",
+                    `translate3d(-${newsOffset}px, 0, 0)`,
+                    "important"
+                );
+            }
+
+
+            requestAnimationFrame(
+                newsAnimation
+            );
+        }
+
+
+        /* -----------------------------------------------------
+           REDUCED MOTION
+           ----------------------------------------------------- */
+
+        const motionQuery =
+            window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            );
+
+
+        function checkMotionPreference() {
+
+            newsReducedMotion =
+                motionQuery.matches;
+
+            if (newsReducedMotion) {
+
+                newsOffset = 0;
+
+                newsTrack.style.setProperty(
+                    "transform",
+                    "translate3d(0, 0, 0)",
+                    "important"
+                );
+            }
+        }
+
+
+        checkMotionPreference();
+
+
+        if (
+            typeof motionQuery.addEventListener ===
+            "function"
+        ) {
+
+            motionQuery.addEventListener(
+                "change",
+                checkMotionPreference
+            );
+
+        } else if (
+            typeof motionQuery.addListener ===
+            "function"
+        ) {
+
+            motionQuery.addListener(
+                checkMotionPreference
+            );
+        }
+
+
+        /* -----------------------------------------------------
+           PAUSE WHEN MOUSE IS OVER TICKER
+           ----------------------------------------------------- */
+
+        newsTicker.addEventListener(
+            "mouseenter",
+            function () {
+                newsPaused = true;
+            }
+        );
+
+        newsTicker.addEventListener(
+            "mouseleave",
+            function () {
+                newsPaused = false;
+            }
+        );
+
+        newsTicker.addEventListener(
+            "focusin",
+            function () {
+                newsPaused = true;
+            }
+        );
+
+        newsTicker.addEventListener(
+            "focusout",
+            function () {
+                newsPaused = false;
+            }
+        );
+
+
+        /* -----------------------------------------------------
+           LOAD TELUGU NEWS
+           ----------------------------------------------------- */
+
+        async function loadTeluguNews() {
+
+            try {
+
+                // Small loading message
+                newsContent.innerHTML =
+                    `<span class="news-item">
+                        📰 తెలుగు తాజా వార్తలు లోడ్ అవుతున్నాయి...
+                    </span>`;
+
+
+                const controller =
+                    new AbortController();
+
+
+                const timeout =
+                    setTimeout(
+                        function () {
+                            controller.abort();
+                        },
+                        8000
+                    );
+
+
+                const response =
+                    await fetch(
+                        "/.netlify/functions/news",
+                        {
+                            method: "GET",
+                            cache: "no-store",
+                            headers: {
+                                "Accept":
+                                    "application/json"
+                            },
+                            signal: controller.signal
+                        }
+                    );
+
+
+                clearTimeout(timeout);
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "News server error: HTTP " +
+                        response.status
+                    );
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !data ||
+                    data.success !== true ||
+                    !Array.isArray(data.items) ||
+                    data.items.length === 0
+                ) {
+
+                    throw new Error(
+                        "No Telugu news items received."
+                    );
+                }
+
+
+                let html = "";
+
+
+                data.items.forEach(
+                    function (item) {
+
+                        const title =
+                            escapeHTML(
+                                item.title ||
+                                "తాజా తెలుగు వార్త"
+                            );
+
+                        const link =
+                            item.link || "#";
+
+
+                        html += `
+                            <a
+                                class="news-item"
+                                href="${link}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="${title}"
+                            >
+                                📰 ${title}
+                            </a>
+                        `;
+
+                    }
+                );
+
+
+                newsContent.innerHTML =
+                    html;
+
+
+                // Exact duplicate for seamless loop
+                newsClone.innerHTML =
+                    newsContent.innerHTML;
+
+
+                styleNewsItems();
+
+
+                // Reset scrolling
+                newsOffset = 0;
+                newsLastTime = 0;
+
+
+                newsTrack.style.setProperty(
+                    "transform",
+                    "translate3d(0, 0, 0)",
+                    "important"
+                );
+
+
+                // Wait for browser layout
+                requestAnimationFrame(
+                    function () {
+
+                        calculateNewsWidth();
+
+                        setNewsSpeed();
+
+                    }
+                );
+
+
+                console.log(
+                    "✅ Telugu Breaking News loaded:",
+                    data.items.length
+                );
+
+            } catch (error) {
+
+                console.error(
+                    "❌ Telugu News Error:",
+                    error
+                );
+
+
+                const fallbackNews = [
+
+                    "📰 తెలుగు తాజా వార్తలు",
+
+                    "📰 తెలంగాణ తాజా వార్తలు",
+
+                    "📰 హైదరాబాద్ తాజా వార్తలు",
+
+                    "📰 ఆంధ్రప్రదేశ్ తాజా వార్తలు",
+
+                    "📰 దేశవ్యాప్తంగా తాజా వార్తలు",
+
+                    "📰 టెక్నాలజీ & AI తాజా అప్డేట్స్"
+
+                ];
+
+
+                newsContent.innerHTML =
+                    fallbackNews
+                        .map(function (item) {
+
+                            return `
+                                <span class="news-item">
+                                    ${item}
+                                </span>
+                            `;
+
+                        })
+                        .join("");
+
 
                 newsClone.innerHTML =
                     newsContent.innerHTML;
 
 
-                /* =========================================
-                   FORCE LIGHT RED NEWS BACKGROUND
-                ========================================= */
-
-                newsTicker.style.setProperty(
-                    "background",
-                    "#fff0f0",
-                    "important"
-                );
-
-                newsTicker.style.setProperty(
-                    "background-color",
-                    "#fff0f0",
-                    "important"
-                );
-
-                newsTicker.style.setProperty(
-                    "border-top",
-                    "1px solid #ffd0d0",
-                    "important"
-                );
-
-                newsTicker.style.setProperty(
-                    "border-bottom",
-                    "1px solid #ffd0d0",
-                    "important"
-                );
+                styleNewsItems();
 
 
-                /* =========================================
-                   FORCE BREAKING NEWS LABEL COLOR
-                ========================================= */
-
-                const newsLabel =
-                    newsTicker.querySelector(
-                        ".news-ticker-label"
-                    );
-
-                if (newsLabel) {
-
-                    newsLabel.style.setProperty(
-                        "background",
-                        "#ffe0e0",
-                        "important"
-                    );
-
-                    newsLabel.style.setProperty(
-                        "background-color",
-                        "#ffe0e0",
-                        "important"
-                    );
-
-                    newsLabel.style.setProperty(
-                        "color",
-                        "#b71c1c",
-                        "important"
-                    );
-
-                    newsLabel.style.setProperty(
-                        "border-right",
-                        "1px solid #ffcaca",
-                        "important"
-                    );
-                }
+                newsOffset = 0;
+                newsLastTime = 0;
 
 
-                /* =========================================
-                   FORCE NEWS TEXT COLOR
-                ========================================= */
+                requestAnimationFrame(
+                    function () {
 
-                newsTicker
-                    .querySelectorAll(".news-item")
-                    .forEach(function (item) {
+                        calculateNewsWidth();
 
-                        item.style.setProperty(
-                            "color",
-                            "#7f1d1d",
-                            "important"
-                        );
-
-                        item.style.setProperty(
-                            "text-decoration",
-                            "none",
-                            "important"
-                        );
-                    });
-
-
-                /* =========================================
-                   RESTART NEWS ANIMATION
-                ========================================= */
-
-                newsTrack.style.animation = "none";
-
-                void newsTrack.offsetWidth;
-
-
-                /* =========================================
-                   VERY SLOW NEWS SPEED
-                   120 SECONDS
-                ========================================= */
-
-                newsTrack.style.setProperty(
-                    "animation-duration",
-                    "120s",
-                    "important"
-                );
-
-                newsTrack.style.setProperty(
-                    "-webkit-animation-duration",
-                    "120s",
-                    "important"
-                );
-
-                newsTrack.style.setProperty(
-                    "animation-timing-function",
-                    "linear",
-                    "important"
-                );
-
-                newsTrack.style.setProperty(
-                    "-webkit-animation-timing-function",
-                    "linear",
-                    "important"
-                );
-
-                newsTrack.style.setProperty(
-                    "animation-iteration-count",
-                    "infinite",
-                    "important"
-                );
-
-                newsTrack.style.setProperty(
-                    "-webkit-animation-iteration-count",
-                    "infinite",
-                    "important"
-                );
-
-
-                /*
-                 * Restore animation after forcing
-                 * the new duration.
-                 */
-
-                newsTrack.style.animationName =
-                    getComputedStyle(
-                        newsTrack
-                    ).animationName;
-
-            }
-            /* -----------------------------------------
-               LOAD LIVE NEWS
-            ----------------------------------------- */
-
-            async function loadLiveNews() {
-
-                try {
-
-                    const response =
-                        await fetch(
-                            "/.netlify/functions/news",
-                            {
-                                cache:
-                                    "no-store"
-                            }
-                        );
-
-
-                    if (!response.ok) {
-
-                        throw new Error(
-                            "News function unavailable"
-                        );
+                        setNewsSpeed();
 
                     }
-
-
-                    const data =
-                        await response.json();
-
-
-                    if (
-                        !data.success ||
-                        !Array.isArray(
-                            data.items
-                        ) ||
-                        !data.items.length
-                    ) {
-
-                        throw new Error(
-                            "No news found"
-                        );
-
-                    }
-
-
-                    const latestNews =
-                        data.items
-                            .slice(0, 15)
-                            .filter(
-                                function (item) {
-
-                                    return (
-                                        item &&
-                                        item.title
-                                    );
-
-                                }
-                            )
-                            .map(
-                                function (item) {
-
-                                    return {
-
-                                        title:
-                                            item.title
-                                                .trim(),
-
-                                        link:
-                                            item.link ||
-                                            ""
-
-                                    };
-
-                                }
-                            );
-
-
-                    if (
-                        !latestNews.length
-                    ) {
-
-                        throw new Error(
-                            "No headlines found"
-                        );
-
-                    }
-
-
-                    displayNews(
-                        latestNews
-                    );
-
-
-                    console.log(
-                        "Telugu breaking news updated successfully."
-                    );
-
-
-                } catch (error) {
-
-                    console.warn(
-                        "Live Telugu news unavailable.",
-                        error
-                    );
-
-
-                    displayNews(
-                        fallbackNews
-                    );
-
-                }
-
-            }
-
-
-            /* -----------------------------------------
-               PAUSE
-            ----------------------------------------- */
-
-            function pauseNews() {
-
-                newsTrack.classList.add(
-                    "is-paused"
                 );
-
             }
-
-
-            /* -----------------------------------------
-               RESUME
-            ----------------------------------------- */
-
-            function resumeNews() {
-
-                newsTrack.classList.remove(
-                    "is-paused"
-                );
-
-            }
-
-
-            /* -----------------------------------------
-               MOUSE PAUSE
-            ----------------------------------------- */
-
-            newsTicker.addEventListener(
-                "mouseenter",
-                pauseNews
-            );
-
-
-            newsTicker.addEventListener(
-                "mouseleave",
-                resumeNews
-            );
-
-
-            /* -----------------------------------------
-               KEYBOARD / FOCUS PAUSE
-            ----------------------------------------- */
-
-            newsTicker.addEventListener(
-                "focusin",
-                pauseNews
-            );
-
-
-            newsTicker.addEventListener(
-                "focusout",
-                resumeNews
-            );
-
-
-            /* -----------------------------------------
-               FIRST LOAD
-            ----------------------------------------- */
-
-            loadLiveNews();
-
-
-            /* -----------------------------------------
-               AUTO REFRESH
-               Every 15 minutes
-            ----------------------------------------- */
-
-            setInterval(
-                loadLiveNews,
-                15 * 60 * 1000
-            );
-
         }
 
+
+        /* -----------------------------------------------------
+           INITIAL NEWS LOAD
+           ----------------------------------------------------- */
+
+        setNewsSpeed();
+
+        loadTeluguNews();
+
+
+        /* -----------------------------------------------------
+           REFRESH EVERY 15 MINUTES
+           ----------------------------------------------------- */
+
+        setInterval(
+            loadTeluguNews,
+            15 * 60 * 1000
+        );
+
+
+        /* -----------------------------------------------------
+           RESIZE
+           ----------------------------------------------------- */
+
+        window.addEventListener(
+            "resize",
+            function () {
+
+                setNewsSpeed();
+
+                calculateNewsWidth();
+
+            }
+        );
+
+
+        /* -----------------------------------------------------
+           START CONTINUOUS ANIMATION
+           ----------------------------------------------------- */
+
+        calculateNewsWidth();
+
+        requestAnimationFrame(
+            newsAnimation
+        );
+
+
+        console.log(
+            "✅ SamSreeFuture Telugu Breaking News ticker started."
+        );
     }
 
 
     /* =====================================================
-       REDUCED MOTION
-    ===================================================== */
+       FINAL CONSOLE MESSAGE
+       ===================================================== */
 
-    if (
-        window.matchMedia &&
-        window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        ).matches
-    ) {
-
-        document.documentElement.style.scrollBehavior =
-            "auto";
-    }
+    console.log(
+        "✅ SamSreeFuture website JavaScript loaded successfully."
+    );
 
 });
