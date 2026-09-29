@@ -1175,7 +1175,7 @@ img[src*="mahesh.png"] {
    display: flex;
    align-items: stretch;
 
-   background: #bfe8ff !important;
+   background: #123b5c !important;
    color: #123b52 !important;
 
    overflow: hidden !important;
@@ -1230,7 +1230,7 @@ img[src*="mahesh.png"] {
    display: flex;
    align-items: center;
 
-   background: #bfe8ff !important;
+   background: #123b5c !important;
 }
 
 /* MOVING TRACK */
@@ -1773,7 +1773,7 @@ img[src*="mahesh.png"] {
    display: flex !important;
    align-items: stretch !important;
    overflow: hidden !important;
-   background: #bfe8ff !important;
+   background: #123b5c !important;
    color: #ffffff !important;
    border: none !important;
    position: relative !important;
@@ -1803,7 +1803,7 @@ img[src*="mahesh.png"] {
    overflow: hidden !important;
    position: relative !important;
    display: block !important;
-   background: #bfe8ff !important;
+   background: #123b5c !important;
 }
 
 .telugu-breaking-track {
@@ -2320,24 +2320,24 @@ img[src*="mahesh.png"] {
    ========================================================= */
 
 #newsTicker.telugu-breaking-news {
-   background: #bfe8ff !important;
-   background-color: #bfe8ff !important;
+   background: #123b5c !important;
+   background-color: #123b5c !important;
 }
 
 /* ONLY SCROLLING NEWS AREA */
 #newsTicker.telugu-breaking-news .news-ticker-viewport {
-   background: #bfe8ff !important;
-   background-color: #bfe8ff !important;
+   background: #123b5c !important;
+   background-color: #123b5c !important;
 }
 
 #newsTicker.telugu-breaking-news .telugu-breaking-track {
-   background: #bfe8ff !important;
-   background-color: #bfe8ff !important;
+   background: #123b5c !important;
+   background-color: #123b5c !important;
 }
 
 #newsTicker.telugu-breaking-news .news-ticker-content {
-   background: #bfe8ff !important;
-   background-color: #bfe8ff !important;
+   background: #123b5c !important;
+   background-color: #123b5c !important;
 }
 
 /* NEWS TEXT */
@@ -2359,3 +2359,4 @@ img[src*="mahesh.png"] {
          rgba(191, 232, 255, 1),
          rgba(191, 232, 255, 0)) !important;
 }
+
