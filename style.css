@@ -476,6 +476,74 @@ img[src*="mahesh.png"] {
 }
 
 /* =========================================================
+   SERVICE CARD DETAILS
+   ========================================================= */
+
+.service-card ul {
+   margin: 16px 0 0;
+   padding-left: 20px;
+   color: var(--muted);
+}
+
+.service-card ul li {
+   margin-bottom: 8px;
+   line-height: 1.5;
+}
+
+.service-card ul li::marker {
+   color: #2bb8ff;
+}
+
+.service-card:hover ul li::marker {
+   color: #25d366;
+}
+
+
+/* Better spacing for longer service titles */
+.service-card h3 {
+   line-height: 1.35;
+}
+
+
+/* Keep service cards balanced */
+.service-card {
+   height: 100%;
+   box-sizing: border-box;
+}
+
+
+/* Mobile */
+@media (max-width: 900px) {
+
+   .service-container,
+   .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+   }
+
+}
+
+
+@media (max-width: 600px) {
+
+   .service-container,
+   .services-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+   }
+
+   .card,
+   .service-card {
+      padding: 23px 20px;
+   }
+
+   .card h3,
+   .service-card h3 {
+      font-size: 19px;
+   }
+
+}
+
+/* =========================================================
    PRICING
    ========================================================= */
 
@@ -1163,7 +1231,7 @@ img[src*="mahesh.png"] {
 }
 
 /* =========================================================
-   ðŸ”´ TELUGU BREAKING NEWS
+    TELUGU BREAKING NEWS
    RED BACKGROUND + FAST SCROLL
    ========================================================= */
 
@@ -2360,3 +2428,230 @@ img[src*="mahesh.png"] {
          rgba(191, 232, 255, 0)) !important;
 }
 
+/* =========================================================
+    TELUGU BREAKING NEWS - NEWS CHANNEL FONT
+    ========================================================= */
+
+#newsTicker.telugu-breaking-news .news-item {
+   font-family:
+      "Noto Sans Telugu",
+      "Nirmala UI",
+      "Gautami",
+      sans-serif !important;
+
+   font-size: 17px !important;
+   font-weight: 800 !important;
+   letter-spacing: 0.1px !important;
+   line-height: 1.5 !important;
+
+   white-space: nowrap !important;
+}
+
+/* =========================================================
+   TELUGU BREAKING NEWS - FINAL POLISH
+   ========================================================= */
+
+#newsTicker.telugu-breaking-news .news-item {
+   font-family:
+      "Noto Sans Telugu",
+      "Nirmala UI",
+      "Gautami",
+      sans-serif !important;
+
+   font-size: 17px !important;
+   font-weight: 800 !important;
+
+   letter-spacing: 0.1px !important;
+   line-height: 1.5 !important;
+
+   padding-left: 28px !important;
+   padding-right: 28px !important;
+
+   display: inline-flex !important;
+   align-items: center !important;
+   justify-content: center !important;
+
+   white-space: nowrap !important;
+}
+
+/* Clean news separator */
+#newsTicker.telugu-breaking-news .news-item::after {
+   content: "●" !important;
+
+   margin-left: 28px !important;
+
+   color: #55ccff !important;
+
+   font-size: 9px !important;
+   font-weight: 900 !important;
+}
+
+/* Better hover */
+#newsTicker.telugu-breaking-news .news-item:hover {
+   color: #55ccff !important;
+}
+
+/* Keep ticker vertically centered */
+#newsTicker.telugu-breaking-news .news-ticker-content,
+#newsTicker.telugu-breaking-news .telugu-breaking-track {
+   align-items: center !important;
+}
+
+/* =========================================================
+   BUSINESS + CRICKET ADS - COMPACT SIZE
+   ========================================================= */
+
+.business-ad,
+.cricket-ad,
+.advertiser-ad,
+.promo-ad,
+.ad-card {
+   max-height: 110px !important;
+   height: 110px !important;
+   overflow: hidden !important;
+}
+
+.business-ad img,
+.cricket-ad img,
+.advertiser-ad img,
+.promo-ad img,
+.ad-card img {
+   max-height: 110px !important;
+   height: 110px !important;
+   width: 100% !important;
+   object-fit: cover !important;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+   .business-ad,
+   .cricket-ad,
+   .advertiser-ad,
+   .promo-ad,
+   .ad-card {
+      max-height: 85px !important;
+      height: 85px !important;
+   }
+
+   .business-ad img,
+   .cricket-ad img,
+   .advertiser-ad img,
+   .promo-ad img,
+   .ad-card img {
+      max-height: 85px !important;
+      height: 85px !important;
+   }
+}
+
+/* =========================================================
+   CRICKET AD - COMPACT SIZE
+   ========================================================= */
+
+#cricketAdSection {
+   padding: 30px 20px !important;
+}
+
+#cricketAdSection .ad-section-heading {
+   margin-bottom: 18px !important;
+}
+
+#cricketAdSection .ad-section-heading h2 {
+   font-size: 28px !important;
+   margin: 6px 0 !important;
+}
+
+#cricketAdSection .ad-section-heading p {
+   font-size: 14px !important;
+   margin: 6px auto !important;
+}
+
+#cricketAdSection .cricket-ad-card {
+   max-width: 850px !important;
+   margin: 0 auto !important;
+
+   display: grid !important;
+   grid-template-columns: 42% 58% !important;
+
+   min-height: 0 !important;
+   height: 230px !important;
+
+   overflow: hidden !important;
+}
+
+#cricketAdSection .cricket-ad-image {
+   height: 230px !important;
+   min-height: 230px !important;
+   overflow: hidden !important;
+}
+
+#cricketAdSection .cricket-ad-image img {
+   width: 100% !important;
+   height: 230px !important;
+   object-fit: cover !important;
+   display: block !important;
+}
+
+#cricketAdSection .cricket-ad-content {
+   padding: 22px 25px !important;
+   overflow: hidden !important;
+}
+
+#cricketAdSection .cricket-ad-content h3 {
+   font-size: 21px !important;
+   margin: 8px 0 !important;
+}
+
+#cricketAdSection .cricket-ad-content p {
+   font-size: 13px !important;
+   line-height: 1.5 !important;
+   margin: 6px 0 12px !important;
+}
+
+#cricketAdSection .advertisement-label {
+   font-size: 10px !important;
+}
+
+#cricketAdSection .ad-cta-button {
+   font-size: 12px !important;
+   padding: 9px 15px !important;
+}
+
+
+/* =========================
+   MOBILE
+   ========================= */
+
+@media (max-width: 600px) {
+
+   #cricketAdSection {
+      padding: 22px 12px !important;
+   }
+
+   #cricketAdSection .ad-section-heading h2 {
+      font-size: 22px !important;
+   }
+
+   #cricketAdSection .cricket-ad-card {
+      display: block !important;
+      height: auto !important;
+      max-width: 100% !important;
+   }
+
+   #cricketAdSection .cricket-ad-image {
+      height: 150px !important;
+      min-height: 150px !important;
+   }
+
+   #cricketAdSection .cricket-ad-image img {
+      height: 150px !important;
+   }
+
+   #cricketAdSection .cricket-ad-content {
+      padding: 16px !important;
+   }
+
+   #cricketAdSection .cricket-ad-content h3 {
+      font-size: 18px !important;
+   }
+}

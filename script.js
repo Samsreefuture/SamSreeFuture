@@ -442,9 +442,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-
     /* =====================================================
-       GET A QUOTE -> WHATSAPP
+       AI GET A QUOTE
        ===================================================== */
 
     const quoteForm =
@@ -454,61 +453,603 @@ document.addEventListener("DOMContentLoaded", function () {
 
         quoteForm.addEventListener(
             "submit",
-            function (event) {
+            async function (event) {
 
                 event.preventDefault();
 
+                /* ---------------------------------------------
+                   GET FORM VALUES
+                --------------------------------------------- */
+
                 const name =
-                    document.getElementById("name")
-                        ?.value.trim() || "";
+                    document.getElementById("quote-name")?.value.trim() ||
+                    document.getElementById("name")?.value.trim() ||
+                    "";
 
                 const whatsapp =
-                    document.getElementById("whatsapp")
-                        ?.value.trim() || "";
+                    document.getElementById("quote-phone")?.value.trim() ||
+                    document.getElementById("whatsapp")?.value.trim() ||
+                    "";
 
                 const service =
-                    document.getElementById("service")
-                        ?.value.trim() || "";
+                    document.getElementById("quote-service")?.value.trim() ||
+                    document.getElementById("service")?.value.trim() ||
+                    "";
 
                 const budget =
-                    document.getElementById("budget")
-                        ?.value.trim() || "";
+                    document.getElementById("quote-budget")?.value.trim() ||
+                    document.getElementById("budget")?.value.trim() ||
+                    "";
 
                 const timeline =
-                    document.getElementById("timeline")
-                        ?.value.trim() || "";
+                    document.getElementById("quote-timeline")?.value.trim() ||
+                    document.getElementById("timeline")?.value.trim() ||
+                    "";
 
                 const details =
-                    document.getElementById("details")
-                        ?.value.trim() || "";
+                    document.getElementById("quote-details")?.value.trim() ||
+                    document.getElementById("details")?.value.trim() ||
+                    "";
 
-                const message =
-                    `Hello Mahesh,
 
-I would like to get a quote from SamSreeFuture.
+                /* ---------------------------------------------
+                   VALIDATION
+                --------------------------------------------- */
 
-Name: ${name}
-WhatsApp: ${whatsapp}
-Service: ${service}
-Budget: ${budget}
-Timeline: ${timeline}
+                if (!service) {
+
+                    alert("Please select a service.");
+
+                    return;
+                }
+
+                if (!details) {
+
+                    alert("Please enter your project or service details.");
+
+                    return;
+                }
+
+
+                /* ---------------------------------------------
+                   SUBMIT BUTTON
+                --------------------------------------------- */
+
+                const submitButton =
+                    quoteForm.querySelector(
+                        'button[type="submit"], input[type="submit"]'
+                    );
+
+                const originalButtonText =
+                    submitButton
+                        ? submitButton.textContent
+                        : "";
+
+
+                if (submitButton) {
+
+                    submitButton.disabled = true;
+
+                    submitButton.textContent =
+                        "🤖 AI is analyzing your requirements...";
+                }
+
+
+                /* ---------------------------------------------
+                   REMOVE OLD AI RESULT
+                --------------------------------------------- */
+
+                const oldResult =
+                    document.getElementById(
+                        "ai-quote-result"
+                    );
+
+                if (oldResult) {
+
+                    oldResult.remove();
+                }
+
+
+                try {
+
+                    /* -----------------------------------------
+                       CALL NETLIFY AI FUNCTION
+                    ----------------------------------------- */
+
+                    const response =
+                        await fetch(
+                            "/.netlify/functions/ai-quote",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json",
+
+                                    "Accept":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+
+                                    name: name,
+
+                                    whatsapp:
+                                        whatsapp,
+
+                                    service:
+                                        service,
+
+                                    budget:
+                                        budget,
+
+                                    timeline:
+                                        timeline,
+
+                                    details:
+                                        details
+                                })
+                            }
+                        );
+
+
+                    /* -----------------------------------------
+                       READ RESPONSE
+                    ----------------------------------------- */
+
+                    const data =
+                        await response.json();
+
+
+                    if (
+                        !response.ok ||
+                        !data ||
+                        data.success !== true ||
+                        !data.quote
+                    ) {
+
+                        throw new Error(
+                            data?.error ||
+                            "Unable to generate AI quotation."
+                        );
+                    }
+
+
+                    const quote =
+                        data.quote;
+
+
+                    /* -----------------------------------------
+                       CREATE RESULT BOX
+                    ----------------------------------------- */
+
+                    const resultBox =
+                        document.createElement("div");
+
+                    resultBox.id =
+                        "ai-quote-result";
+
+
+                    resultBox.innerHTML = `
+
+                    <div
+                        style="
+                            margin-top:25px;
+                            padding:25px;
+                            border-radius:18px;
+                            background:#0b1b2d;
+                            border:1px solid rgba(43,184,255,0.45);
+                            box-shadow:0 10px 35px rgba(0,0,0,0.25);
+                        "
+                    >
+
+                        <div
+                            style="
+                                font-size:22px;
+                                font-weight:700;
+                                color:#2bb8ff;
+                                margin-bottom:20px;
+                            "
+                        >
+                            🤖 Your AI Quote Estimate
+                        </div>
+
+
+                        <div style="margin-bottom:18px;">
+
+                            <strong
+                                style="color:#ffffff;"
+                            >
+                                Recommended Service
+                            </strong>
+
+                            <div
+                                style="
+                                    margin-top:6px;
+                                    color:#2bb8ff;
+                                    font-weight:600;
+                                "
+                            >
+                                ${escapeQuoteHTML(
+                        quote.recommended_service
+                    )}
+                            </div>
+
+                        </div>
+
+
+                        <div style="margin-bottom:18px;">
+
+                            <strong
+                                style="color:#ffffff;"
+                            >
+                                💰 Estimated Price
+                            </strong>
+
+                            <div
+                                style="
+                                    margin-top:6px;
+                                    color:#25d366;
+                                    font-size:20px;
+                                    font-weight:700;
+                                "
+                            >
+                                ${escapeQuoteHTML(
+                        quote.estimated_price
+                    )}
+                            </div>
+
+                        </div>
+
+
+                        <div style="margin-bottom:18px;">
+
+                            <strong
+                                style="color:#ffffff;"
+                            >
+                                ⏱ Estimated Delivery
+                            </strong>
+
+                            <div
+                                style="
+                                    margin-top:6px;
+                                    color:#ffffff;
+                                "
+                            >
+                                ${escapeQuoteHTML(
+                        quote.estimated_delivery
+                    )}
+                            </div>
+
+                        </div>
+
+
+                        <div style="margin-bottom:18px;">
+
+                            <strong
+                                style="color:#ffffff;"
+                            >
+                                📋 Requirements
+                            </strong>
+
+                            <ul
+                                style="
+                                    margin-top:8px;
+                                    padding-left:22px;
+                                    color:#d9e7f2;
+                                "
+                            >
+
+                                ${Array.isArray(
+                        quote.requirements
+                    )
+
+                            ? quote.requirements
+                                .map(function (item) {
+
+                                    return `
+                                                    <li
+                                                        style="
+                                                            margin-bottom:6px;
+                                                        "
+                                                    >
+                                                        ${escapeQuoteHTML(item)}
+                                                    </li>
+                                                `;
+
+                                })
+                                .join("")
+
+                            : ""
+                        }
+
+                            </ul>
+
+                        </div>
+
+
+                        <div style="margin-bottom:18px;">
+
+                            <strong
+                                style="color:#ffffff;"
+                            >
+                                🚀 Next Steps
+                            </strong>
+
+                            <ol
+                                style="
+                                    margin-top:8px;
+                                    padding-left:22px;
+                                    color:#d9e7f2;
+                                "
+                            >
+
+                                ${Array.isArray(
+                            quote.next_steps
+                        )
+
+                            ? quote.next_steps
+                                .map(function (item) {
+
+                                    return `
+                                                    <li
+                                                        style="
+                                                            margin-bottom:6px;
+                                                        "
+                                                    >
+                                                        ${escapeQuoteHTML(item)}
+                                                    </li>
+                                                `;
+
+                                })
+                                .join("")
+
+                            : ""
+                        }
+
+                            </ol>
+
+                        </div>
+
+
+                        <div
+                            style="
+                                margin-top:20px;
+                                padding:14px;
+                                border-radius:12px;
+                                background:rgba(255,255,255,0.05);
+                                color:#b9c9d6;
+                                font-size:14px;
+                                line-height:1.6;
+                            "
+                        >
+
+                            ℹ️ ${escapeQuoteHTML(
+                            quote.note
+                        )}
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            id="ai-whatsapp-button"
+                            style="
+                                width:100%;
+                                margin-top:20px;
+                                padding:14px 20px;
+                                border:none;
+                                border-radius:10px;
+                                background:#25d366;
+                                color:#ffffff;
+                                font-size:16px;
+                                font-weight:700;
+                                cursor:pointer;
+                            "
+                        >
+                            💬 Send AI Quote Enquiry on WhatsApp
+                        </button>
+
+                    </div>
+
+                `;
+
+
+                    /* -----------------------------------------
+                       INSERT RESULT AFTER FORM
+                    ----------------------------------------- */
+
+                    quoteForm.insertAdjacentElement(
+                        "afterend",
+                        resultBox
+                    );
+
+
+                    /* -----------------------------------------
+                       WHATSAPP BUTTON
+                    ----------------------------------------- */
+
+                    const whatsappButton =
+                        document.getElementById(
+                            "ai-whatsapp-button"
+                        );
+
+
+                    if (whatsappButton) {
+
+                        whatsappButton.addEventListener(
+                            "click",
+                            function () {
+
+                                const message =
+                                    `Hello Mahesh,
+
+I would like to proceed with a SamSreeFuture enquiry.
+
+Name: ${name || "Not provided"}
+WhatsApp: ${whatsapp || "Not provided"}
+
+Service:
+${quote.recommended_service}
+
+Estimated Price:
+${quote.estimated_price}
+
+Estimated Delivery:
+${quote.estimated_delivery}
+
+Budget:
+${budget || "Not provided"}
+
+Timeline:
+${timeline || "Not provided"}
 
 Project Details:
-${details}`;
+${details}
 
-                const whatsappURL =
-                    "https://wa.me/918125024046?text=" +
-                    encodeURIComponent(message);
+AI Quote Requirements:
+${Array.isArray(quote.requirements)
+                                        ? quote.requirements.join("\n- ")
+                                        : "To be confirmed"
+                                    }
 
-                window.open(
-                    whatsappURL,
-                    "_blank"
-                );
+AI Suggested Next Steps:
+${Array.isArray(quote.next_steps)
+                                        ? quote.next_steps.join("\n- ")
+                                        : "To be confirmed"
+                                    }
+
+Note:
+${quote.note || ""}
+
+Please review my requirements and provide the final quotation.`;
+
+                                const whatsappURL =
+                                    "https://wa.me/918125024046?text=" +
+                                    encodeURIComponent(
+                                        message
+                                    );
+
+                                window.open(
+                                    whatsappURL,
+                                    "_blank"
+                                );
+
+                            }
+                        );
+
+                    }
+
+
+                    /* -----------------------------------------
+                       SCROLL TO RESULT
+                    ----------------------------------------- */
+
+                    setTimeout(
+                        function () {
+
+                            resultBox.scrollIntoView({
+                                behavior: "smooth",
+                                block: "center"
+                            });
+
+                        },
+                        100
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "❌ AI Quote Error:",
+                        error
+                    );
+
+
+                    const errorBox =
+                        document.createElement("div");
+
+                    errorBox.id =
+                        "ai-quote-result";
+
+
+                    errorBox.innerHTML = `
+
+                    <div
+                        style="
+                            margin-top:25px;
+                            padding:20px;
+                            border-radius:15px;
+                            background:#0b1b2d;
+                            border:1px solid rgba(255,80,80,0.5);
+                            color:#ffffff;
+                        "
+                    >
+
+                        <strong
+                            style="
+                                color:#ff7676;
+                                font-size:18px;
+                            "
+                        >
+                            ⚠️ AI Quote Could Not Be Generated
+                        </strong>
+
+                        <p
+                            style="
+                                margin-top:10px;
+                                color:#d9e7f2;
+                            "
+                        >
+                            Please try again in a moment.
+                        </p>
+
+                    </div>
+
+                `;
+
+
+                    quoteForm.insertAdjacentElement(
+                        "afterend",
+                        errorBox
+                    );
+
+
+                } finally {
+
+                    /* -----------------------------------------
+                       RESTORE BUTTON
+                    ----------------------------------------- */
+
+                    if (submitButton) {
+
+                        submitButton.disabled = false;
+
+                        submitButton.textContent =
+                            originalButtonText ||
+                            "🤖 Generate AI Quote";
+                    }
+
+                }
+
             }
         );
     }
 
 
+    /* =====================================================
+       AI QUOTE HTML ESCAPE
+       ===================================================== */
+
+    function escapeQuoteHTML(value) {
+
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
     /* =====================================================
        BACK TO TOP
        ===================================================== */
@@ -1360,12 +1901,74 @@ ${details}`;
             "✅ SamSreeFuture Telugu Breaking News ticker started."
         );
     }
-
-
     /* =====================================================
-       FINAL CONSOLE MESSAGE
-       ===================================================== */
+       SERVICES - VIEW SERVICES BUTTON
+    ===================================================== */
 
+    const serviceButtons =
+        document.querySelectorAll(".view-services-btn");
+
+    serviceButtons.forEach(function (button) {
+
+        button.addEventListener("click", function () {
+
+            const card =
+                this.closest(".service-card");
+
+            if (!card) return;
+
+            const isOpen =
+                card.classList.contains("service-open");
+
+            document
+                .querySelectorAll(".service-card.service-open")
+                .forEach(function (otherCard) {
+
+                    if (otherCard !== card) {
+
+                        otherCard.classList.remove("service-open");
+
+                        const otherButton =
+                            otherCard.querySelector(".view-services-btn");
+
+                        if (otherButton) {
+
+                            const otherSpan =
+                                otherButton.querySelector("span");
+
+                            if (otherSpan) {
+                                otherSpan.textContent = "+";
+                            }
+                        }
+                    }
+                });
+
+            if (isOpen) {
+
+                card.classList.remove("service-open");
+
+                const span =
+                    this.querySelector("span");
+
+                if (span) {
+                    span.textContent = "+";
+                }
+
+            } else {
+
+                card.classList.add("service-open");
+
+                const span =
+                    this.querySelector("span");
+
+                if (span) {
+                    span.textContent = "×";
+                }
+            }
+
+        });
+
+    });
     console.log(
         "✅ SamSreeFuture website JavaScript loaded successfully."
     );
