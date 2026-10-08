@@ -442,8 +442,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+
     /* =====================================================
-       AI GET A QUOTE
+       GET A QUOTE
+       WhatsApp First + Optional AI Quote
        ===================================================== */
 
     const quoteForm =
@@ -456,6 +458,7 @@ document.addEventListener("DOMContentLoaded", function () {
             async function (event) {
 
                 event.preventDefault();
+
 
                 /* ---------------------------------------------
                    GET FORM VALUES
@@ -512,6 +515,85 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 /* ---------------------------------------------
+                   BASIC WHATSAPP MESSAGE
+                   --------------------------------------------- */
+
+                const basicWhatsAppMessage =
+                    `Hello Mahesh,
+
+I would like to send a SamSreeFuture enquiry.
+
+Name:
+${name || "Not provided"}
+
+WhatsApp Number:
+${whatsapp || "Not provided"}
+
+Service:
+${service}
+
+Budget:
+${budget || "Not provided"}
+
+Timeline:
+${timeline || "Not provided"}
+
+Project Details:
+${details}
+
+Please review my enquiry and provide the quotation.
+
+Thank you.`;
+
+
+                const basicWhatsAppURL =
+                    "https://wa.me/918125024046?text=" +
+                    encodeURIComponent(
+                        basicWhatsAppMessage
+                    );
+
+
+                /* ---------------------------------------------
+                   OPEN WHATSAPP IMMEDIATELY
+                   --------------------------------------------- */
+
+                /*
+                   This is intentionally done BEFORE the AI API
+                   request.
+
+                   Therefore, even if OpenAI credits are exhausted,
+                   the customer enquiry still reaches WhatsApp.
+                */
+
+                const whatsappWindow =
+                    window.open(
+                        basicWhatsAppURL,
+                        "_blank"
+                    );
+
+
+                /*
+                   If the browser blocks the new tab, provide
+                   a fallback message below.
+                */
+
+                if (!whatsappWindow) {
+
+                    const openWhatsApp =
+                        confirm(
+                            "Please allow pop-ups for this website to open WhatsApp.\n\n" +
+                            "Would you like to open WhatsApp now?"
+                        );
+
+                    if (openWhatsApp) {
+
+                        window.location.href =
+                            basicWhatsAppURL;
+                    }
+                }
+
+
+                /* ---------------------------------------------
                    SUBMIT BUTTON
                 --------------------------------------------- */
 
@@ -531,7 +613,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     submitButton.disabled = true;
 
                     submitButton.textContent =
-                        "🤖 AI is analyzing your requirements...";
+                        "🤖 Preparing AI Quote...";
                 }
 
 
@@ -550,11 +632,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
 
 
-                try {
+                /* ---------------------------------------------
+                   TRY AI QUOTE
+                --------------------------------------------- */
 
-                    /* -----------------------------------------
-                       CALL NETLIFY AI FUNCTION
-                    ----------------------------------------- */
+                try {
 
                     const response =
                         await fetch(
@@ -572,7 +654,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                                 body: JSON.stringify({
 
-                                    name: name,
+                                    name:
+                                        name,
 
                                     whatsapp:
                                         whatsapp,
@@ -592,10 +675,6 @@ document.addEventListener("DOMContentLoaded", function () {
                             }
                         );
 
-
-                    /* -----------------------------------------
-                       READ RESPONSE
-                    ----------------------------------------- */
 
                     const data =
                         await response.json();
@@ -620,7 +699,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                     /* -----------------------------------------
-                       CREATE RESULT BOX
+                       CREATE AI RESULT BOX
                     ----------------------------------------- */
 
                     const resultBox =
@@ -657,9 +736,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         <div style="margin-bottom:18px;">
 
-                            <strong
-                                style="color:#ffffff;"
-                            >
+                            <strong style="color:#ffffff;">
                                 Recommended Service
                             </strong>
 
@@ -680,9 +757,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         <div style="margin-bottom:18px;">
 
-                            <strong
-                                style="color:#ffffff;"
-                            >
+                            <strong style="color:#ffffff;">
                                 💰 Estimated Price
                             </strong>
 
@@ -704,9 +779,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         <div style="margin-bottom:18px;">
 
-                            <strong
-                                style="color:#ffffff;"
-                            >
+                            <strong style="color:#ffffff;">
                                 ⏱ Estimated Delivery
                             </strong>
 
@@ -726,9 +799,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         <div style="margin-bottom:18px;">
 
-                            <strong
-                                style="color:#ffffff;"
-                            >
+                            <strong style="color:#ffffff;">
                                 📋 Requirements
                             </strong>
 
@@ -770,9 +841,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         <div style="margin-bottom:18px;">
 
-                            <strong
-                                style="color:#ffffff;"
-                            >
+                            <strong style="color:#ffffff;">
                                 🚀 Next Steps
                             </strong>
 
@@ -852,11 +921,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     </div>
 
-                `;
+                    `;
 
 
                     /* -----------------------------------------
-                       INSERT RESULT AFTER FORM
+                       INSERT AI RESULT
                     ----------------------------------------- */
 
                     quoteForm.insertAdjacentElement(
@@ -866,7 +935,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                     /* -----------------------------------------
-                       WHATSAPP BUTTON
+                       AI WHATSAPP BUTTON
                     ----------------------------------------- */
 
                     const whatsappButton =
@@ -886,8 +955,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 I would like to proceed with a SamSreeFuture enquiry.
 
-Name: ${name || "Not provided"}
-WhatsApp: ${whatsapp || "Not provided"}
+Name:
+${name || "Not provided"}
+
+WhatsApp:
+${whatsapp || "Not provided"}
 
 Service:
 ${quote.recommended_service}
@@ -924,11 +996,13 @@ ${quote.note || ""}
 
 Please review my requirements and provide the final quotation.`;
 
+
                                 const whatsappURL =
                                     "https://wa.me/918125024046?text=" +
                                     encodeURIComponent(
                                         message
                                     );
+
 
                                 window.open(
                                     whatsappURL,
@@ -937,12 +1011,11 @@ Please review my requirements and provide the final quotation.`;
 
                             }
                         );
-
                     }
 
 
                     /* -----------------------------------------
-                       SCROLL TO RESULT
+                       SCROLL TO AI RESULT
                     ----------------------------------------- */
 
                     setTimeout(
@@ -959,6 +1032,16 @@ Please review my requirements and provide the final quotation.`;
 
 
                 } catch (error) {
+
+                    /*
+                       IMPORTANT:
+
+                       WhatsApp has already been opened before
+                       this AI request.
+
+                       Therefore, an OpenAI 429 error will NOT
+                       stop the customer's enquiry.
+                    */
 
                     console.error(
                         "❌ AI Quote Error:",
@@ -981,32 +1064,35 @@ Please review my requirements and provide the final quotation.`;
                             padding:20px;
                             border-radius:15px;
                             background:#0b1b2d;
-                            border:1px solid rgba(255,80,80,0.5);
+                            border:1px solid rgba(43,184,255,0.35);
                             color:#ffffff;
                         "
                     >
 
                         <strong
                             style="
-                                color:#ff7676;
+                                color:#2bb8ff;
                                 font-size:18px;
                             "
                         >
-                            ⚠️ AI Quote Could Not Be Generated
+                            ✅ Your enquiry has been prepared for WhatsApp
                         </strong>
 
                         <p
                             style="
                                 margin-top:10px;
                                 color:#d9e7f2;
+                                line-height:1.6;
                             "
                         >
-                            Please try again in a moment.
+                            Your WhatsApp enquiry was opened successfully.
+                            The AI quote assistant is temporarily unavailable,
+                            but your enquiry details are safe and can be sent through WhatsApp.
                         </p>
 
                     </div>
 
-                `;
+                    `;
 
 
                     quoteForm.insertAdjacentElement(
@@ -1014,6 +1100,52 @@ Please review my requirements and provide the final quotation.`;
                         errorBox
                     );
 
+
+                    /*
+                       If WhatsApp popup was blocked,
+                       show a manual button.
+                    */
+
+                    if (!whatsappWindow) {
+
+                        const manualButton =
+                            document.createElement("button");
+
+                        manualButton.type =
+                            "button";
+
+                        manualButton.textContent =
+                            "💬 Open WhatsApp Enquiry";
+
+                        manualButton.style.cssText = `
+                            width:100%;
+                            margin-top:15px;
+                            padding:14px 20px;
+                            border:none;
+                            border-radius:10px;
+                            background:#25d366;
+                            color:#ffffff;
+                            font-size:16px;
+                            font-weight:700;
+                            cursor:pointer;
+                        `;
+
+                        manualButton.addEventListener(
+                            "click",
+                            function () {
+
+                                window.open(
+                                    basicWhatsAppURL,
+                                    "_blank"
+                                );
+
+                            }
+                        );
+
+                        errorBox.appendChild(
+                            manualButton
+                        );
+                    }
 
                 } finally {
 
@@ -1027,7 +1159,7 @@ Please review my requirements and provide the final quotation.`;
 
                         submitButton.textContent =
                             originalButtonText ||
-                            "🤖 Generate AI Quote";
+                            "💬 Send Quote Request on WhatsApp";
                     }
 
                 }
@@ -1050,6 +1182,8 @@ Please review my requirements and provide the final quotation.`;
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
     }
+
+
     /* =====================================================
        BACK TO TOP
        ===================================================== */
@@ -1171,7 +1305,6 @@ Please review my requirements and provide the final quotation.`;
         let newsContentWidth = 0;
         let newsPaused = false;
 
-        // FIXED: previously "alse" caused JavaScript error
         let newsReducedMotion = false;
 
         let newsSpeed = 40;
@@ -1300,9 +1433,6 @@ Please review my requirements and provide the final quotation.`;
             "0",
             "important"
         );
-
-        // Disable CSS animation.
-        // JavaScript handles continuous scrolling.
 
         newsTrack.style.setProperty(
             "animation",
@@ -1605,6 +1735,7 @@ Please review my requirements and provide the final quotation.`;
         ) {
 
             motionQuery.addListener(
+                "change",
                 checkMotionPreference
             );
         }
@@ -1651,7 +1782,6 @@ Please review my requirements and provide the final quotation.`;
 
             try {
 
-                // Small loading message
                 newsContent.innerHTML =
                     `<span class="news-item">
                         📰 తెలుగు తాజా వార్తలు లోడ్ అవుతున్నాయి...
@@ -1751,7 +1881,6 @@ Please review my requirements and provide the final quotation.`;
                     html;
 
 
-                // Exact duplicate for seamless loop
                 newsClone.innerHTML =
                     newsContent.innerHTML;
 
@@ -1759,7 +1888,6 @@ Please review my requirements and provide the final quotation.`;
                 styleNewsItems();
 
 
-                // Reset scrolling
                 newsOffset = 0;
                 newsLastTime = 0;
 
@@ -1771,7 +1899,6 @@ Please review my requirements and provide the final quotation.`;
                 );
 
 
-                // Wait for browser layout
                 requestAnimationFrame(
                     function () {
 
@@ -1901,9 +2028,11 @@ Please review my requirements and provide the final quotation.`;
             "✅ SamSreeFuture Telugu Breaking News ticker started."
         );
     }
+
+
     /* =====================================================
        SERVICES - VIEW SERVICES BUTTON
-    ===================================================== */
+       ===================================================== */
 
     const serviceButtons =
         document.querySelectorAll(".view-services-btn");
@@ -1969,6 +2098,8 @@ Please review my requirements and provide the final quotation.`;
         });
 
     });
+
+
     console.log(
         "✅ SamSreeFuture website JavaScript loaded successfully."
     );
